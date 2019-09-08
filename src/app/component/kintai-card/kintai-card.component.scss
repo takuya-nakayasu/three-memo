@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+
+  .time-card {
+    width: 50%;
+    height: 60%;
+    min-width: 220px;
+    min-height: 320px;
+
+    .time-wrapper {
+      text-align: center;
+      font-weight: bold;
+      font-size: 24px;
+
+      .date {
+        margin-bottom: 10px
+      }
+
+      .time {
+        font-size: 40px;
+      }
+    }
+
+    .border {
+      margin: 20px;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+
+      .button {
+        margin: 5px;
+      }
+    }
+  }
+}

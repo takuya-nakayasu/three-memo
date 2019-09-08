@@ -1,0 +1,34 @@
+<app-header></app-header>
+<div class="wrapper">
+  <mat-card class="sign-up-card">
+    <mat-card-header>
+      <mat-card-title class="sign-up-title">Create an account</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" class="sign-up-form" [formGroup]="signUpFormGroup">
+        <mat-form-field>
+          <input matInput placeholder="user name" id="userName" formControlName="userName" required>
+          <mat-error *ngIf="userNameControl.invalid">{{getErrorMessageToUserName()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="email" id="email" formControlName="email" required>
+          <mat-error *ngIf="emailControl.invalid">{{getErrorMessageToEmail()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input [type]="hide ? 'password' : 'text'"
+            matInput placeholder="password" id="password" formControlName="password" required>
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="passwordControl.invalid">{{getErrorMessageToPassword()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input [type]="hideConfirm ? 'password' : 'text'"
+            matInput placeholder="confirm password" id="confirmPassword" formControlName="confirmPassword" required>
+          <mat-icon matSuffix (click)="hideConfirm = !hideConfirm">{{hideConfirm ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="confirmPasswordControl.invalid">{{getErrorMessageToConfirmPassword()}}</mat-error>
+        </mat-form-field>
+        <button type="submit" class="sign-up-button" mat-raised-button [disabled]="!signUpFormGroup.valid" color="primary">Create your account</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <mat-card class="time-card">
+    <mat-card-header>
+      <mat-card-title>現在時刻</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="time-wrapper">
+        <div class="date">
+          {{date}}
+        </div>
+        <div class="time">
+          {{time}}
+        </div>
+      </div>
+      <hr class="border">
+      <div class="button-group">
+        <button mat-raised-button class="button" color="primary" (click)="startWork()">出勤</button>
+        <button mat-raised-button class="button" color="accent" (click)="endWork()">退勤</button>
+        <button mat-raised-button class="button" color="warn" (click)="startBreak()">休憩</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15%;
+
+  .sign-up-card {
+    width: 500px;
+  }
+
+  .sign-up-form {
+    display: flex;
+    flex-direction: column;
+
+    .sign-up-button {
+      margin-top: 20px;
+    }
+  }
+
+  .sign-up-title {
+    font-weight: bold;
+    font-size: 22px;
+    color: #3f51b5;
+  }
+}
