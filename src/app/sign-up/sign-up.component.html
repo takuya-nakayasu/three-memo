@@ -28,6 +28,7 @@
           <mat-error *ngIf="confirmPasswordControl.invalid">{{getErrorMessageToConfirmPassword()}}</mat-error>
         </mat-form-field>
         <button type="submit" class="sign-up-button" mat-raised-button [disabled]="!signUpFormGroup.valid" color="primary">Create your account</button>
+        <mat-error *ngIf="apiErrorMessage" class="apiErrorMessage">{{apiErrorMessage}}</mat-error>
       </form>
     </mat-card-content>
   </mat-card>

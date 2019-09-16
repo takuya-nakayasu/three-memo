@@ -22,6 +22,8 @@ export class SignUpComponent implements OnInit {
   public passwordControl: FormControl;
   public confirmPasswordControl: FormControl;
 
+  public apiErrorMessage: string;
+
   constructor(
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
@@ -61,6 +63,10 @@ export class SignUpComponent implements OnInit {
             // アカウント登録処理が成功したらログイン画面に戻る
             this.router.navigate(['/login']);
           });
+      })
+      .catch(error => {
+        console.log(error);
+        this.apiErrorMessage = error ? error.message : undefined;
       });
   }
 
