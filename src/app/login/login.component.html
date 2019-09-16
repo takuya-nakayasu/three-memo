@@ -18,6 +18,7 @@
           <mat-error *ngIf="passwordControl.invalid">{{getErrorMessageToPassword()}}</mat-error>
         </mat-form-field>
         <button type="submit" class="login-button" mat-raised-button [disabled]="!loginFormGroup.valid" color="primary">Login</button>
+        <mat-error *ngIf="apiErrorMessage" class="apiErrorMessage">{{apiErrorMessage}}</mat-error>
       </form>
     </mat-card-content>
   </mat-card>

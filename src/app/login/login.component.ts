@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
   // passwordフォームのコントロール定義
   public passwordControl: FormControl;
 
+  public apiErrorMessage: string;
+
   constructor(
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
@@ -54,7 +56,10 @@ export class LoginComponent implements OnInit {
       // ログインに成功したらホーム画面に遷移する
       .then(user => this.router.navigate(['/home']))
       // ログインに失敗したらエラーメッセージをログ出力
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        this.apiErrorMessage = error ? error.message : undefined;
+      });
   }
 
   /**
