@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
@@ -17,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { KintaiCardComponent } from './component/kintai-card/kintai-card.component';
 import { KintaiTableComponent } from './component/kintai-table/kintai-table.component';
 import { AppRoutingModule } from './app-routing.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // 設定ファイル
 import { environment } from './../environments//environment';
@@ -27,6 +27,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SpinnerInterceptor } from './services/spinner-interceptor';
+import { SpinnerComponent } from './component/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     KintaiCardComponent,
     KintaiTableComponent,
     HomeComponent,
+    SpinnerComponent,
     LoginComponent,
     SignUpComponent
   ],
@@ -52,10 +56,17 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     MatButtonModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    MatProgressSpinnerModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
