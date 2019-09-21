@@ -8,6 +8,7 @@ import {
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { CustomValidator } from '../validation/custom-validator';
+import { SpinnerService } from '../services/spinner.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -27,7 +28,8 @@ export class SignUpComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private spinnerService: SpinnerService
   ) {}
 
   public ngOnInit() {
@@ -45,6 +47,7 @@ export class SignUpComponent implements OnInit {
    *
    */
   public onSubmit() {
+    this.spinnerService.show();
     this.afAuth.auth
       // Firebaseのアカウント登録処理の呼び出し
       .createUserWithEmailAndPassword(
@@ -67,7 +70,8 @@ export class SignUpComponent implements OnInit {
       .catch(error => {
         console.log(error);
         this.apiErrorMessage = error ? error.message : undefined;
-      });
+      })
+      .finally(() => this.spinnerService.hide());
   }
 
   /**

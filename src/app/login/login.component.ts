@@ -58,15 +58,14 @@ export class LoginComponent implements OnInit {
       )
       // ログインに成功したらホーム画面に遷移する
       .then(user => {
-        this.spinnerService.hide();
         this.router.navigate(['/home']);
       })
       // ログインに失敗したらエラーメッセージをログ出力
       .catch(error => {
-        this.spinnerService.hide();
         console.log(error);
         this.apiErrorMessage = error ? error.message : undefined;
-      });
+      })
+      .finally(() => this.spinnerService.hide());
   }
 
   /**
