@@ -9,6 +9,14 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { SpinnerService } from './spinner.service';
 
+/**
+ * HttpClientModuleのリクエスト、レスポンス処理のタイミングで、
+ * スピナーを表示する。
+ *
+ * @export
+ * @class SpinnerInterceptor
+ * @implements {HttpInterceptor}
+ */
 @Injectable()
 export class SpinnerInterceptor implements HttpInterceptor {
   constructor(public spinnerService: SpinnerService) {}

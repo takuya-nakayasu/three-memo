@@ -10,6 +10,13 @@ import { Router } from '@angular/router';
 import { CustomValidator } from '../validation/custom-validator';
 import { SpinnerService } from '../services/spinner.service';
 
+/**
+ * アカウント登録画面コンポーネント
+ *
+ * @export
+ * @class SignUpComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
