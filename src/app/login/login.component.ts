@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { SpinnerService } from '../services/spinner.service';
 
 /**
  * ログイン画面コンポーネント
@@ -33,7 +34,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private spinnerService: SpinnerService
   ) {}
 
   public ngOnInit() {
@@ -48,15 +50,20 @@ export class LoginComponent implements OnInit {
    */
   public onSubmit() {
     // メールアドレスとパスワードをFirebase Authenticationに渡す
+    this.spinnerService.show();
     this.afAuth.auth
       .signInWithEmailAndPassword(
         this.emailControl.value,
         this.passwordControl.value
       )
       // ログインに成功したらホーム画面に遷移する
-      .then(user => this.router.navigate(['/home']))
+      .then(user => {
+        this.spinnerService.hide();
+        this.router.navigate(['/home']);
+      })
       // ログインに失敗したらエラーメッセージをログ出力
       .catch(error => {
+        this.spinnerService.hide();
         console.log(error);
         this.apiErrorMessage = error ? error.message : undefined;
       });
