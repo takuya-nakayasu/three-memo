@@ -17,6 +17,13 @@ import { KintaiCardComponent } from './component/kintai-card/kintai-card.compone
 import { KintaiTableComponent } from './component/kintai-table/kintai-table.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SpinnerInterceptor } from './services/spinner-interceptor';
+import { SpinnerComponent } from './component/spinner/spinner.component';
+import { SpinnerService } from './services/spinner.service';
 
 // 設定ファイル
 import { environment } from './../environments//environment';
@@ -24,12 +31,6 @@ import { environment } from './../environments//environment';
 // AngularFire
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { SpinnerInterceptor } from './services/spinner-interceptor';
-import { SpinnerComponent } from './component/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { SpinnerComponent } from './component/spinner/spinner.component';
     AngularFireAuthModule
   ],
   providers: [
+    SpinnerService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: SpinnerInterceptor,
