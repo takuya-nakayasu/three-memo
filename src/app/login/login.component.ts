@@ -44,9 +44,10 @@ export class LoginComponent implements OnInit {
     this.createForm();
     this.emailControl = this.loginFormGroup.get('email') as FormControl;
     this.passwordControl = this.loginFormGroup.get('password') as FormControl;
-    this.http
-      .get(`https://yesno.wtf/api`)
-      .subscribe(response => console.log(response));
+    // this.spinnerService.show();
+    // this.http
+    //   .get(`https://yesno.wtf/api`)
+    //   .subscribe(response => console.log(response));
   }
 
   /**
