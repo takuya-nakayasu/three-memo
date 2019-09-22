@@ -8,7 +8,6 @@ import {
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { SpinnerService } from '../services/spinner.service';
-import { HttpClient } from '@angular/common/http';
 
 /**
  * ログイン画面コンポーネント
@@ -36,18 +35,13 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
     private router: Router,
-    private spinnerService: SpinnerService,
-    private http: HttpClient
+    private spinnerService: SpinnerService
   ) {}
 
   public ngOnInit() {
     this.createForm();
     this.emailControl = this.loginFormGroup.get('email') as FormControl;
     this.passwordControl = this.loginFormGroup.get('password') as FormControl;
-    // this.spinnerService.show();
-    // this.http
-    //   .get(`https://yesno.wtf/api`)
-    //   .subscribe(response => console.log(response));
   }
 
   /**
