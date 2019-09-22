@@ -20,7 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SpinnerInterceptor } from './services/spinner-interceptor';
 import { SpinnerComponent } from './component/spinner/spinner.component';
 import { SpinnerService } from './services/spinner.service';
@@ -49,6 +49,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     MatInputModule,
     MatCardModule,
     MatFormFieldModule,
+    HttpClientModule,
     FormsModule,
     MatToolbarModule,
     MatTableModule,
