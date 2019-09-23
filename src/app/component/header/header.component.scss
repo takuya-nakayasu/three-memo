@@ -2,6 +2,7 @@ mat-toolbar {
   .main {
     display: flex;
     align-items: center;
+    width: 100%;
 
     .title {
       margin-left: 12px;
@@ -10,6 +11,10 @@ mat-toolbar {
 
     .header-icon {
       font-size: 24px;
+    }
+
+    .right-icon {
+      text-align: right;
     }
   }
 }
