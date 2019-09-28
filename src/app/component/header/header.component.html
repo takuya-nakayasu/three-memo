@@ -1,9 +1,9 @@
 <mat-toolbar color="primary">
   <div class="main">
-    <mat-icon class=" header-icon">
+    <mat-icon class="header-icon">
       note
     </mat-icon>
     <span class="title">CONCEPT</span>
-    <mat-icon class="right-icon" fontSet="fa" fontIcon="fa-home" inline></mat-icon>
+    <mat-icon *ngIf="isSigningIn" class="right-icon">exit_to_app</mat-icon>
   </div>
 </mat-toolbar>
