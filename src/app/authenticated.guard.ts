@@ -11,16 +11,17 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { take, map } from 'rxjs/operators';
 
 /**
- * ログインしていないアカウントをログイン画面に遷移させる
+ * ログイン済のアカウントをログイン・アカウント登録画面に、
+ * 遷移させない
  *
  * @export
- * @class AuthenticationGuard
+ * @class AuthenticatedGuard
  * @implements {CanActivate}
  */
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationGuard implements CanActivate {
+export class AuthenticatedGuard implements CanActivate {
   constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
   canActivate(
@@ -35,12 +36,12 @@ export class AuthenticationGuard implements CanActivate {
       take(1),
       map(user => {
         if (user != null) {
-          // ログインしていた場合userにユーザーの情報が入る
-          return true;
-        } else {
-          // ログインしていない場合はログイン画面に遷移する
-          this.router.navigate(['/login']);
+          // ログインしていた場合はホーム画面に遷移する
+          this.router.navigate(['/home']);
           return false;
+        } else {
+          // ログインしていない場合は遷移を許可する
+          return true;
         }
       })
     );
