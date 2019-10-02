@@ -3,6 +3,13 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 
+/**
+ * ヘッダーのコンポーネントクラス
+ *
+ * @export
+ * @class HeaderComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
