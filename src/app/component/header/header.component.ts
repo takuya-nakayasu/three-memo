@@ -16,10 +16,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @Input() isSigningIn: boolean;
-
   constructor(
-    private afAuth: AngularFireAuth,
+    public afAuth: AngularFireAuth,
     private router: Router,
     private spinnerService: SpinnerService
   ) {}
