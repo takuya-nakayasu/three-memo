@@ -1,12 +1,11 @@
-.example-container {
+.container {
   position: absolute;
   top: 64px;
   bottom: 0;
   left: 0;
   right: 0;
-}
 
-.center {
-  padding: 20%;
-  text-align: center;
+  .side-menu {
+    width: 128px;
+  }
 }
