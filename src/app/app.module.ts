@@ -24,6 +24,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SpinnerInterceptor } from './services/spinner-interceptor';
 import { SpinnerComponent } from './component/spinner/spinner.component';
 import { SpinnerService } from './services/spinner.service';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 // 設定ファイル
 import { environment } from './../environments//environment';
@@ -45,6 +46,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
   ],
   imports: [
     BrowserModule,
+    MatSidenavModule,
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
