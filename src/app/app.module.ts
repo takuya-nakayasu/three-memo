@@ -33,6 +33,8 @@ import { environment } from './../environments//environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+import { MatListModule } from '@angular/material/list';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +57,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     FormsModule,
     MatToolbarModule,
     MatTableModule,
+    MatListModule,
     MatIconModule,
     MatSelectModule,
     MatButtonModule,
