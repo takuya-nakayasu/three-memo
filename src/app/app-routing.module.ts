@@ -6,6 +6,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthenticationGuard } from './authentication.guard';
 import { AuthenticatedGuard } from './authenticated.guard';
 import { CreateComponent } from './create/create.component';
+import { ListComponent } from './list/list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -24,9 +25,15 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [AuthenticationGuard],
     children: [
+      { path: '', redirectTo: 'create', pathMatch: 'full' },
       {
         path: 'create',
         component: CreateComponent,
+        canActivate: [AuthenticationGuard]
+      },
+      {
+        path: 'list',
+        component: ListComponent,
         canActivate: [AuthenticationGuard]
       }
     ]
