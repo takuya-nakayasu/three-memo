@@ -35,6 +35,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { MatListModule } from '@angular/material/list';
 import { CreateComponent } from './create/create.component';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { CreateComponent } from './create/create.component';
     SpinnerComponent,
     LoginComponent,
     SignUpComponent,
-    CreateComponent
+    CreateComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,

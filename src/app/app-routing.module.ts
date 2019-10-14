@@ -22,12 +22,14 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AuthenticationGuard]
-  },
-  {
-    path: 'create',
-    component: CreateComponent,
-    canActivate: [AuthenticationGuard]
+    canActivate: [AuthenticationGuard],
+    children: [
+      {
+        path: 'create',
+        component: CreateComponent,
+        canActivate: [AuthenticationGuard]
+      }
+    ]
   }
 ];
 @NgModule({
