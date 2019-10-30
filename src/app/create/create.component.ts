@@ -5,6 +5,7 @@ import {
   FormBuilder,
   Validators
 } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-create',
@@ -19,7 +20,7 @@ export class CreateComponent implements OnInit {
   // descriptionフォームのコントロール定義
   public descriptionControl: FormControl;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private afAuth: AngularFireAuth) {
     this.createForm();
     this.titleControl = this.createFormGroup.get('title') as FormControl;
     this.descriptionControl = this.createFormGroup.get(
@@ -42,5 +43,18 @@ export class CreateComponent implements OnInit {
 
   onSubmit() {
     console.log(`${this.titleControl.value}/${this.descriptionControl.value}`);
+
+    const user = this.afAuth.auth.currentUser;
+
+    console.log(` uid: ${user.uid} \n providerId: ${user.providerId}`);
+    console.log(` email: ${user.email}\n photoURL: ${user.photoURL}`);
+    console.log(
+      ` providerData: ${user.providerData}\n emailVerified: ${
+        user.emailVerified
+      }`
+    );
+    console.log(
+      ` displayName: ${user.displayName}\n phoneNumber: ${user.phoneNumber}`
+    );
   }
 }
