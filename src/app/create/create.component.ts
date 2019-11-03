@@ -12,6 +12,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
+import { SpinnerService } from '../services/spinner.service';
 
 @Component({
   selector: 'app-create',
@@ -31,7 +32,8 @@ export class CreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
-    private afStore: AngularFirestore
+    private afStore: AngularFirestore,
+    private spinnerService: SpinnerService
   ) {
     this.createForm();
     this.titleControl = this.createFormGroup.get('title') as FormControl;
@@ -56,6 +58,7 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit() {
+    this.spinnerService.show();
     console.log(`${this.titleControl.value}/${this.descriptionControl.value}`);
 
     const user = this.afAuth.auth.currentUser;
@@ -86,6 +89,7 @@ export class CreateComponent implements OnInit {
         });
         this.titleControl.reset();
         this.descriptionControl.reset();
+        this.spinnerService.hide();
       });
     console.log('memo');
     console.log(this.memo);
