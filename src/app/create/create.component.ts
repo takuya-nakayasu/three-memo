@@ -8,6 +8,10 @@ import {
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 import { Memo } from '../entity/memo.entity';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-create',
@@ -22,8 +26,13 @@ export class CreateComponent implements OnInit {
   // descriptionフォームのコントロール定義
   public descriptionControl: FormControl;
   public memo: Memo;
+  public memoCollection: AngularFirestoreCollection<Memo>;
 
-  constructor(private fb: FormBuilder, private afAuth: AngularFireAuth) {
+  constructor(
+    private fb: FormBuilder,
+    private afAuth: AngularFireAuth,
+    private afStore: AngularFirestore
+  ) {
     this.createForm();
     this.titleControl = this.createFormGroup.get('title') as FormControl;
     this.descriptionControl = this.createFormGroup.get(
@@ -66,6 +75,14 @@ export class CreateComponent implements OnInit {
       createdUser: user.uid,
       createdDate: firebase.firestore.FieldValue.serverTimestamp()
     };
+    this.afStore
+      .collection('memos')
+      .add(this.memo)
+      .then(docRef => {
+        // this.memoCollection.doc(docRef.id).update({
+        //   id: docRef.id
+        // });
+      });
     console.log('memo');
     console.log(this.memo);
   }
