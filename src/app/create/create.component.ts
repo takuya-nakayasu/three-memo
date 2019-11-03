@@ -40,7 +40,9 @@ export class CreateComponent implements OnInit {
     ) as FormControl;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.retrieveMemos();
+  }
 
   /**
    * フォーム設定の作成
@@ -79,11 +81,19 @@ export class CreateComponent implements OnInit {
       .collection('memos')
       .add(this.memo)
       .then(docRef => {
-        // this.memoCollection.doc(docRef.id).update({
-        //   id: docRef.id
-        // });
+        this.memoCollection.doc(docRef.id).update({
+          id: docRef.id
+        });
+        this.titleControl.reset();
+        this.descriptionControl.reset();
       });
     console.log('memo');
     console.log(this.memo);
+  }
+
+  public retrieveMemos() {
+    this.memoCollection = this.afStore.collection('memos', ref =>
+      ref.orderBy('createdDate', 'desc')
+    );
   }
 }
