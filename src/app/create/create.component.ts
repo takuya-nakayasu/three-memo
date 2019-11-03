@@ -6,6 +6,8 @@ import {
   Validators
 } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase';
+import { Memo } from '../entity/memo.entity';
 
 @Component({
   selector: 'app-create',
@@ -19,6 +21,7 @@ export class CreateComponent implements OnInit {
   public titleControl: FormControl;
   // descriptionフォームのコントロール定義
   public descriptionControl: FormControl;
+  public memo: Memo;
 
   constructor(private fb: FormBuilder, private afAuth: AngularFireAuth) {
     this.createForm();
@@ -56,5 +59,14 @@ export class CreateComponent implements OnInit {
     console.log(
       ` displayName: ${user.displayName}\n phoneNumber: ${user.phoneNumber}`
     );
+    this.memo = {
+      id: '',
+      title: this.titleControl.value,
+      description: this.descriptionControl.value,
+      createdUser: user.uid,
+      createdDate: firebase.firestore.FieldValue.serverTimestamp()
+    };
+    console.log('memo');
+    console.log(this.memo);
   }
 }

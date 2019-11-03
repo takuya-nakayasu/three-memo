@@ -32,6 +32,7 @@ import { environment } from './../environments//environment';
 // AngularFire
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { MatListModule } from '@angular/material/list';
 import { CreateComponent } from './create/create.component';
@@ -69,7 +70,8 @@ import { ListComponent } from './list/list.component';
     AppRoutingModule,
     MatProgressSpinnerModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
   providers: [
     SpinnerService,
