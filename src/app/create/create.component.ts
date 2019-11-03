@@ -87,8 +87,7 @@ export class CreateComponent implements OnInit {
         this.memoCollection.doc(docRef.id).update({
           id: docRef.id
         });
-        this.titleControl.reset();
-        this.descriptionControl.reset();
+        this.createFormGroup.reset();
         this.spinnerService.hide();
       });
     console.log('memo');

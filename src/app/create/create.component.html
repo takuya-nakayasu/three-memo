@@ -1,4 +1,5 @@
-<form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="createFormGroup">
+<form class="example-form" (ngSubmit)="onSubmit(); createNgForm.resetForm()" [formGroup]="createFormGroup"
+  #createNgForm="ngForm">
   <mat-form-field class="example-full-width">
     <input matInput class="title" placeholder="Title" formControlName="title" />
   </mat-form-field>
