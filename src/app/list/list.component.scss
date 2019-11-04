@@ -6,8 +6,22 @@
       font-weight: 500;
     }
 
-    .date {
-      font-size: 12px;
+    .info {
+      display: flex;
+      line-height: 12px;
+
+      .date {
+        font-size: 12px;
+      }
+
+      .description {
+        font-size: 12px;
+        overflow: hidden;
+        margin-left: 10px;
+        white-space: nowrap;
+        width: 200px;
+        text-overflow: ellipsis;
+      }
     }
   }
 }
