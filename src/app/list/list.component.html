@@ -1,13 +1,7 @@
 <div class="list-wrapper">
   <mat-list role="list">
-    <mat-list-item role="listitem">メモ 1</mat-list-item>
-    <mat-list-item role="listitem">メモ 2</mat-list-item>
-    <mat-list-item role="listitem">メモ 3</mat-list-item>
-    <mat-list-item role="listitem">メモ 4</mat-list-item>
-    <mat-list-item role="listitem">メモ 5</mat-list-item>
-    <mat-list-item role="listitem">メモ 6</mat-list-item>
-    <mat-list-item role="listitem">メモ 7</mat-list-item>
-    <mat-list-item role="listitem">メモ 8</mat-list-item>
-    <mat-list-item role="listitem">メモ 9</mat-list-item>
+    <mat-list-item *ngFor="let memo of memos" role="listitem">
+      {{memo.title}}
+    </mat-list-item>
   </mat-list>
 </div>
