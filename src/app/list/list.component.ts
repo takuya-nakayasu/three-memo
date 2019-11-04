@@ -4,6 +4,7 @@ import {
   AngularFirestoreCollection,
   AngularFirestore
 } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-list',
@@ -15,15 +16,19 @@ export class ListComponent implements OnInit {
   public memos: Memo[];
   public memoCollection: AngularFirestoreCollection<Memo>;
 
-  constructor(private afStore: AngularFirestore) {}
+  constructor(
+    private afStore: AngularFirestore,
+    private afAuth: AngularFireAuth
+  ) {}
 
   ngOnInit() {
     this.retrieveMemos();
   }
 
   public retrieveMemos() {
+    const user = this.afAuth.auth.currentUser;
     this.memoCollection = this.afStore.collection('memos', ref =>
-      ref.orderBy('createdDate', 'desc')
+      ref.orderBy('createdDate', 'desc').where('createdUser', '==', user.uid)
     );
 
     this.memoCollection.valueChanges().subscribe(data => {
