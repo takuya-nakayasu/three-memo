@@ -1,8 +1,10 @@
 <div class="list-wrapper">
   <mat-list role="list">
     <mat-list-item *ngFor="let memo of memos" role="listitem">
-      {{memo.title}}
-      {{memo.createdDate.toDate() | date: "yyyy/MM/dd HH:mm"}}
+      <div>
+        <div>{{memo.title}}</div>
+        <div>{{memo.createdDate.toDate() | date: "yyyy/MM/dd HH:mm"}}</div>
+      </div>
     </mat-list-item>
   </mat-list>
 </div>
