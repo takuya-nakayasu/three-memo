@@ -21,11 +21,11 @@ export class ListComponent implements OnInit {
     private afAuth: AngularFireAuth
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.retrieveMemos();
   }
 
-  public retrieveMemos() {
+  public retrieveMemos(): void {
     const user = this.afAuth.auth.currentUser;
     this.memoCollection = this.afStore.collection('memos', ref =>
       ref.orderBy('createdDate', 'desc').where('createdUser', '==', user.uid)
@@ -35,5 +35,9 @@ export class ListComponent implements OnInit {
       this.memos = data;
       console.log(this.memos);
     });
+  }
+
+  public delete(id: string): void {
+    console.log(`id: ${id}`);
   }
 }
