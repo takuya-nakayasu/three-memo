@@ -39,5 +39,9 @@ export class ListComponent implements OnInit {
 
   public delete(id: string): void {
     console.log(`id: ${id}`);
+    this.memoCollection
+      .doc(id)
+      .delete()
+      .then(() => console.log('memo deleted'));
   }
 }
