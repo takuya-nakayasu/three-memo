@@ -37,6 +37,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MatListModule } from '@angular/material/list';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
+import { UpdateComponent } from './update/update.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ListComponent } from './list/list.component';
     LoginComponent,
     SignUpComponent,
     CreateComponent,
-    ListComponent
+    ListComponent,
+    UpdateComponent
   ],
   imports: [
     BrowserModule,

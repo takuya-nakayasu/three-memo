@@ -44,4 +44,8 @@ export class ListComponent implements OnInit {
       .delete()
       .then(() => console.log('memo deleted'));
   }
+
+  public update(memo: Memo): void {
+    console.log(memo);
+  }
 }
