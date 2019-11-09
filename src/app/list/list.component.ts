@@ -5,6 +5,7 @@ import {
   AngularFirestore
 } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { SpinnerService } from '../services/spinner.service';
 
 @Component({
   selector: 'app-list',
@@ -18,6 +19,7 @@ export class ListComponent implements OnInit {
 
   constructor(
     private afStore: AngularFirestore,
+    private spinnerService: SpinnerService,
     private afAuth: AngularFireAuth
   ) {}
 
@@ -32,17 +34,23 @@ export class ListComponent implements OnInit {
     );
 
     this.memoCollection.valueChanges().subscribe(data => {
+      this.spinnerService.show();
       this.memos = data;
       console.log(this.memos);
+      this.spinnerService.hide();
     });
   }
 
   public delete(id: string): void {
+    this.spinnerService.show();
     console.log(`id: ${id}`);
     this.memoCollection
       .doc(id)
       .delete()
-      .then(() => console.log('memo deleted'));
+      .then(() => {
+        console.log('memo deleted');
+        this.spinnerService.hide();
+      });
   }
 
   public update(memo: Memo): void {
