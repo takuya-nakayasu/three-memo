@@ -1,7 +1,7 @@
 <div class="list-wrapper">
   <mat-list role="list">
     <mat-list-item *ngFor="let memo of memos" role="listitem">
-      <div (click)="update(memo)" class="list-item">
+      <div (click)="update(memo.id)" class="list-item">
         <div class="title">{{memo.title}}</div>
         <div class="info">
           <div class="date">{{memo.createdDate.toDate() | date: "yyyy/MM/dd HH:mm"}}</div>

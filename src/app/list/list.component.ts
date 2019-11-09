@@ -6,6 +6,7 @@ import {
 } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from '../services/spinner.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -20,7 +21,8 @@ export class ListComponent implements OnInit {
   constructor(
     private afStore: AngularFirestore,
     private spinnerService: SpinnerService,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private router: Router
   ) {}
 
   public ngOnInit() {
@@ -53,7 +55,7 @@ export class ListComponent implements OnInit {
       });
   }
 
-  public update(memo: Memo): void {
-    console.log(memo);
+  public update(id: string): void {
+    this.router.navigate(['/update', id]);
   }
 }

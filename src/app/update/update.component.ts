@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-update',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./update.component.scss']
 })
 export class UpdateComponent implements OnInit {
-
-  constructor() { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const param = params.get('memo');
+      console.log(param);
+    });
   }
-
 }

@@ -7,6 +7,7 @@ import { AuthenticationGuard } from './authentication.guard';
 import { AuthenticatedGuard } from './authenticated.guard';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
+import { UpdateComponent } from './update/update.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -19,6 +20,11 @@ const routes: Routes = [
     path: 'sign-up',
     component: SignUpComponent,
     canActivate: [AuthenticatedGuard]
+  },
+  {
+    path: 'update/:memo',
+    component: UpdateComponent,
+    canActivate: [AuthenticationGuard]
   },
   {
     path: 'home',
