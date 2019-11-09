@@ -56,6 +56,6 @@ export class ListComponent implements OnInit {
   }
 
   public update(id: string): void {
-    this.router.navigate(['/update', id]);
+    this.router.navigate(['/home/update', id]);
   }
 }

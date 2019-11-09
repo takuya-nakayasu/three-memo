@@ -22,11 +22,6 @@ const routes: Routes = [
     canActivate: [AuthenticatedGuard]
   },
   {
-    path: 'update/:memo',
-    component: UpdateComponent,
-    canActivate: [AuthenticationGuard]
-  },
-  {
     path: 'home',
     component: HomeComponent,
     canActivate: [AuthenticationGuard],
@@ -40,6 +35,11 @@ const routes: Routes = [
       {
         path: 'list',
         component: ListComponent,
+        canActivate: [AuthenticationGuard]
+      },
+      {
+        path: 'update/:memo',
+        component: UpdateComponent,
         canActivate: [AuthenticationGuard]
       }
     ]
