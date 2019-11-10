@@ -3,7 +3,8 @@ import {
   FormGroup,
   FormControl,
   FormBuilder,
-  Validators
+  Validators,
+  NgForm
 } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
@@ -14,6 +15,13 @@ import {
 } from '@angular/fire/firestore';
 import { SpinnerService } from '../services/spinner.service';
 
+/**
+ * メモの新規作成画面
+ *
+ * @export
+ * @class CreateComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -36,6 +44,8 @@ export class CreateComponent implements OnInit {
     private spinnerService: SpinnerService
   ) {
     this.createForm();
+
+    // フォームコントロールの設定
     this.titleControl = this.createFormGroup.get('title') as FormControl;
     this.descriptionControl = this.createFormGroup.get(
       'description'
@@ -57,22 +67,19 @@ export class CreateComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  /**
+   * メモの新規作成
+   *
+   * @memberof CreateComponent
+   */
+  public onSubmit(form: NgForm) {
+    // スピナーを表示する
     this.spinnerService.show();
-    console.log(`${this.titleControl.value}/${this.descriptionControl.value}`);
 
+    // ログインしているユーザ情報の取得
     const user = this.afAuth.auth.currentUser;
 
-    console.log(` uid: ${user.uid} \n providerId: ${user.providerId}`);
-    console.log(` email: ${user.email}\n photoURL: ${user.photoURL}`);
-    console.log(
-      ` providerData: ${user.providerData}\n emailVerified: ${
-        user.emailVerified
-      }`
-    );
-    console.log(
-      ` displayName: ${user.displayName}\n phoneNumber: ${user.phoneNumber}`
-    );
+    // メモを新規作成する
     this.memo = {
       id: '',
       title: this.titleControl.value,
@@ -88,13 +95,20 @@ export class CreateComponent implements OnInit {
         this.memoCollection.doc(docRef.id).update({
           id: docRef.id
         });
-        this.createFormGroup.reset();
+        // フォームの内容をリセットする
+        form.resetForm();
+      })
+      .finally(() => {
+        // スピナーを非表示にする
         this.spinnerService.hide();
       });
-    console.log('memo');
-    console.log(this.memo);
   }
 
+  /**
+   * メモ一覧の取得
+   *
+   * @memberof CreateComponent
+   */
   public retrieveMemos() {
     this.memoCollection = this.afStore.collection('memos', ref =>
       ref.orderBy('updatedDate', 'desc')
