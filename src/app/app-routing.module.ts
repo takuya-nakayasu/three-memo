@@ -38,7 +38,7 @@ const routes: Routes = [
         canActivate: [AuthenticationGuard]
       },
       {
-        path: 'update/:memo',
+        path: 'update/:id',
         component: UpdateComponent,
         canActivate: [AuthenticationGuard]
       }

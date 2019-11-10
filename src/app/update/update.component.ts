@@ -44,12 +44,7 @@ export class UpdateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      const param = params.get('memo');
-      console.log(param);
-    });
-
-    this.retrieveMemos();
+    this.retrieveMemo();
   }
 
   /**
@@ -68,17 +63,6 @@ export class UpdateComponent implements OnInit {
     console.log(`${this.titleControl.value}/${this.descriptionControl.value}`);
 
     const user = this.afAuth.auth.currentUser;
-
-    console.log(` uid: ${user.uid} \n providerId: ${user.providerId}`);
-    console.log(` email: ${user.email}\n photoURL: ${user.photoURL}`);
-    console.log(
-      ` providerData: ${user.providerData}\n emailVerified: ${
-        user.emailVerified
-      }`
-    );
-    console.log(
-      ` displayName: ${user.displayName}\n phoneNumber: ${user.phoneNumber}`
-    );
     this.memo = {
       id: '',
       title: this.titleControl.value,
@@ -104,5 +88,24 @@ export class UpdateComponent implements OnInit {
     this.memoCollection = this.afStore.collection('memos', ref =>
       ref.orderBy('createdDate', 'desc')
     );
+  }
+
+  public retrieveMemo() {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.spinnerService.show();
+      const paramId = params.get('id');
+      console.log(paramId);
+
+      this.memoCollection = this.afStore.collection('memos', ref =>
+        ref.where('id', '==', paramId)
+      );
+
+      this.memoCollection.valueChanges().subscribe(data => {
+        const memo: Memo = data[0];
+        this.titleControl.setValue(memo.title);
+        this.descriptionControl.setValue(memo.description);
+      });
+      this.spinnerService.hide();
+    });
   }
 }
