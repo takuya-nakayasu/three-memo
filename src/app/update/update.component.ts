@@ -63,26 +63,17 @@ export class UpdateComponent implements OnInit {
     console.log(`${this.titleControl.value}/${this.descriptionControl.value}`);
 
     const user = this.afAuth.auth.currentUser;
-    this.memo = {
-      id: '',
-      title: this.titleControl.value,
-      description: this.descriptionControl.value,
-      createdUser: user.uid,
-      createdDate: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedDate: firebase.firestore.FieldValue.serverTimestamp()
-    };
-    this.afStore
-      .collection('memos')
-      .add(this.memo)
-      .then(docRef => {
-        this.memoCollection.doc(docRef.id).update({
-          id: docRef.id
-        });
+    this.memoCollection
+      .doc(this.memo.id)
+      .update({
+        title: this.titleControl.value,
+        description: this.descriptionControl.value,
+        updatedDate: firebase.firestore.FieldValue.serverTimestamp()
+      })
+      .then(() => {
         this.createFormGroup.reset();
         this.spinnerService.hide();
       });
-    console.log('memo');
-    console.log(this.memo);
   }
 
   public retrieveMemos() {
@@ -102,9 +93,9 @@ export class UpdateComponent implements OnInit {
       );
 
       this.memoCollection.valueChanges().subscribe(data => {
-        const memo: Memo = data[0];
-        this.titleControl.setValue(memo.title);
-        this.descriptionControl.setValue(memo.description);
+        this.memo = data[0];
+        this.titleControl.setValue(this.memo.title);
+        this.descriptionControl.setValue(this.memo.description);
       });
       this.spinnerService.hide();
     });
