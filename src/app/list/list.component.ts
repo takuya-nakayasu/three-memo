@@ -32,7 +32,7 @@ export class ListComponent implements OnInit {
   public retrieveMemos(): void {
     const user = this.afAuth.auth.currentUser;
     this.memoCollection = this.afStore.collection('memos', ref =>
-      ref.orderBy('createdDate', 'desc').where('createdUser', '==', user.uid)
+      ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
     );
 
     this.memoCollection.valueChanges().subscribe(data => {

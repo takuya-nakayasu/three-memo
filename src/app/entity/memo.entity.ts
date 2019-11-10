@@ -4,4 +4,5 @@ export interface Memo {
   description: string;
   createdUser: string;
   createdDate: any;
+  updatedDate: any;
 }

@@ -68,7 +68,8 @@ export class UpdateComponent implements OnInit {
       title: this.titleControl.value,
       description: this.descriptionControl.value,
       createdUser: user.uid,
-      createdDate: firebase.firestore.FieldValue.serverTimestamp()
+      createdDate: firebase.firestore.FieldValue.serverTimestamp(),
+      updatedDate: firebase.firestore.FieldValue.serverTimestamp()
     };
     this.afStore
       .collection('memos')
@@ -86,7 +87,7 @@ export class UpdateComponent implements OnInit {
 
   public retrieveMemos() {
     this.memoCollection = this.afStore.collection('memos', ref =>
-      ref.orderBy('createdDate', 'desc')
+      ref.orderBy('updatedDate', 'desc')
     );
   }
 
