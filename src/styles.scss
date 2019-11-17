@@ -5,3 +5,8 @@ body {
   margin: 0px;
   background: #eff1f4;
 }
+
+// サブサイドメニューの高さ調整
+.mat-drawer-container {
+  height: 100%;
+}
