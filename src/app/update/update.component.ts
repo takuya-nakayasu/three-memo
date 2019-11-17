@@ -96,9 +96,11 @@ export class UpdateComponent implements OnInit {
   public retrieveMemo() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.spinnerService.show();
+      // メモ一覧で選択したメモのIDを取得
       const paramId = params.get('id');
       console.log(paramId);
 
+      // IDをキーにメモを取得
       this.memoCollection = this.afStore.collection('memos', ref =>
         ref.where('id', '==', paramId)
       );
