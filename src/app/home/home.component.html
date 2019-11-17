@@ -28,11 +28,13 @@
   <!-- メイン コンテンツ -->
   <mat-sidenav-content class="main-contents">
     <!-- サブサイドメニュー -->
-    <mat-sidenav-container>
-      <mat-sidenav mode="side" class="side-menu" opened>
+    <mat-sidenav-container class="#">
+      <!-- サブサイドメニュー（サイドメニュー） -->
+      <mat-sidenav mode="side" class="#" opened>
         <app-list></app-list>
       </mat-sidenav>
-      <mat-sidenav-content class="main-contents">
+      <!-- サブサイドメニュー（メインコンテンツ） -->
+      <mat-sidenav-content class="#">
         <app-create></app-create>
       </mat-sidenav-content>
     </mat-sidenav-container>
