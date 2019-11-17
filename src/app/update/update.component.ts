@@ -15,6 +15,13 @@ import {
 import { SpinnerService } from '../services/spinner.service';
 import * as firebase from 'firebase';
 
+/**
+ * メモ更新画面コンポーネント
+ *
+ * @export
+ * @class UpdateComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
@@ -58,7 +65,12 @@ export class UpdateComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  /**
+   * メモ更新処理
+   *
+   * @memberof UpdateComponent
+   */
+  public onSubmit() {
     this.spinnerService.show();
     console.log(`${this.titleControl.value}/${this.descriptionControl.value}`);
 
@@ -76,12 +88,11 @@ export class UpdateComponent implements OnInit {
       });
   }
 
-  public retrieveMemos() {
-    this.memoCollection = this.afStore.collection('memos', ref =>
-      ref.orderBy('updatedDate', 'desc')
-    );
-  }
-
+  /**
+   * メモ一覧で選択したメモを取得
+   *
+   * @memberof UpdateComponent
+   */
   public retrieveMemo() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.spinnerService.show();
