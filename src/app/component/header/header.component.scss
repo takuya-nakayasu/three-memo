@@ -6,6 +6,11 @@ mat-toolbar {
     align-items: center;
     width: 100%;
 
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
     .title {
       margin-left: 12px;
       font-size: 21px;

@@ -1,9 +1,11 @@
 <mat-toolbar color="primary">
   <div class="main">
-    <mat-icon class="header-icon">
-      note
-    </mat-icon>
-    <span class="title">CONCEPT</span>
+    <span class="logo" (click)="signOut()">
+      <mat-icon class=" header-icon">
+        note
+      </mat-icon>
+      <span class="title">CONCEPT</span>
+    </span>
     <!-- ログアウトボタン(ログインしている時のみ表示される) -->
     <mat-icon (click)="signOut()" *ngIf="afAuth.user | async" class="right-icon">exit_to_app</mat-icon>
   </div>
