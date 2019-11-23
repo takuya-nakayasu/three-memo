@@ -1,6 +1,6 @@
 <div class="list-wrapper">
-  <mat-list role="list">
-    <mat-list-item *ngFor="let memo of memos" role="listitem">
+  <mat-nav-list>
+    <a mat-list-item *ngFor="let memo of memos" role="listitem">
       <div (click)="update(memo.id)" class="list-item">
         <div class="title">{{memo.title}}</div>
         <div class="info">
@@ -9,6 +9,6 @@
         </div>
       </div>
       <mat-icon class="right-icon" (click)="delete(memo.id)">delete</mat-icon>
-    </mat-list-item>
-  </mat-list>
+    </a>
+  </mat-nav-list>
 </div>
