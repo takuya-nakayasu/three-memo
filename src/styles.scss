@@ -4,6 +4,8 @@
 body {
   margin: 0px;
   background: #eff1f4;
+  // スクロール禁止
+  overflow: hidden;
 }
 
 // サブサイドメニューの高さ調整
