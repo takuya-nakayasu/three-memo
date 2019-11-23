@@ -36,9 +36,12 @@ export class ListComponent implements OnInit {
     );
 
     this.memoCollection.get().subscribe(querySnapshot => {
+      let index = 0;
       querySnapshot.forEach(memoSnapshot => {
         const memo = memoSnapshot.data();
-        if (memo) {
+        console.log(memo);
+        index++;
+        if (memo && index === 1) {
           this.router.navigate([`/home/update/${memo.id}`]);
         }
       });
