@@ -51,6 +51,8 @@ export class ListComponent implements OnInit {
       .delete()
       .then(() => {
         console.log('memo deleted');
+        // 削除に成功したら、新規メモ作成画面に遷移する
+        this.router.navigate(['/home/create']);
         this.spinnerService.hide();
       });
   }
