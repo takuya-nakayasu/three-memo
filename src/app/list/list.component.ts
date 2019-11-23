@@ -35,6 +35,15 @@ export class ListComponent implements OnInit {
       ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
     );
 
+    this.memoCollection.get().subscribe(querySnapshot => {
+      querySnapshot.forEach(memoSnapshot => {
+        const memo = memoSnapshot.data();
+        if (memo) {
+          this.router.navigate([`/home/update/${memo.id}`]);
+        }
+      });
+    });
+
     this.memoCollection.valueChanges().subscribe(data => {
       this.spinnerService.show();
       this.memos = data;
