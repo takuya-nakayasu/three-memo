@@ -13,8 +13,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { KintaiCardComponent } from './component/kintai-card/kintai-card.component';
-import { KintaiTableComponent } from './component/kintai-table/kintai-table.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HomeComponent } from './home/home.component';
@@ -43,8 +41,6 @@ import { UpdateComponent } from './update/update.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-    KintaiCardComponent,
-    KintaiTableComponent,
     HomeComponent,
     SpinnerComponent,
     LoginComponent,
