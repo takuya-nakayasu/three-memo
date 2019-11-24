@@ -37,6 +37,7 @@ import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { UpdateComponent } from './update/update.component';
 import { ListHeaderComponent } from './component/list-header/list-header.component';
+import { MainSideMenuComponent } from './component/main-side-menu/main-side-menu.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ListHeaderComponent } from './component/list-header/list-header.compone
     CreateComponent,
     ListComponent,
     UpdateComponent,
-    ListHeaderComponent
+    ListHeaderComponent,
+    MainSideMenuComponent
   ],
   imports: [
     BrowserModule,
