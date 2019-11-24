@@ -36,6 +36,7 @@ import { MatListModule } from '@angular/material/list';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { UpdateComponent } from './update/update.component';
+import { ListHeaderComponent } from './component/list-header/list-header.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { UpdateComponent } from './update/update.component';
     SignUpComponent,
     CreateComponent,
     ListComponent,
-    UpdateComponent
+    UpdateComponent,
+    ListHeaderComponent
   ],
   imports: [
     BrowserModule,
