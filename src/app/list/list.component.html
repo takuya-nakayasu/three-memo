@@ -1,6 +1,6 @@
 <app-list-header [numberOfMemos]="numberOfMemos"></app-list-header>
-<div class="list-wrapper">
-  <mat-nav-list>
+<div>
+  <mat-nav-list class="list-wrapper">
     <a class="memo-item" mat-list-item *ngFor="let memo of memos" role="listitem">
       <div (click)="update(memo.id)" class="list-item">
         <div class="title">{{memo.title}}</div>
