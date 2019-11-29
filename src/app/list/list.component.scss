@@ -3,12 +3,16 @@
   margin-top: 80px;
 
   .memo-item {
-    margin: 5px 0;
+    margin: 10px 0;
   }
 
   .list-item {
     .title {
       font-weight: 500;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 300px;
+      text-overflow: ellipsis;
     }
 
     .info {
