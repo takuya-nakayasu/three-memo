@@ -1,5 +1,17 @@
-<mat-nav-list>
-  <a mat-list-item [routerLink]="'./create'"> 新規メモ </a>
-  <a mat-list-item [routerLink]="'./list'"> すべてのメモ </a>
-  <a mat-list-item> フォルダ </a>
+<mat-nav-list class="side-menu">
+  <a mat-list-item [routerLink]="'./create'">
+    <div class="menu-item">新規メモ</div>
+  </a>
+  <a mat-list-item [routerLink]="'./list'">
+    <div class="menu-item">
+      <mat-icon class="menu-icon">note</mat-icon>
+      <div>すべてのメモ</div>
+    </div>
+  </a>
+  <a mat-list-item>
+    <div class="menu-item">
+      <mat-icon class="menu-icon">folder</mat-icon>
+      <div>フォルダ</div>
+    </div>
+  </a>
 </mat-nav-list>
