@@ -34,12 +34,12 @@ const routes: Routes = [
         canActivate: [AuthenticationGuard]
       },
       {
-        path: 'list',
-        component: ListComponent,
+        path: 'update/:id',
+        component: UpdateComponent,
         canActivate: [AuthenticationGuard]
       },
       {
-        path: 'update/:id',
+        path: 'update',
         component: UpdateComponent,
         canActivate: [AuthenticationGuard]
       },

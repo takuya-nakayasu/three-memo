@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { Memo } from '../entity/memo.entity';
 import {
   AngularFirestoreCollection,
@@ -27,6 +27,8 @@ export class ListComponent implements OnInit {
   public memoCollection: AngularFirestoreCollection<Memo>;
   public numberOfMemos: number;
 
+  @Input() isSelected: boolean;
+
   constructor(
     private afStore: AngularFirestore,
     private spinnerService: SpinnerService,
@@ -49,18 +51,20 @@ export class ListComponent implements OnInit {
       ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
     );
 
-    this.memoCollection.get().subscribe(querySnapshot => {
-      let index = 0;
-      querySnapshot.forEach(memoSnapshot => {
-        const memo = memoSnapshot.data();
-        console.log(memo);
-        index++;
-        if (memo && index === 1) {
-          // デフォルトでは、先頭のメモを参照する
-          this.router.navigate([`/home/update/${memo.id}`]);
-        }
+    if (this.isSelected) {
+      this.memoCollection.get().subscribe(querySnapshot => {
+        let index = 0;
+        querySnapshot.forEach(memoSnapshot => {
+          const memo = memoSnapshot.data();
+          console.log(memo);
+          index++;
+          if (memo && index === 1) {
+            // デフォルトでは、先頭のメモを参照する
+            this.router.navigate([`/home/update/${memo.id}`]);
+          }
+        });
       });
-    });
+    }
 
     this.memoCollection.valueChanges().subscribe(data => {
       this.spinnerService.show();

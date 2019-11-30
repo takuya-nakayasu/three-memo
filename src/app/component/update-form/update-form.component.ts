@@ -100,8 +100,10 @@ export class UpdateFormComponent implements OnInit {
 
       this.memoCollection.valueChanges().subscribe(data => {
         this.memo = data[0];
-        this.titleControl.setValue(this.memo.title);
-        this.descriptionControl.setValue(this.memo.description);
+        if (this.memo) {
+          this.titleControl.setValue(this.memo.title);
+          this.descriptionControl.setValue(this.memo.description);
+        }
       });
       this.spinnerService.hide();
     });
