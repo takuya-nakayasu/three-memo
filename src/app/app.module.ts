@@ -38,6 +38,7 @@ import { ListComponent } from './list/list.component';
 import { UpdateComponent } from './update/update.component';
 import { ListHeaderComponent } from './component/list-header/list-header.component';
 import { MainSideMenuComponent } from './component/main-side-menu/main-side-menu.component';
+import { FolderListComponent } from './folder-list/folder-list.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MainSideMenuComponent } from './component/main-side-menu/main-side-menu
     ListComponent,
     UpdateComponent,
     ListHeaderComponent,
-    MainSideMenuComponent
+    MainSideMenuComponent,
+    FolderListComponent
   ],
   imports: [
     BrowserModule,
