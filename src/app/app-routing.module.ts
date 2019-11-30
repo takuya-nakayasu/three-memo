@@ -8,6 +8,7 @@ import { AuthenticatedGuard } from './authenticated.guard';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { UpdateComponent } from './update/update.component';
+import { FolderListComponent } from './folder-list/folder-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -40,6 +41,11 @@ const routes: Routes = [
       {
         path: 'update/:id',
         component: UpdateComponent,
+        canActivate: [AuthenticationGuard]
+      },
+      {
+        path: 'folder-list',
+        component: FolderListComponent,
         canActivate: [AuthenticationGuard]
       }
     ]
