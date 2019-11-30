@@ -1,14 +1,12 @@
-<form class="example-form" (ngSubmit)="onSubmit(createNgForm)" [formGroup]="createFormGroup" #createNgForm="ngForm">
-  <!-- タイトル欄 -->
-  <mat-form-field class="example-full-width">
-    <input matInput class="title" placeholder="Title" formControlName="title" />
-  </mat-form-field>
-
-  <!-- 詳細欄 -->
-  <mat-form-field class="example-full-width">
-    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="10" cdkAutosizeMaxRows="30" placeholder="Discription"
-      formControlName="description"></textarea>
-  </mat-form-field>
-  <button type="submit" class="login-button" mat-raised-button [disabled]="!createFormGroup.valid"
-    color="primary">Create</button>
-</form>
+<!-- サブサイドメニュー -->
+<mat-sidenav-container>
+  <!-- サブサイドメニュー（サイドメニュー） -->
+  <mat-sidenav mode="side" class="sub-side-menu" opened>
+    <!-- メモ一覧 -->
+    <app-list></app-list>
+  </mat-sidenav>
+  <!-- サブサイドメニュー（メインコンテンツ） -->
+  <mat-sidenav-content>
+    <app-create-form></app-create-form>
+  </mat-sidenav-content>
+</mat-sidenav-container>
