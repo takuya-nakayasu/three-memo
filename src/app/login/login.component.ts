@@ -8,6 +8,7 @@ import {
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { SpinnerService } from '../services/spinner.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 /**
  * ログイン画面コンポーネント
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
     private router: Router,
+    private _snackBar: MatSnackBar,
     private spinnerService: SpinnerService
   ) {}
 
@@ -60,9 +62,16 @@ export class LoginComponent implements OnInit {
       .then(user => {
         this.router.navigate(['/home']);
       })
-      // ログインに失敗したらエラーメッセージをログ出力
+      // ログインに失敗したらエラーメッセージを画面に出力
       .catch(error => {
         console.log(error);
+        this._snackBar.open(
+          'ログインに失敗しました。エラーメッセージを確認してください。',
+          'Close',
+          {
+            duration: 2000
+          }
+        );
         this.apiErrorMessage = error ? error.message : undefined;
       })
       .finally(() => this.spinnerService.hide());

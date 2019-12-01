@@ -41,6 +41,7 @@ import { MainSideMenuComponent } from './component/main-side-menu/main-side-menu
 import { FolderListComponent } from './folder-list/folder-list.component';
 import { CreateFormComponent } from './component/create-form/create-form.component';
 import { UpdateFormComponent } from './component/update-form/update-form.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { UpdateFormComponent } from './component/update-form/update-form.compone
     MatTableModule,
     MatListModule,
     MatIconModule,
+    MatSnackBarModule,
     MatSelectModule,
     MatButtonModule,
     ReactiveFormsModule,
