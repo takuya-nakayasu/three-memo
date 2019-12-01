@@ -8,7 +8,7 @@ import {
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { SpinnerService } from '../services/spinner.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastService } from '../services/toast.service';
 
 /**
  * ログイン画面コンポーネント
@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
     private router: Router,
-    private _snackBar: MatSnackBar,
+    // tslint:disable-next-line:variable-name
+    private _toastService: ToastService,
     private spinnerService: SpinnerService
   ) {}
 
@@ -65,12 +66,8 @@ export class LoginComponent implements OnInit {
       // ログインに失敗したらエラーメッセージを画面に出力
       .catch(error => {
         console.log(error);
-        this._snackBar.open(
-          'ログインに失敗しました。エラーメッセージを確認してください。',
-          'Close',
-          {
-            duration: 2000
-          }
+        this._toastService.open(
+          'ログインに失敗しました。エラーメッセージを確認してください。'
         );
         this.apiErrorMessage = error ? error.message : undefined;
       })
