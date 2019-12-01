@@ -1,15 +1,17 @@
-<app-list-header [numberOfMemos]="numberOfMemos"></app-list-header>
-<div>
-  <mat-nav-list class="list-wrapper">
-    <a class="memo-item" mat-list-item *ngFor="let memo of memos" role="listitem">
-      <div (click)="update(memo.id)" class="list-item">
-        <div class="title">{{memo.title}}</div>
-        <div class="info">
-          <div class="date">{{memo.updatedDate?.toDate() | date: "yyyy/MM/dd HH:mm"}}</div>
-          <div class="description">{{memo.description}}</div>
+<div class="wrapper">
+  <app-list-header [numberOfMemos]="numberOfMemos"></app-list-header>
+  <div>
+    <mat-nav-list class="list-wrapper">
+      <a class="memo-item" mat-list-item *ngFor="let memo of memos" role="listitem">
+        <div (click)="update(memo.id)" class="list-item">
+          <div class="title">{{memo.title}}</div>
+          <div class="info">
+            <div class="date">{{memo.updatedDate?.toDate() | date: "yyyy/MM/dd HH:mm"}}</div>
+            <div class="description">{{memo.description}}</div>
+          </div>
         </div>
-      </div>
-      <mat-icon class="right-icon" (click)="delete(memo.id)">delete</mat-icon>
-    </a>
-  </mat-nav-list>
+        <mat-icon class="right-icon" (click)="delete(memo.id)">delete</mat-icon>
+      </a>
+    </mat-nav-list>
+  </div>
 </div>
