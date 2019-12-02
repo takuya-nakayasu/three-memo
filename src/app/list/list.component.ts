@@ -8,6 +8,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from '../services/spinner.service';
 import { Router } from '@angular/router';
 import { EventEmitter } from 'events';
+import { ToastService } from '../services/toast.service';
 
 /**
  *　メモ一覧コンポーネント
@@ -32,6 +33,7 @@ export class ListComponent implements OnInit {
   constructor(
     private afStore: AngularFirestore,
     private spinnerService: SpinnerService,
+    private _toastService: ToastService,
     private afAuth: AngularFireAuth,
     private router: Router
   ) {}
@@ -91,6 +93,11 @@ export class ListComponent implements OnInit {
         // 削除に成功したら、新規メモ作成画面に遷移する
         this.router.navigate(['/home/create']);
         this.spinnerService.hide();
+        this._toastService.open('メモを削除しました。');
+      })
+      .catch(error => {
+        console.log(error);
+        this._toastService.open('メモの削除に失敗しました。');
       });
   }
 
