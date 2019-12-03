@@ -42,6 +42,7 @@ import { FolderListComponent } from './folder-list/folder-list.component';
 import { CreateFormComponent } from './component/create-form/create-form.component';
 import { UpdateFormComponent } from './component/update-form/update-form.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     HttpClientModule,
     FormsModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatTableModule,
     MatListModule,
     MatIconModule,

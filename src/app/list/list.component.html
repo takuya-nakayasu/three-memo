@@ -10,7 +10,7 @@
             <div class="description">{{memo.description}}</div>
           </div>
         </div>
-        <mat-icon class="right-icon" (click)="delete(memo.id)">delete</mat-icon>
+        <mat-icon matTooltip="メモを削除する" class="right-icon" (click)="delete(memo.id)">delete</mat-icon>
       </a>
     </mat-nav-list>
   </div>
