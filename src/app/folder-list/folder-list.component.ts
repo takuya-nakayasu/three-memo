@@ -1,25 +1,89 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { Folder } from '../entity/folder.entity';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' }
+const ELEMENT_DATA: Folder[] = [
+  {
+    id: '1',
+    name: 'Hydrogen',
+    numberOfFiles: 1,
+    createdUser: 'H',
+    createdDate: '2019/12/5',
+    updatedDate: '2019/12/7'
+  },
+  {
+    id: '2',
+    name: 'Helium',
+    numberOfFiles: 4,
+    createdUser: 'He',
+    createdDate: '2019/12/5',
+    updatedDate: '2019/12/7'
+  },
+  {
+    id: '3',
+    name: 'Lithium',
+    numberOfFiles: 6,
+    createdUser: 'Li',
+    createdDate: '2019/12/5',
+    updatedDate: '2019/12/7'
+  },
+  {
+    id: '4',
+    name: 'Beryllium',
+    numberOfFiles: 9,
+    createdUser: 'Be',
+    createdDate: '2019/12/5',
+    updatedDate: '2019/12/7'
+  },
+  {
+    id: '5',
+    name: 'Boron',
+    numberOfFiles: 10,
+    createdUser: 'B',
+    createdDate: '2019/12/5',
+    updatedDate: '2019/12/7'
+  },
+  {
+    id: '6',
+    name: 'Carbon',
+    numberOfFiles: 12,
+    createdUser: 'C',
+    createdDate: '2019/12/5',
+    updatedDate: '2019/12/7'
+  },
+  {
+    id: '7',
+    name: 'Nitrogen',
+    numberOfFiles: 14,
+    createdUser: 'N',
+    createdDate: '2019/12/5',
+    updatedDate: '2019/12/7'
+  },
+  {
+    id: '8',
+    name: 'Oxygen',
+    numberOfFiles: 15,
+    createdUser: 'O',
+    createdDate: '2019/12/5',
+    updatedDate: '2019/12/7'
+  },
+  {
+    id: '9',
+    name: 'Fluorine',
+    numberOfFiles: 18,
+    createdUser: 'F',
+    createdDate: '2019/12/5',
+    updatedDate: '2019/12/7'
+  },
+  {
+    id: '10',
+    name: 'Neon',
+    numberOfFiles: 20,
+    createdUser: 'Ne',
+    createdDate: '2019/12/5',
+    updatedDate: '2019/12/7'
+  }
 ];
 @Component({
   selector: 'app-folder-list',
@@ -27,7 +91,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./folder-list.component.scss']
 })
 export class FolderListComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['name', 'numberOfFiles', 'updatedDate'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
