@@ -96,7 +96,16 @@ export class FolderListComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  ngOnInit() {
+  public ngOnInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  /**
+   * フォルダの新規作成
+   *
+   * @memberof FolderListComponent
+   */
+  public create() {
+    console.log('create');
   }
 }
