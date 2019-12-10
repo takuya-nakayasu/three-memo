@@ -1,5 +1,11 @@
 <div class="wrapper">
-  <div class="header">フォルダ</div>
+  <div class="header">
+    <div class="title">フォルダ</div>
+    <div class="add-link">
+      <mat-icon class="icon">create_new_folder</mat-icon>
+      <span>新規フォルダ</span>
+    </div>
+  </div>
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
     <!-- Position Column -->

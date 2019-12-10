@@ -2,8 +2,23 @@
   padding: 0 30px;
 
   .header {
-    font-size: 20px;
     padding: 20px 0;
+
+    .title {
+      font-size: 20px;
+    }
+
+    .add-link {
+      color: #3f51b5;
+      margin-right: 30px;
+      display: flex;
+      justify-content: flex-end;
+      vertical-align: middle;
+
+      .icon {
+        margin-right: 5px;
+      }
+    }
   }
 
   table {
