@@ -43,6 +43,7 @@ import { CreateFormComponent } from './component/create-form/create-form.compone
 import { UpdateFormComponent } from './component/update-form/update-form.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
+    MatDialogModule,
     MatFormFieldModule,
     HttpClientModule,
     FormsModule,
