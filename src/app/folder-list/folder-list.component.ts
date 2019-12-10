@@ -91,7 +91,7 @@ const ELEMENT_DATA: Folder[] = [
   styleUrls: ['./folder-list.component.scss']
 })
 export class FolderListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'numberOfFiles', 'updatedDate'];
+  displayedColumns: string[] = ['name', 'numberOfFiles', 'updatedDate', 'star'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
