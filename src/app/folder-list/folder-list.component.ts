@@ -6,7 +6,7 @@ import { Folder } from '../entity/folder.entity';
 const ELEMENT_DATA: Folder[] = [
   {
     id: '1',
-    name: 'Hydrogen',
+    title: 'Hydrogen',
     numberOfFiles: 1,
     createdUser: 'H',
     createdDate: '2019/12/5',
@@ -14,7 +14,7 @@ const ELEMENT_DATA: Folder[] = [
   },
   {
     id: '2',
-    name: 'Helium',
+    title: 'Helium',
     numberOfFiles: 4,
     createdUser: 'He',
     createdDate: '2019/12/5',
@@ -22,7 +22,7 @@ const ELEMENT_DATA: Folder[] = [
   },
   {
     id: '3',
-    name: 'Lithium',
+    title: 'Lithium',
     numberOfFiles: 6,
     createdUser: 'Li',
     createdDate: '2019/12/5',
@@ -30,7 +30,7 @@ const ELEMENT_DATA: Folder[] = [
   },
   {
     id: '4',
-    name: 'Beryllium',
+    title: 'Beryllium',
     numberOfFiles: 9,
     createdUser: 'Be',
     createdDate: '2019/12/5',
@@ -38,7 +38,7 @@ const ELEMENT_DATA: Folder[] = [
   },
   {
     id: '5',
-    name: 'Boron',
+    title: 'Boron',
     numberOfFiles: 10,
     createdUser: 'B',
     createdDate: '2019/12/5',
@@ -46,7 +46,7 @@ const ELEMENT_DATA: Folder[] = [
   },
   {
     id: '6',
-    name: 'Carbon',
+    title: 'Carbon',
     numberOfFiles: 12,
     createdUser: 'C',
     createdDate: '2019/12/5',
@@ -54,7 +54,7 @@ const ELEMENT_DATA: Folder[] = [
   },
   {
     id: '7',
-    name: 'Nitrogen',
+    title: 'Nitrogen',
     numberOfFiles: 14,
     createdUser: 'N',
     createdDate: '2019/12/5',
@@ -62,7 +62,7 @@ const ELEMENT_DATA: Folder[] = [
   },
   {
     id: '8',
-    name: 'Oxygen',
+    title: 'Oxygen',
     numberOfFiles: 15,
     createdUser: 'O',
     createdDate: '2019/12/5',
@@ -70,7 +70,7 @@ const ELEMENT_DATA: Folder[] = [
   },
   {
     id: '9',
-    name: 'Fluorine',
+    title: 'Fluorine',
     numberOfFiles: 18,
     createdUser: 'F',
     createdDate: '2019/12/5',
@@ -78,7 +78,7 @@ const ELEMENT_DATA: Folder[] = [
   },
   {
     id: '10',
-    name: 'Neon',
+    title: 'Neon',
     numberOfFiles: 20,
     createdUser: 'Ne',
     createdDate: '2019/12/5',
@@ -91,7 +91,12 @@ const ELEMENT_DATA: Folder[] = [
   styleUrls: ['./folder-list.component.scss']
 })
 export class FolderListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'numberOfFiles', 'updatedDate', 'star'];
+  displayedColumns: string[] = [
+    'title',
+    'numberOfFiles',
+    'updatedDate',
+    'star'
+  ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
