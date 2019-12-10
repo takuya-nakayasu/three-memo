@@ -1,7 +1,16 @@
-table {
-  width: 100%;
-}
+.wrapper {
+  padding: 0 20px;
 
-th.mat-sort-header-sorted {
-  color: black;
+  .header {
+    font-size: 20px;
+    padding: 20px 0;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  th.mat-sort-header-sorted {
+    color: black;
+  }
 }
