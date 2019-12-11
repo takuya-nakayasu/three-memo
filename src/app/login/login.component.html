@@ -12,15 +12,16 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input [type]="hide ? 'password' : 'text'"
-            matInput placeholder="password" id="password" formControlName="password" required>
+          <input [type]="hide ? 'password' : 'text'" matInput placeholder="password" id="password"
+            formControlName="password" required>
           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           <mat-error *ngIf="passwordControl.invalid">{{getErrorMessageToPassword()}}</mat-error>
         </mat-form-field>
-        <button type="submit" class="login-button" mat-raised-button [disabled]="!loginFormGroup.valid" color="primary">Login</button>
+        <button type="submit" class="login-button" mat-raised-button [disabled]="!loginFormGroup.valid"
+          color="primary">Login</button>
         <mat-error *ngIf="apiErrorMessage" class="apiErrorMessage">{{apiErrorMessage}}</mat-error>
       </form>
     </mat-card-content>
   </mat-card>
 </div>
-<div class="sign-up">New to Concept? <a routerLink="/sign-up">Create an account</a></div>
+<div class="sign-up">アカウントをお持ちでない方は <a routerLink="/sign-up">アカウント登録</a></div>

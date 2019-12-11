@@ -16,21 +16,23 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input [type]="hide ? 'password' : 'text'"
-            matInput placeholder="password" id="password" formControlName="password" required>
+          <input [type]="hide ? 'password' : 'text'" matInput placeholder="password" id="password"
+            formControlName="password" required>
           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           <mat-error *ngIf="passwordControl.invalid">{{getErrorMessageToPassword()}}</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input [type]="hideConfirm ? 'password' : 'text'"
-            matInput placeholder="confirm password" id="confirmPassword" formControlName="confirmPassword" required>
-          <mat-icon matSuffix (click)="hideConfirm = !hideConfirm">{{hideConfirm ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <input [type]="hideConfirm ? 'password' : 'text'" matInput placeholder="confirm password" id="confirmPassword"
+            formControlName="confirmPassword" required>
+          <mat-icon matSuffix (click)="hideConfirm = !hideConfirm">{{hideConfirm ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
           <mat-error *ngIf="confirmPasswordControl.invalid">{{getErrorMessageToConfirmPassword()}}</mat-error>
         </mat-form-field>
-        <button type="submit" class="sign-up-button" mat-raised-button [disabled]="!signUpFormGroup.valid" color="primary">Create your account</button>
+        <button type="submit" class="sign-up-button" mat-raised-button [disabled]="!signUpFormGroup.valid"
+          color="primary">Create your account</button>
         <mat-error *ngIf="apiErrorMessage" class="apiErrorMessage">{{apiErrorMessage}}</mat-error>
       </form>
     </mat-card-content>
   </mat-card>
 </div>
-<div class="sign-in">Already have an account? <a routerLink="/login">Sign In</a></div>
+<div class="sign-in">すでにアカウントをお持ちの方は <a routerLink="/login">ログイン</a></div>
