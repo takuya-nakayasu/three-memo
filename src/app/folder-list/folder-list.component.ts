@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Folder } from '../entity/folder.entity';
-import { MatDialog } from '@angular/material/dialog';
 
 const ELEMENT_DATA: Folder[] = [
   {
@@ -102,7 +101,7 @@ export class FolderListComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(public dialog: MatDialog) {}
+  constructor() {}
 
   public ngOnInit() {
     this.dataSource.sort = this.sort;

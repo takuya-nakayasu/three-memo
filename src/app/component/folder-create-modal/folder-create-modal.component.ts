@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-folder-create-modal',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./folder-create-modal.component.scss']
 })
 export class FolderCreateModalComponent implements OnInit {
+  constructor(public dialogRef: MatDialogRef<FolderCreateModalComponent>) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  onNoClick(): void {
+    this.dialogRef.close();
   }
-
 }
