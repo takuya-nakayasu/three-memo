@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./forder-list-header.component.scss']
 })
 export class ForderListHeaderComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  /**
+   * フォルダの新規作成
+   *
+   * @memberof ForderListHeaderComponent
+   */
+  public create() {
+    console.log('create');
   }
-
 }

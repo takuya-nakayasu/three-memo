@@ -104,13 +104,4 @@ export class FolderListComponent implements OnInit {
   public ngOnInit() {
     this.dataSource.sort = this.sort;
   }
-
-  /**
-   * フォルダの新規作成
-   *
-   * @memberof FolderListComponent
-   */
-  public create() {
-    console.log('create');
-  }
 }

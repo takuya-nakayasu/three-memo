@@ -1,11 +1,5 @@
 <div class="wrapper">
-  <div class="header">
-    <div class="title">フォルダ</div>
-    <a (click)="create()" class="add-link">
-      <mat-icon class="icon">create_new_folder</mat-icon>
-      <span>新規フォルダ</span>
-    </a>
-  </div>
+  <app-forder-list-header></app-forder-list-header>
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
     <!-- Position Column -->
     <ng-container matColumnDef="title">
