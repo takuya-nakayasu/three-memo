@@ -45,6 +45,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ForderListHeaderComponent } from './component/forder-list-header/forder-list-header.component';
+import { FolderCreateModalComponent } from './component/folder-create-modal/folder-create-modal.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { ForderListHeaderComponent } from './component/forder-list-header/forder
     FolderListComponent,
     CreateFormComponent,
     UpdateFormComponent,
-    ForderListHeaderComponent
+    ForderListHeaderComponent,
+    FolderCreateModalComponent
   ],
   imports: [
     BrowserModule,
