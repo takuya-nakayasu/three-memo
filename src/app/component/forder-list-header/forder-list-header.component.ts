@@ -20,12 +20,11 @@ export class ForderListHeaderComponent implements OnInit {
   public create() {
     console.log('create');
     const dialogRef = this.dialog.open(FolderCreateModalComponent, {
-      width: '250px',
+      width: '250px'
     });
 
     dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
-  }
   }
 }

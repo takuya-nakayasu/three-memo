@@ -66,6 +66,7 @@ import { FolderCreateModalComponent } from './component/folder-create-modal/fold
     ForderListHeaderComponent,
     FolderCreateModalComponent
   ],
+  entryComponents: [FolderCreateModalComponent],
   imports: [
     BrowserModule,
     MatSidenavModule,
