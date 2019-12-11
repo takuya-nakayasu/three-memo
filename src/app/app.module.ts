@@ -44,6 +44,7 @@ import { UpdateFormComponent } from './component/update-form/update-form.compone
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ForderListHeaderComponent } from './component/forder-list-header/forder-list-header.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MainSideMenuComponent,
     FolderListComponent,
     CreateFormComponent,
-    UpdateFormComponent
+    UpdateFormComponent,
+    ForderListHeaderComponent
   ],
   imports: [
     BrowserModule,
