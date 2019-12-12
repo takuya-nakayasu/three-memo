@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-folder-create-modal',
@@ -11,6 +11,11 @@ export class FolderCreateModalComponent implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * キャンセルボタン押下時に呼び出し
+   *
+   * @memberof FolderCreateModalComponent
+   */
   onNoClick(): void {
     this.dialogRef.close();
   }
