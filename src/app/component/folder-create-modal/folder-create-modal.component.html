@@ -1,11 +1,11 @@
-<h1 mat-dialog-title>Hi</h1>
+<h1 mat-dialog-title>新規フォルダを作成</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+  <p>フォルダは、同じテーマや目的をもつメモをまとめて整理するのに役立ちます。</p>
   <mat-form-field>
-    <input matInput>
+    <input matInput class="title" placeholder="名前" />
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">キャンセル</button>
+  <button mat-button cdkFocusInitial>作成</button>
 </div>
