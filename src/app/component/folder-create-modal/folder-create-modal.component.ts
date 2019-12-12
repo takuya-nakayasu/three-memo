@@ -12,11 +12,21 @@ export class FolderCreateModalComponent implements OnInit {
   ngOnInit() {}
 
   /**
+   * 作成ボタン押下時に呼び出し
+   *
+   * @memberof FolderCreateModalComponent
+   */
+  public onOkClick(): void {
+    this.dialogRef.close();
+    // TODO: フォルダ作成処理追加
+  }
+
+  /**
    * キャンセルボタン押下時に呼び出し
    *
    * @memberof FolderCreateModalComponent
    */
-  onNoClick(): void {
+  public onNoClick(): void {
     this.dialogRef.close();
   }
 }
