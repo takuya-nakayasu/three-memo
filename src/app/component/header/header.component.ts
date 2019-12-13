@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
