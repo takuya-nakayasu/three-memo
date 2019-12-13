@@ -13,7 +13,7 @@ export class ForderListHeaderComponent implements OnInit {
   ngOnInit() {}
 
   /**
-   * フォルダの新規作成
+   * フォルダの新規作成モーダルを表示する
    *
    * @memberof ForderListHeaderComponent
    */
