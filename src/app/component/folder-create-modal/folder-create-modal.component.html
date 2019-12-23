@@ -1,11 +1,13 @@
-<h1 mat-dialog-title>新規フォルダを作成</h1>
-<div mat-dialog-content>
-  <p>フォルダは、同じテーマや目的をもつメモをまとめて整理するのに役立ちます。</p>
-  <mat-form-field class="folder">
-    <input matInput class="title" placeholder="名前" />
-  </mat-form-field>
-</div>
-<div mat-dialog-actions align="end">
-  <button mat-button (click)="onNoClick()">キャンセル</button>
-  <button mat-button cdkFocusInitial (click)="onOkClick()">作成</button>
+<div class="modal-wrapper">
+  <h1 mat-dialog-title>新規フォルダを作成</h1>
+  <div mat-dialog-content>
+    <p>フォルダは、同じテーマや目的をもつメモをまとめて整理するのに役立ちます。</p>
+    <mat-form-field class="folder">
+      <input matInput class="title" placeholder="名前" />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()">キャンセル</button>
+    <button mat-button cdkFocusInitial (click)="onOkClick()">作成</button>
+  </div>
 </div>
