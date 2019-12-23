@@ -53,9 +53,10 @@ export class FolderCreateModalComponent implements OnInit {
    * @memberof FolderCreateModalComponent
    */
   public onOkClick(): void {
+    // TODO: フォルダ作成処理追加
+    console.log(this.titleControl.value);
     // モーダルを閉じる
     this.dialogRef.close();
-    // TODO: フォルダ作成処理追加
   }
 
   /**
