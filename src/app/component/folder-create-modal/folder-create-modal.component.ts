@@ -9,7 +9,10 @@ import {
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Folder } from '../../entity/folder.entity';
-import { AngularFirestore } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 
 /**
@@ -30,6 +33,8 @@ export class FolderCreateModalComponent implements OnInit {
   // Titleフォームのコントロール定義
   public titleControl: FormControl;
   public folder: Folder;
+  public folderCollection: AngularFirestoreCollection<Folder>;
+
   // モーダルへの参照をDI
   constructor(
     public dialogRef: MatDialogRef<FolderCreateModalComponent>,
@@ -44,6 +49,7 @@ export class FolderCreateModalComponent implements OnInit {
 
     // フォームコントロールの設定
     this.titleControl = this.folderFormGroup.get('title') as FormControl;
+    this.retrieveFolder();
   }
 
   /**
@@ -82,7 +88,11 @@ export class FolderCreateModalComponent implements OnInit {
     this.afStore
       .collection('folder')
       .add(this.folder)
-      .then(docRef => {})
+      .then(docRef => {
+        this.folderCollection.doc(docRef.id).update({
+          id: docRef.id
+        });
+      })
       .finally(() => {
         // スピナーを非表示にする
         this.spinnerService.hide();
@@ -99,5 +109,11 @@ export class FolderCreateModalComponent implements OnInit {
   public onNoClick(): void {
     // モーダルを閉じる
     this.dialogRef.close();
+  }
+
+  public retrieveFolder() {
+    this.folderCollection = this.afStore.collection('folder', ref =>
+      ref.orderBy('updatedDate', 'desc')
+    );
   }
 }
