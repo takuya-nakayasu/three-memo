@@ -6,6 +6,11 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
+import { SpinnerService } from 'src/app/services/spinner.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Folder } from '../../entity/folder.entity';
+import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase';
 
 /**
  * フォルダ新規作成モーダルのコンポーネントクラス
@@ -24,9 +29,13 @@ export class FolderCreateModalComponent implements OnInit {
   public folderFormGroup: FormGroup;
   // Titleフォームのコントロール定義
   public titleControl: FormControl;
+  public folder: Folder;
   // モーダルへの参照をDI
   constructor(
     public dialogRef: MatDialogRef<FolderCreateModalComponent>,
+    private spinnerService: SpinnerService,
+    private afAuth: AngularFireAuth,
+    private afStore: AngularFirestore,
     private fb: FormBuilder
   ) {}
 
@@ -55,8 +64,31 @@ export class FolderCreateModalComponent implements OnInit {
   public onOkClick(): void {
     // TODO: フォルダ作成処理追加
     console.log(this.titleControl.value);
-    // モーダルを閉じる
-    this.dialogRef.close();
+    // スピナーを表示する
+    this.spinnerService.show();
+
+    // ログインしているユーザ情報の取得
+    const user = this.afAuth.auth.currentUser;
+
+    // メモを新規作成する
+    this.folder = {
+      id: '',
+      title: this.titleControl.value,
+      numberOfFiles: 0,
+      createdUser: user.uid,
+      createdDate: firebase.firestore.FieldValue.serverTimestamp(),
+      updatedDate: firebase.firestore.FieldValue.serverTimestamp()
+    };
+    this.afStore
+      .collection('folder')
+      .add(this.folder)
+      .then(docRef => {})
+      .finally(() => {
+        // スピナーを非表示にする
+        this.spinnerService.hide();
+        // モーダルを閉じる
+        this.dialogRef.close();
+      });
   }
 
   /**
