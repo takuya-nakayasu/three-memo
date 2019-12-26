@@ -2,108 +2,54 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Folder } from '../entity/folder.entity';
+import { SpinnerService } from '../services/spinner.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from '@angular/fire/firestore';
 
-const ELEMENT_DATA: Folder[] = [
-  {
-    id: '1',
-    title: 'Hydrogen',
-    numberOfFiles: 1,
-    createdUser: 'H',
-    createdDate: '2019/12/5',
-    updatedDate: '2019/12/7'
-  },
-  {
-    id: '2',
-    title: 'Helium',
-    numberOfFiles: 4,
-    createdUser: 'He',
-    createdDate: '2019/12/5',
-    updatedDate: '2019/12/7'
-  },
-  {
-    id: '3',
-    title: 'Lithium',
-    numberOfFiles: 6,
-    createdUser: 'Li',
-    createdDate: '2019/12/5',
-    updatedDate: '2019/12/7'
-  },
-  {
-    id: '4',
-    title: 'Beryllium',
-    numberOfFiles: 9,
-    createdUser: 'Be',
-    createdDate: '2019/12/5',
-    updatedDate: '2019/12/7'
-  },
-  {
-    id: '5',
-    title: 'Boron',
-    numberOfFiles: 10,
-    createdUser: 'B',
-    createdDate: '2019/12/5',
-    updatedDate: '2019/12/7'
-  },
-  {
-    id: '6',
-    title: 'Carbon',
-    numberOfFiles: 12,
-    createdUser: 'C',
-    createdDate: '2019/12/5',
-    updatedDate: '2019/12/7'
-  },
-  {
-    id: '7',
-    title: 'Nitrogen',
-    numberOfFiles: 14,
-    createdUser: 'N',
-    createdDate: '2019/12/5',
-    updatedDate: '2019/12/7'
-  },
-  {
-    id: '8',
-    title: 'Oxygen',
-    numberOfFiles: 15,
-    createdUser: 'O',
-    createdDate: '2019/12/5',
-    updatedDate: '2019/12/7'
-  },
-  {
-    id: '9',
-    title: 'Fluorine',
-    numberOfFiles: 18,
-    createdUser: 'F',
-    createdDate: '2019/12/5',
-    updatedDate: '2019/12/7'
-  },
-  {
-    id: '10',
-    title: 'Neon',
-    numberOfFiles: 20,
-    createdUser: 'Ne',
-    createdDate: '2019/12/5',
-    updatedDate: '2019/12/7'
-  }
-];
 @Component({
   selector: 'app-folder-list',
   templateUrl: './folder-list.component.html',
   styleUrls: ['./folder-list.component.scss']
 })
 export class FolderListComponent implements OnInit {
+  public folderCollection: AngularFirestoreCollection<Folder>;
+  public ELEMENT_DATA: Folder[];
+  public dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   displayedColumns: string[] = [
     'title',
     'numberOfFiles',
     'updatedDate',
     'star'
   ];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor() {}
+  constructor(
+    private spinnerService: SpinnerService,
+    private afAuth: AngularFireAuth,
+    private afStore: AngularFirestore
+  ) {}
 
   public ngOnInit() {
     this.dataSource.sort = this.sort;
+    this.retrieveFolder();
+  }
+
+  public retrieveFolder() {
+    const user = this.afAuth.auth.currentUser;
+    // 自分が作成したフォルダーを取得する
+    this.folderCollection = this.afStore.collection('folder', ref =>
+      ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
+    );
+
+    this.folderCollection.valueChanges().subscribe(data => {
+      this.spinnerService.show();
+      this.ELEMENT_DATA = data;
+      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      this.spinnerService.hide();
+    });
   }
 }

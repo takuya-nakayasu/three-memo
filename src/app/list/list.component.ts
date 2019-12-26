@@ -7,7 +7,6 @@ import {
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from '../services/spinner.service';
 import { Router } from '@angular/router';
-import { EventEmitter } from 'events';
 import { ToastService } from '../services/toast.service';
 
 /**
@@ -49,6 +48,7 @@ export class ListComponent implements OnInit {
    */
   public retrieveMemos(): void {
     const user = this.afAuth.auth.currentUser;
+    // 自分が作成したメモを取得する
     this.memoCollection = this.afStore.collection('memos', ref =>
       ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
     );
