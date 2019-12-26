@@ -6,7 +6,6 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthenticationGuard } from './authentication.guard';
 import { AuthenticatedGuard } from './authenticated.guard';
 import { CreateComponent } from './create/create.component';
-import { ListComponent } from './list/list.component';
 import { UpdateComponent } from './update/update.component';
 import { FolderListComponent } from './folder-list/folder-list.component';
 
