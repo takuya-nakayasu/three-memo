@@ -73,8 +73,6 @@ export class CreateFormComponent implements OnInit {
    * @memberof CreateComponent
    */
   public onSubmit(form: NgForm) {
-    console.log(this.folderControl.value);
-    return;
     // スピナーを表示する
     this.spinnerService.show();
 
@@ -86,6 +84,7 @@ export class CreateFormComponent implements OnInit {
       id: '',
       title: this.titleControl.value,
       description: this.descriptionControl.value,
+      folderId: this.folderControl.value,
       createdUser: user.uid,
       createdDate: firebase.firestore.FieldValue.serverTimestamp(),
       updatedDate: firebase.firestore.FieldValue.serverTimestamp()
