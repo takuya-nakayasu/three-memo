@@ -14,6 +14,7 @@ import { Memo } from 'src/app/entity/memo.entity';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import * as firebase from 'firebase';
+import { Folder } from 'src/app/entity/folder.entity';
 
 export interface Food {
   value: string;
@@ -33,6 +34,8 @@ export class CreateFormComponent implements OnInit {
   public descriptionControl: FormControl;
   public memo: Memo;
   public memoCollection: AngularFirestoreCollection<Memo>;
+  public folderCollection: AngularFirestoreCollection<Folder>;
+  public folderList: Folder[];
 
   foods: Food[] = [
     { value: 'steak-0', viewValue: 'Steak' },
@@ -57,6 +60,7 @@ export class CreateFormComponent implements OnInit {
 
   ngOnInit() {
     this.retrieveMemos();
+    this.retrieveFolder();
   }
 
   /**
@@ -116,5 +120,19 @@ export class CreateFormComponent implements OnInit {
     this.memoCollection = this.afStore.collection('memos', ref =>
       ref.orderBy('updatedDate', 'desc')
     );
+  }
+
+  public retrieveFolder() {
+    const user = this.afAuth.auth.currentUser;
+    // 自分が作成したフォルダーを取得する
+    this.folderCollection = this.afStore.collection('folder', ref =>
+      ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
+    );
+
+    this.folderCollection.valueChanges().subscribe(data => {
+      this.spinnerService.show();
+      this.folderList = data;
+      this.spinnerService.hide();
+    });
   }
 }

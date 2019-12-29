@@ -2,8 +2,8 @@
   <mat-form-field>
     <mat-label>Folder</mat-label>
     <mat-select>
-      <mat-option *ngFor="let food of foods" [value]="food.value">
-        {{food.viewValue}}
+      <mat-option *ngFor="let folder of folderList" [value]="folder.id">
+        {{folder.title}}
       </mat-option>
     </mat-select>
   </mat-form-field>
