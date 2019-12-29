@@ -15,6 +15,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import * as firebase from 'firebase';
 
+export interface Food {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-create-form',
   templateUrl: './create-form.component.html',
@@ -29,6 +33,12 @@ export class CreateFormComponent implements OnInit {
   public descriptionControl: FormControl;
   public memo: Memo;
   public memoCollection: AngularFirestoreCollection<Memo>;
+
+  foods: Food[] = [
+    { value: 'steak-0', viewValue: 'Steak' },
+    { value: 'pizza-1', viewValue: 'Pizza' },
+    { value: 'tacos-2', viewValue: 'Tacos' }
+  ];
 
   constructor(
     private fb: FormBuilder,

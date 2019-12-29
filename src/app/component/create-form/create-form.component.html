@@ -1,9 +1,16 @@
 <form class="example-form" (ngSubmit)="onSubmit(createNgForm)" [formGroup]="createFormGroup" #createNgForm="ngForm">
+  <mat-form-field>
+    <mat-label>Folder</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let food of foods" [value]="food.value">
+        {{food.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <!-- タイトル欄 -->
   <mat-form-field class="example-full-width">
     <input matInput class="title" placeholder="Title" formControlName="title" />
   </mat-form-field>
-
   <!-- 詳細欄 -->
   <mat-form-field class="example-full-width">
     <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="10" cdkAutosizeMaxRows="30" placeholder="Discription"

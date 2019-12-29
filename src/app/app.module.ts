@@ -73,6 +73,7 @@ import { FolderCreateModalComponent } from './component/folder-create-modal/fold
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
+    MatSelectModule,
     MatDialogModule,
     MatFormFieldModule,
     HttpClientModule,
