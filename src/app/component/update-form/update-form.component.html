@@ -1,5 +1,13 @@
 <form class="example-form" (ngSubmit)="onSubmit(); createNgForm.resetForm()" [formGroup]="createFormGroup"
   #createNgForm="ngForm">
+  <mat-form-field>
+    <mat-label>Folder</mat-label>
+    <mat-select formControlName="folder">
+      <mat-option *ngFor="let folder of folderList" [value]="folder.id">
+        {{folder.title}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <mat-form-field class="example-full-width">
     <input matInput class="title" placeholder="Title" formControlName="title" />
   </mat-form-field>

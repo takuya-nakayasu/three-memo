@@ -14,6 +14,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import * as firebase from 'firebase';
+import { Folder } from 'src/app/entity/folder.entity';
 
 @Component({
   selector: 'app-update-form',
@@ -27,8 +28,12 @@ export class UpdateFormComponent implements OnInit {
   public titleControl: FormControl;
   // descriptionフォームのコントロール定義
   public descriptionControl: FormControl;
+  public folderControl: FormControl;
   public memo: Memo;
   public memoCollection: AngularFirestoreCollection<Memo>;
+  public folderCollection: AngularFirestoreCollection<Folder>;
+  public folderList: Folder[];
+
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -37,6 +42,7 @@ export class UpdateFormComponent implements OnInit {
     private spinnerService: SpinnerService
   ) {
     this.createForm();
+    this.folderControl = this.createFormGroup.get('folder') as FormControl;
     this.titleControl = this.createFormGroup.get('title') as FormControl;
     this.descriptionControl = this.createFormGroup.get(
       'description'
@@ -45,6 +51,7 @@ export class UpdateFormComponent implements OnInit {
 
   ngOnInit() {
     this.retrieveMemo();
+    this.retrieveFolder();
   }
 
   /**
@@ -54,6 +61,7 @@ export class UpdateFormComponent implements OnInit {
   private createForm() {
     this.createFormGroup = this.fb.group({
       title: ['', [Validators.required]],
+      folder: ['', []],
       description: ['', [Validators.required]]
     });
   }
@@ -105,6 +113,20 @@ export class UpdateFormComponent implements OnInit {
           this.descriptionControl.setValue(this.memo.description);
         }
       });
+      this.spinnerService.hide();
+    });
+  }
+
+  public retrieveFolder() {
+    const user = this.afAuth.auth.currentUser;
+    // 自分が作成したフォルダーを取得する
+    this.folderCollection = this.afStore.collection('folder', ref =>
+      ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
+    );
+
+    this.folderCollection.valueChanges().subscribe(data => {
+      this.spinnerService.show();
+      this.folderList = data;
       this.spinnerService.hide();
     });
   }
