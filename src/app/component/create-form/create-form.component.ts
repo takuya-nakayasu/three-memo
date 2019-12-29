@@ -62,7 +62,7 @@ export class CreateFormComponent implements OnInit {
   private createForm() {
     this.createFormGroup = this.fb.group({
       title: ['', [Validators.required]],
-      folder: ['', [Validators.required]],
+      folder: ['', []],
       description: ['', [Validators.required]]
     });
   }
