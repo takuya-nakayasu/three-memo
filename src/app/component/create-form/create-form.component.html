@@ -1,7 +1,7 @@
 <form class="example-form" (ngSubmit)="onSubmit(createNgForm)" [formGroup]="createFormGroup" #createNgForm="ngForm">
   <mat-form-field>
     <mat-label>Folder</mat-label>
-    <mat-select>
+    <mat-select formControlName="folder">
       <mat-option *ngFor="let folder of folderList" [value]="folder.id">
         {{folder.title}}
       </mat-option>

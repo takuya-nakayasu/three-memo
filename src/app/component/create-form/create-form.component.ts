@@ -16,10 +16,6 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import * as firebase from 'firebase';
 import { Folder } from 'src/app/entity/folder.entity';
 
-export interface Food {
-  value: string;
-  viewValue: string;
-}
 @Component({
   selector: 'app-create-form',
   templateUrl: './create-form.component.html',
@@ -32,16 +28,11 @@ export class CreateFormComponent implements OnInit {
   public titleControl: FormControl;
   // descriptionフォームのコントロール定義
   public descriptionControl: FormControl;
+  public folderControl: FormControl;
   public memo: Memo;
   public memoCollection: AngularFirestoreCollection<Memo>;
   public folderCollection: AngularFirestoreCollection<Folder>;
   public folderList: Folder[];
-
-  foods: Food[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
-  ];
 
   constructor(
     private fb: FormBuilder,
@@ -52,6 +43,7 @@ export class CreateFormComponent implements OnInit {
     this.createForm();
 
     // フォームコントロールの設定
+    this.folderControl = this.createFormGroup.get('folder') as FormControl;
     this.titleControl = this.createFormGroup.get('title') as FormControl;
     this.descriptionControl = this.createFormGroup.get(
       'description'
@@ -70,6 +62,7 @@ export class CreateFormComponent implements OnInit {
   private createForm() {
     this.createFormGroup = this.fb.group({
       title: ['', [Validators.required]],
+      folder: ['', [Validators.required]],
       description: ['', [Validators.required]]
     });
   }
@@ -80,6 +73,8 @@ export class CreateFormComponent implements OnInit {
    * @memberof CreateComponent
    */
   public onSubmit(form: NgForm) {
+    console.log(this.folderControl.value);
+    return;
     // スピナーを表示する
     this.spinnerService.show();
 
