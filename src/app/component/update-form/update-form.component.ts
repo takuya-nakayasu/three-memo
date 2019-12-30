@@ -81,6 +81,7 @@ export class UpdateFormComponent implements OnInit {
       .update({
         title: this.titleControl.value,
         description: this.descriptionControl.value,
+        folderId: this.folderControl.value,
         updatedDate: firebase.firestore.FieldValue.serverTimestamp()
       })
       .then(() => {
@@ -111,6 +112,7 @@ export class UpdateFormComponent implements OnInit {
         if (this.memo) {
           this.titleControl.setValue(this.memo.title);
           this.descriptionControl.setValue(this.memo.description);
+          this.folderControl.setValue(this.memo.folderId);
         }
       });
       this.spinnerService.hide();
