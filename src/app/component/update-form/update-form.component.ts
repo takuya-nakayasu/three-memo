@@ -15,6 +15,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import * as firebase from 'firebase';
 import { Folder } from 'src/app/entity/folder.entity';
+import { FolderCode } from 'src/app/constants/folder-code';
 
 @Component({
   selector: 'app-update-form',
@@ -33,6 +34,7 @@ export class UpdateFormComponent implements OnInit {
   public memoCollection: AngularFirestoreCollection<Memo>;
   public folderCollection: AngularFirestoreCollection<Folder>;
   public folderList: Folder[];
+  public folderNone: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -52,6 +54,7 @@ export class UpdateFormComponent implements OnInit {
   ngOnInit() {
     this.retrieveMemo();
     this.retrieveFolder();
+    this.folderNone = FolderCode.None;
   }
 
   /**

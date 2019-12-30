@@ -3,7 +3,7 @@
   <mat-form-field>
     <mat-label>フォルダ</mat-label>
     <mat-select formControlName="folder">
-      <mat-option [value]="000">フォルダなし</mat-option>
+      <mat-option [value]="folderNone">フォルダなし</mat-option>
       <mat-option *ngFor="let folder of folderList" [value]="folder.id">
         {{folder.title}}
       </mat-option>
