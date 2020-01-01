@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Memo } from '../entity/memo.entity';
 import {
   AngularFirestoreCollection,
