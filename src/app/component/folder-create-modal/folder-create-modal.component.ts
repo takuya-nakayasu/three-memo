@@ -80,7 +80,6 @@ export class FolderCreateModalComponent implements OnInit {
     this.folder = {
       id: '',
       title: this.titleControl.value,
-      numberOfFiles: 0,
       createdUser: user.uid,
       createdDate: firebase.firestore.FieldValue.serverTimestamp(),
       updatedDate: firebase.firestore.FieldValue.serverTimestamp()

@@ -18,12 +18,7 @@ export class FolderListComponent implements OnInit {
   public folderCollection: AngularFirestoreCollection<Folder>;
   public ELEMENT_DATA: Folder[];
   public dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-  displayedColumns: string[] = [
-    'title',
-    'numberOfFiles',
-    'updatedDate',
-    'star'
-  ];
+  displayedColumns: string[] = ['title', 'updatedDate', 'star'];
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
