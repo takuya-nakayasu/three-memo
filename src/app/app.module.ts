@@ -46,7 +46,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ForderListHeaderComponent } from './component/forder-list-header/forder-list-header.component';
 import { FolderCreateModalComponent } from './component/folder-create-modal/folder-create-modal.component';
-
+import { MatMenuModule } from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +79,7 @@ import { FolderCreateModalComponent } from './component/folder-create-modal/fold
     HttpClientModule,
     FormsModule,
     MatToolbarModule,
+    MatMenuModule,
     MatTooltipModule,
     MatTableModule,
     MatListModule,
