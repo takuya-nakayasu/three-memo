@@ -47,4 +47,26 @@ export class FolderListComponent implements OnInit {
       this.spinnerService.hide();
     });
   }
+
+  /**
+   * フォルダ名の変更
+   *
+   * @param {Folder} selectedFolder
+   * @memberof FolderListComponent
+   */
+  public changeFolderName(selectedFolder: Folder) {
+    console.log('changeFolderName');
+    console.log(selectedFolder.title);
+  }
+
+  /**
+   * フォルダを削除する
+   *
+   * @param {Folder} selectedFolder
+   * @memberof FolderListComponent
+   */
+  public deleteFolder(selectedFolder: Folder) {
+    console.log('deleteFolder');
+    console.log(selectedFolder);
+  }
 }
