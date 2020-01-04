@@ -66,7 +66,6 @@ export class FolderListComponent implements OnInit {
    * @memberof FolderListComponent
    */
   public deleteFolder(selectedFolder: Folder) {
-    console.log('deleteFolder');
     console.log(selectedFolder);
   }
 }
