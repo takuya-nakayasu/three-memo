@@ -78,7 +78,6 @@ export class UpdateFormComponent implements OnInit {
     this.spinnerService.show();
     console.log(`${this.titleControl.value}/${this.descriptionControl.value}`);
 
-    const user = this.afAuth.auth.currentUser;
     this.memoCollection
       .doc(this.memo.id)
       .update({

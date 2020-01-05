@@ -11,6 +11,7 @@ import {
 import { ToastService } from '../services/toast.service';
 import { FolderChangeNameModalComponent } from '../component/folder-change-name-modal/folder-change-name-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-folder-list',
@@ -65,8 +66,12 @@ export class FolderListComponent implements OnInit {
       data: selectedFolder
     });
 
-    dialogRef.afterClosed().subscribe((result: Folder) => {
-      console.log(result);
+    dialogRef.afterClosed().subscribe((updatedFolder: Folder) => {
+      this.spinnerService.show();
+      this.folderCollection.doc(updatedFolder.id).update({
+        title: updatedFolder.title,
+        updatedDate: firebase.firestore.FieldValue.serverTimestamp()
+      });
     });
   }
 
