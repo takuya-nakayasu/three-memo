@@ -8,6 +8,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-folder-list',
@@ -25,6 +26,7 @@ export class FolderListComponent implements OnInit {
   constructor(
     private spinnerService: SpinnerService,
     private afAuth: AngularFireAuth,
+    private _toastService: ToastService,
     private afStore: AngularFirestore
   ) {}
 
@@ -66,6 +68,18 @@ export class FolderListComponent implements OnInit {
    * @memberof FolderListComponent
    */
   public deleteFolder(selectedFolder: Folder) {
-    console.log(selectedFolder);
+    this.spinnerService.show();
+    this.folderCollection
+      .doc(selectedFolder.id)
+      .delete()
+      .then(() => {
+        console.log('folder deleted');
+        this._toastService.open('フォルダを削除しました。');
+      })
+      .catch(error => {
+        console.log(error);
+        this._toastService.open('フォルダの削除に失敗しました。');
+      })
+      .finally(() => this.spinnerService.hide());
   }
 }

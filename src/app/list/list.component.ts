@@ -92,13 +92,13 @@ export class ListComponent implements OnInit {
         console.log('memo deleted');
         // 削除に成功したら、新規メモ作成画面に遷移する
         this.router.navigate(['/home/create']);
-        this.spinnerService.hide();
         this._toastService.open('メモを削除しました。');
       })
       .catch(error => {
         console.log(error);
         this._toastService.open('メモの削除に失敗しました。');
-      });
+      })
+      .finally(() => this.spinnerService.hide());
   }
 
   /**
