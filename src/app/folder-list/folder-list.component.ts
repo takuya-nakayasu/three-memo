@@ -61,11 +61,12 @@ export class FolderListComponent implements OnInit {
    */
   public changeFolderName(selectedFolder: Folder) {
     const dialogRef = this.dialog.open(FolderChangeNameModalComponent, {
-      width: '360px'
+      width: '360px',
+      data: selectedFolder
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe((result: Folder) => {
+      console.log(result);
     });
   }
 

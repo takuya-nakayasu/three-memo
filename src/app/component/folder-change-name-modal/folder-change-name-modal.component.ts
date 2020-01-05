@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Folder } from 'src/app/entity/folder.entity';
 import { AngularFirestoreCollection } from '@angular/fire/firestore/collection/collection';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -29,67 +29,10 @@ export class FolderChangeNameModalComponent implements OnInit {
   // モーダルへの参照をDI
   constructor(
     public dialogRef: MatDialogRef<FolderChangeNameModalComponent>,
-    private spinnerService: SpinnerService,
-    private afAuth: AngularFireAuth,
-    private afStore: AngularFirestore,
-    private fb: FormBuilder
+    @Inject(MAT_DIALOG_DATA) public selectedFolder: Folder
   ) {}
 
-  ngOnInit() {
-    this.createForm();
-
-    // フォームコントロールの設定
-    this.titleControl = this.folderFormGroup.get('title') as FormControl;
-    this.retrieveFolder();
-  }
-
-  /**
-   * フォーム設定の作成
-   *
-   */
-  private createForm() {
-    this.folderFormGroup = this.fb.group({
-      title: ['', [Validators.required]]
-    });
-  }
-
-  /**
-   * モーダルの作成ボタン押下時に呼び出し
-   *
-   * @memberof FolderCreateModalComponent
-   */
-  public onOkClick(): void {
-    // TODO: フォルダ作成処理追加
-    console.log(this.titleControl.value);
-    // スピナーを表示する
-    this.spinnerService.show();
-
-    // ログインしているユーザ情報の取得
-    const user = this.afAuth.auth.currentUser;
-
-    // メモを新規作成する
-    this.folder = {
-      id: '',
-      title: this.titleControl.value,
-      createdUser: user.uid,
-      createdDate: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedDate: firebase.firestore.FieldValue.serverTimestamp()
-    };
-    this.afStore
-      .collection('folder')
-      .add(this.folder)
-      .then(docRef => {
-        this.folderCollection.doc(docRef.id).update({
-          id: docRef.id
-        });
-      })
-      .finally(() => {
-        // スピナーを非表示にする
-        this.spinnerService.hide();
-        // モーダルを閉じる
-        this.dialogRef.close();
-      });
-  }
+  ngOnInit() {}
 
   /**
    * モーダルのキャンセルボタン押下時に呼び出し
@@ -99,11 +42,5 @@ export class FolderChangeNameModalComponent implements OnInit {
   public onNoClick(): void {
     // モーダルを閉じる
     this.dialogRef.close();
-  }
-
-  public retrieveFolder() {
-    this.folderCollection = this.afStore.collection('folder', ref =>
-      ref.orderBy('updatedDate', 'desc')
-    );
   }
 }
