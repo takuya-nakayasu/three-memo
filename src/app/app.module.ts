@@ -47,6 +47,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ForderListHeaderComponent } from './component/forder-list-header/forder-list-header.component';
 import { FolderCreateModalComponent } from './component/folder-create-modal/folder-create-modal.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { FolderChangeNameModalComponent } from './component/folder-change-name-modal/folder-change-name-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,8 @@ import { MatMenuModule } from '@angular/material/menu';
     CreateFormComponent,
     UpdateFormComponent,
     ForderListHeaderComponent,
-    FolderCreateModalComponent
+    FolderCreateModalComponent,
+    FolderChangeNameModalComponent
   ],
   entryComponents: [FolderCreateModalComponent],
   imports: [
