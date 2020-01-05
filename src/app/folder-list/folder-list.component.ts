@@ -9,6 +9,8 @@ import {
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
 import { ToastService } from '../services/toast.service';
+import { FolderChangeNameModalComponent } from '../component/folder-change-name-modal/folder-change-name-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-folder-list',
@@ -27,6 +29,7 @@ export class FolderListComponent implements OnInit {
     private spinnerService: SpinnerService,
     private afAuth: AngularFireAuth,
     private _toastService: ToastService,
+    public dialog: MatDialog,
     private afStore: AngularFirestore
   ) {}
 
@@ -57,7 +60,13 @@ export class FolderListComponent implements OnInit {
    * @memberof FolderListComponent
    */
   public changeFolderName(selectedFolder: Folder) {
-    console.log(selectedFolder.title);
+    const dialogRef = this.dialog.open(FolderChangeNameModalComponent, {
+      width: '360px'
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    });
   }
 
   /**

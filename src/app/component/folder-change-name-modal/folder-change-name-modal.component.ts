@@ -8,7 +8,6 @@ import {
 import { Folder } from 'src/app/entity/folder.entity';
 import { AngularFirestoreCollection } from '@angular/fire/firestore/collection/collection';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FolderCreateModalComponent } from '../folder-create-modal/folder-create-modal.component';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -29,7 +28,7 @@ export class FolderChangeNameModalComponent implements OnInit {
 
   // モーダルへの参照をDI
   constructor(
-    public dialogRef: MatDialogRef<FolderCreateModalComponent>,
+    public dialogRef: MatDialogRef<FolderChangeNameModalComponent>,
     private spinnerService: SpinnerService,
     private afAuth: AngularFireAuth,
     private afStore: AngularFirestore,

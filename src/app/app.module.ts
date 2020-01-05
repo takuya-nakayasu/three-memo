@@ -68,7 +68,7 @@ import { FolderChangeNameModalComponent } from './component/folder-change-name-m
     FolderCreateModalComponent,
     FolderChangeNameModalComponent
   ],
-  entryComponents: [FolderCreateModalComponent],
+  entryComponents: [FolderCreateModalComponent, FolderChangeNameModalComponent],
   imports: [
     BrowserModule,
     MatSidenavModule,
