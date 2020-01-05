@@ -57,7 +57,6 @@ export class FolderListComponent implements OnInit {
    * @memberof FolderListComponent
    */
   public changeFolderName(selectedFolder: Folder) {
-    console.log('changeFolderName');
     console.log(selectedFolder.title);
   }
 
