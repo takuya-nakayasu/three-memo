@@ -12,4 +12,12 @@
   .mat-column-star {
     text-align: right;
   }
+
+  tr.folder-element-row:hover {
+    background: #777;
+  }
+
+  tr.folder-element-row:active {
+    background: #efefef;
+  }
 }
