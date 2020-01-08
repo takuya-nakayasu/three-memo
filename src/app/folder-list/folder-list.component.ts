@@ -12,6 +12,7 @@ import { ToastService } from '../services/toast.service';
 import { FolderChangeNameModalComponent } from '../component/folder-change-name-modal/folder-change-name-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import * as firebase from 'firebase';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-folder-list',
@@ -30,6 +31,7 @@ export class FolderListComponent implements OnInit {
     private spinnerService: SpinnerService,
     private afAuth: AngularFireAuth,
     private _toastService: ToastService,
+    private router: Router,
     public dialog: MatDialog,
     private afStore: AngularFirestore
   ) {}
@@ -99,5 +101,6 @@ export class FolderListComponent implements OnInit {
 
   public moveToFolder(selectedFolder: Folder) {
     console.log(selectedFolder);
+    this.router.navigate([`/home/update/`]);
   }
 }
