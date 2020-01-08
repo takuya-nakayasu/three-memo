@@ -19,6 +19,7 @@
         <button mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
+        <!-- フォルダの操作メニュー -->
         <mat-menu #menu="matMenu">
           <button (click)="changeFolderName(element)" mat-menu-item>
             <span>フォルダの名前を変更</span>
@@ -31,6 +32,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr class="folder-element-row" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr (click)="moveToFolder(row)" class="folder-element-row" mat-row *matRowDef="let row; columns: displayedColumns">
+    </tr>
   </table>
 </div>

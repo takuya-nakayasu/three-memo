@@ -96,4 +96,8 @@ export class FolderListComponent implements OnInit {
       })
       .finally(() => this.spinnerService.hide());
   }
+
+  public moveToFolder(selectedFolder: Folder) {
+    console.log(selectedFolder);
+  }
 }
