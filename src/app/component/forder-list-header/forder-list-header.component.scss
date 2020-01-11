@@ -12,6 +12,11 @@
     justify-content: flex-end;
     vertical-align: middle;
 
+    &:hover,
+    &:active {
+      opacity: 0.5;
+    }
+
     .icon {
       margin-right: 5px;
     }

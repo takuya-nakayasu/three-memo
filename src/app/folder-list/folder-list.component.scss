@@ -3,6 +3,17 @@
 
   table {
     width: 100%;
+
+    a.title-link {
+
+      text-decoration: underline;
+
+      &:hover,
+      &:active {
+        opacity: 0.5;
+      }
+    }
+
   }
 
   th.mat-sort-header-sorted {
@@ -13,11 +24,11 @@
     text-align: right;
   }
 
-  tr.folder-element-row:hover {
-    background: #777;
-  }
+  tr.folder-element-row {
 
-  tr.folder-element-row:active {
-    background: #efefef;
+    &:hover,
+    &:active {
+      background: #efefef;
+    }
   }
 }
