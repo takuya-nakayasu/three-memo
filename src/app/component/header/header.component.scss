@@ -7,6 +7,7 @@ mat-toolbar {
     width: 100%;
 
     .logo {
+      cursor: pointer;
       display: flex;
       align-items: center;
     }
@@ -22,6 +23,7 @@ mat-toolbar {
 
     // ログアウトボタンを右寄せにする
     .right-icon {
+      cursor: pointer;
       margin: 0 0 0 auto;
     }
   }
