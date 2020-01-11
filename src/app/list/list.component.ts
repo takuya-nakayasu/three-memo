@@ -64,6 +64,7 @@ export class ListComponent implements OnInit {
 
     if (this.isSelected) {
       // メモの新規作成画面ではなく更新画面の場合は、isSelectedがTRUEになる
+      // 画面の初期表示のタイミングでのみ呼び出し
       this.memoCollection.get().subscribe(querySnapshot => {
         // 先頭のメモを選択状態にするための処理
         let index = 0;
