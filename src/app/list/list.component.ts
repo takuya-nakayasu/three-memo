@@ -6,7 +6,7 @@ import {
 } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from '../services/spinner.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastService } from '../services/toast.service';
 
 /**
@@ -34,6 +34,7 @@ export class ListComponent implements OnInit {
     private spinnerService: SpinnerService,
     private _toastService: ToastService,
     private afAuth: AngularFireAuth,
+    private route: ActivatedRoute,
     private router: Router
   ) {}
 
@@ -47,14 +48,24 @@ export class ListComponent implements OnInit {
    * @memberof ListComponent
    */
   public retrieveMemos(): void {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      console.log('s');
+    });
+
+    // TODO: FolderIDを考慮した処理に変更する
+    // ここから
     const user = this.afAuth.auth.currentUser;
     // 自分が作成したメモを取得する
     this.memoCollection = this.afStore.collection('memos', ref =>
       ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
     );
+    // ここまでの処理にfolderIdを加えることでFolderIDに準拠したmemoCollectionを作成する
+    // TODO: リストヘッダーにメモの数だけでなくフォルダ名も渡してあげること
 
     if (this.isSelected) {
+      // メモの新規作成画面ではなく更新画面の場合は、isSelectedがTRUEになる
       this.memoCollection.get().subscribe(querySnapshot => {
+        // 先頭のメモを選択状態にするための処理
         let index = 0;
         querySnapshot.forEach(memoSnapshot => {
           const memo = memoSnapshot.data();

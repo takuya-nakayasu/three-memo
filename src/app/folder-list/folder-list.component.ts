@@ -101,6 +101,6 @@ export class FolderListComponent implements OnInit {
 
   public moveToFolder(selectedFolder: Folder) {
     console.log(selectedFolder);
-    this.router.navigate([`/home/update/`]);
+    this.router.navigate([`/home/folder/${selectedFolder.id}`]);
   }
 }

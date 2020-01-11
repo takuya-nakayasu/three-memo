@@ -43,6 +43,11 @@ const routes: Routes = [
         canActivate: [AuthenticationGuard]
       },
       {
+        path: 'folder/:folderId',
+        component: UpdateComponent,
+        canActivate: [AuthenticationGuard]
+      },
+      {
         path: 'folder-list',
         component: FolderListComponent,
         canActivate: [AuthenticationGuard]
