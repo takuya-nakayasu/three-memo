@@ -48,9 +48,10 @@ export class ListComponent implements OnInit {
    * @memberof ListComponent
    */
   public retrieveMemos(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      console.log('s');
-    });
+    // this.route.paramMap.subscribe((params: ParamMap) => {
+    //   const folderId: string = params.get('folderId');
+    //   console.log(`folderId: ${folderId}`);
+    // });
 
     // TODO: FolderIDを考慮した処理に変更する
     // ここから
