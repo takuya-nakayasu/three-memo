@@ -63,12 +63,12 @@ export class FolderCreateModalComponent implements OnInit {
   }
 
   /**
-   * モーダルの作成ボタン押下時に呼び出し
+   * モーダルの作成ボタン押下時に呼び出し。
+   * フォルダを新規作成する
    *
    * @memberof FolderCreateModalComponent
    */
   public onOkClick(): void {
-    // TODO: フォルダ作成処理追加
     console.log(this.titleControl.value);
     // スピナーを表示する
     this.spinnerService.show();
@@ -76,7 +76,7 @@ export class FolderCreateModalComponent implements OnInit {
     // ログインしているユーザ情報の取得
     const user = this.afAuth.auth.currentUser;
 
-    // メモを新規作成する
+    // フォルダを新規作成する
     this.folder = {
       id: '',
       title: this.titleControl.value,

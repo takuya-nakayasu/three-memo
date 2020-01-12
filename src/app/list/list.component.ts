@@ -48,38 +48,41 @@ export class ListComponent implements OnInit {
    * @memberof ListComponent
    */
   public retrieveMemos(): void {
-    // this.route.paramMap.subscribe((params: ParamMap) => {
-    //   const folderId: string = params.get('folderId');
-    //   console.log(`folderId: ${folderId}`);
-    // });
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const memoId: string = params.get('id');
+      const folderId: string = params.get('folderId');
+      console.log(`memoId: ${memoId}`);
+      console.log(`folderId: ${folderId}`);
 
-    // TODO: FolderIDを考慮した処理に変更する
-    // ここから
-    const user = this.afAuth.auth.currentUser;
-    // 自分が作成したメモを取得する
-    this.memoCollection = this.afStore.collection('memos', ref =>
-      ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
-    );
-    // ここまでの処理にfolderIdを加えることでFolderIDに準拠したmemoCollectionを作成する
-    // TODO: リストヘッダーにメモの数だけでなくフォルダ名も渡してあげること
+      // TODO: FolderIDを考慮した処理に変更する
+      // ここから
+      const user = this.afAuth.auth.currentUser;
+      // 自分が作成したメモを取得する
+      this.memoCollection = this.afStore.collection('memos', ref =>
+        ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
+      );
+      // ここまでの処理にfolderIdを加えることでFolderIDに準拠したmemoCollectionを作成する
+      // TODO: リストヘッダーにメモの数だけでなくフォルダ名も渡してあげること
 
-    if (this.isSelected) {
-      // メモの新規作成画面ではなく更新画面の場合は、isSelectedがTRUEになる
-      // 画面の初期表示のタイミングでのみ呼び出し
-      this.memoCollection.get().subscribe(querySnapshot => {
-        // 先頭のメモを選択状態にするための処理
-        let index = 0;
-        querySnapshot.forEach(memoSnapshot => {
-          const memo = memoSnapshot.data();
-          console.log(memo);
-          index++;
-          if (memo && index === 1) {
-            // デフォルトでは、先頭のメモを参照する
-            this.router.navigate([`/home/update/${memo.id}`]);
-          }
+      if (this.isSelected && !memoId) {
+        // メモの新規作成画面ではなく更新画面の場合は、isSelectedがTRUEになる
+        // 画面の初期表示のタイミングでのみ呼び出し
+        // メモを選択している場合はこの処理をスキップする
+        this.memoCollection.get().subscribe(querySnapshot => {
+          // 先頭のメモを選択状態にするための処理
+          let index = 0;
+          querySnapshot.forEach(memoSnapshot => {
+            const memo = memoSnapshot.data();
+            console.log(memo);
+            index++;
+            if (memo && index === 1) {
+              // デフォルトでは、先頭のメモを参照する
+              this.router.navigate([`/home/update/${memo.id}`]);
+            }
+          });
         });
-      });
-    }
+      }
+    });
 
     this.memoCollection.valueChanges().subscribe(data => {
       this.spinnerService.show();
