@@ -76,19 +76,7 @@ export class ListComponent implements OnInit {
         // メモの新規作成画面ではなく更新画面の場合は、isSelectedがTRUEになる
         // 画面の初期表示のタイミングでのみ呼び出し
         // メモを選択している場合はこの処理をスキップする
-        this.memoCollection.get().subscribe(querySnapshot => {
-          // 先頭のメモを選択状態にするための処理
-          let index = 0;
-          querySnapshot.forEach(memoSnapshot => {
-            const memo = memoSnapshot.data();
-            console.log(memo);
-            index++;
-            if (memo && index === 1) {
-              // デフォルトでは、先頭のメモを参照する
-              this.router.navigate([`/home/update/${memo.id}`]);
-            }
-          });
-        });
+        this.selectFirstMemo();
       }
     });
 
@@ -158,6 +146,17 @@ export class ListComponent implements OnInit {
       ref.orderBy('updatedDate', 'desc').where('folderId', '==', folderId)
     );
 
+    this.selectFirstMemo();
+
+    this.memoCollection.valueChanges().subscribe(data => {
+      this.spinnerService.show();
+      this.memos = data;
+      this.numberOfMemos = this.memos.length;
+      this.spinnerService.hide();
+    });
+  }
+
+  private selectFirstMemo() {
     this.memoCollection.get().subscribe(querySnapshot => {
       // 先頭のメモを選択状態にするための処理
       let index = 0;
@@ -170,13 +169,6 @@ export class ListComponent implements OnInit {
           this.router.navigate([`/home/update/${memo.id}`]);
         }
       });
-    });
-
-    this.memoCollection.valueChanges().subscribe(data => {
-      this.spinnerService.show();
-      this.memos = data;
-      this.numberOfMemos = this.memos.length;
-      this.spinnerService.hide();
     });
   }
 }
