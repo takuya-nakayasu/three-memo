@@ -8,6 +8,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from '../services/spinner.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastService } from '../services/toast.service';
+import { Folder } from '../entity/folder.entity';
 
 /**
  *　メモ一覧コンポーネント
@@ -25,7 +26,9 @@ export class ListComponent implements OnInit {
   public memo: Memo;
   public memos: Memo[];
   public memoCollection: AngularFirestoreCollection<Memo>;
+  public folderCollection: AngularFirestoreCollection<Folder>;
   public numberOfMemos: number;
+  public selectedFolder: Folder;
 
   @Input() isSelected: boolean;
 
@@ -53,6 +56,8 @@ export class ListComponent implements OnInit {
       const folderId: string = params.get('folderId');
       console.log(`memoId: ${memoId}`);
       console.log(`folderId: ${folderId}`);
+
+      this.retrieveSelectedFolder(folderId);
 
       // TODO: FolderIDを考慮した処理に変更する
       // ここから
@@ -125,5 +130,19 @@ export class ListComponent implements OnInit {
    */
   public update(id: string): void {
     this.router.navigate(['/home/update', id]);
+  }
+
+  private retrieveSelectedFolder(folderId: string): void {
+    // 選択したフォルダーを取得する
+    this.folderCollection = this.afStore.collection('folder', ref =>
+      ref.where('id', '==', folderId)
+    );
+
+    this.folderCollection.valueChanges().subscribe((data: Folder[]) => {
+      this.spinnerService.show();
+      this.selectedFolder = data[0];
+      console.log(this.selectedFolder);
+      this.spinnerService.hide();
+    });
   }
 }
