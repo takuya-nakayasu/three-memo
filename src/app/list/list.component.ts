@@ -61,7 +61,7 @@ export class ListComponent implements OnInit {
       if (folderId) {
         return;
       }
-
+      // すべてのメモで検索をスタートする
       // TODO: FolderIDを考慮した処理に変更する
       // ここから
       const user = this.afAuth.auth.currentUser;
