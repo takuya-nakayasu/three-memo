@@ -58,6 +58,7 @@ export class ListComponent implements OnInit {
       console.log(`folderId: ${folderId}`);
 
       this.retrieveSelectedFolder(folderId);
+
       if (folderId) {
         return;
       }
@@ -80,12 +81,7 @@ export class ListComponent implements OnInit {
       }
     });
 
-    this.memoCollection.valueChanges().subscribe(data => {
-      this.spinnerService.show();
-      this.memos = data;
-      this.numberOfMemos = this.memos.length;
-      this.spinnerService.hide();
-    });
+    this.setMemoList();
   }
 
   /**
@@ -148,14 +144,15 @@ export class ListComponent implements OnInit {
 
     this.selectFirstMemo();
 
-    this.memoCollection.valueChanges().subscribe(data => {
-      this.spinnerService.show();
-      this.memos = data;
-      this.numberOfMemos = this.memos.length;
-      this.spinnerService.hide();
-    });
+    this.setMemoList();
   }
 
+  /**
+   *　先頭のメモを選択状態にする
+   *
+   * @private
+   * @memberof ListComponent
+   */
   private selectFirstMemo() {
     this.memoCollection.get().subscribe(querySnapshot => {
       // 先頭のメモを選択状態にするための処理
@@ -169,6 +166,21 @@ export class ListComponent implements OnInit {
           this.router.navigate([`/home/update/${memo.id}`]);
         }
       });
+    });
+  }
+
+  /**
+   * 取得したメモの一覧をセットする
+   *
+   * @private
+   * @memberof ListComponent
+   */
+  private setMemoList() {
+    this.memoCollection.valueChanges().subscribe(data => {
+      this.spinnerService.show();
+      this.memos = data;
+      this.numberOfMemos = this.memos.length;
+      this.spinnerService.hide();
     });
   }
 }
