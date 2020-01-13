@@ -178,6 +178,9 @@ export class ListComponent implements OnInit {
    * @memberof ListComponent
    */
   private setMemoList() {
+    if (!this.memoCollection) {
+      return;
+    }
     this.memoCollection.valueChanges().subscribe(data => {
       this.spinnerService.show();
       this.memos = data;
