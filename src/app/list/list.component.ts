@@ -28,6 +28,7 @@ export class ListComponent implements OnInit {
   public memoCollection: AngularFirestoreCollection<Memo>;
   public folderCollection: AngularFirestoreCollection<Folder>;
   public numberOfMemos: number;
+  public selectedFolderTitle: string;
   public selectedFolder: Folder;
 
   @Input() isSelected: boolean;
@@ -131,6 +132,7 @@ export class ListComponent implements OnInit {
       }
       this.spinnerService.show();
       this.selectedFolder = data[0];
+      this.selectedFolderTitle = this.selectedFolder.title;
       this.retrieveMemoByFolderId(this.selectedFolder.id);
       console.log(this.selectedFolder);
       this.spinnerService.hide();

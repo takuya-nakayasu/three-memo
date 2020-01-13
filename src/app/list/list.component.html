@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <app-list-header [numberOfMemos]="numberOfMemos"></app-list-header>
+  <app-list-header [selectedFolderTitle]="selectedFolderTitle" [numberOfMemos]="numberOfMemos"></app-list-header>
   <div>
     <mat-nav-list class="list-wrapper">
       <a class="memo-item" mat-list-item *ngFor="let memo of memos" role="listitem">
