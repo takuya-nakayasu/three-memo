@@ -58,6 +58,9 @@ export class ListComponent implements OnInit {
       console.log(`folderId: ${folderId}`);
 
       this.retrieveSelectedFolder(folderId);
+      if (folderId) {
+        return;
+      }
 
       // TODO: FolderIDを考慮した処理に変更する
       // ここから
@@ -139,9 +142,40 @@ export class ListComponent implements OnInit {
     );
 
     this.folderCollection.valueChanges().subscribe((data: Folder[]) => {
+      if (data.length === 0) {
+        return;
+      }
       this.spinnerService.show();
       this.selectedFolder = data[0];
+      this.retrieveMemoByFolderId(this.selectedFolder.id);
       console.log(this.selectedFolder);
+      this.spinnerService.hide();
+    });
+  }
+
+  private retrieveMemoByFolderId(folderId: string): void {
+    this.memoCollection = this.afStore.collection('memos', ref =>
+      ref.orderBy('updatedDate', 'desc').where('folderId', '==', folderId)
+    );
+
+    this.memoCollection.get().subscribe(querySnapshot => {
+      // 先頭のメモを選択状態にするための処理
+      let index = 0;
+      querySnapshot.forEach(memoSnapshot => {
+        const memo = memoSnapshot.data();
+        console.log(memo);
+        index++;
+        if (memo && index === 1) {
+          // デフォルトでは、先頭のメモを参照する
+          this.router.navigate([`/home/update/${memo.id}`]);
+        }
+      });
+    });
+
+    this.memoCollection.valueChanges().subscribe(data => {
+      this.spinnerService.show();
+      this.memos = data;
+      this.numberOfMemos = this.memos.length;
       this.spinnerService.hide();
     });
   }
