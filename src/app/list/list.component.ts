@@ -64,7 +64,6 @@ export class ListComponent implements OnInit {
         return;
       }
       // すべてのメモで検索をスタートする
-      // TODO: FolderIDを考慮した処理に変更する
       // ここから
       const user = this.afAuth.auth.currentUser;
       // 自分が作成したメモを取得する
@@ -72,7 +71,6 @@ export class ListComponent implements OnInit {
         ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
       );
       // ここまでの処理にfolderIdを加えることでFolderIDに準拠したmemoCollectionを作成する
-      // TODO: リストヘッダーにメモの数だけでなくフォルダ名も渡してあげること
 
       if (this.isSelected && !memoId) {
         // メモの新規作成画面ではなく更新画面の場合は、isSelectedがTRUEになる
@@ -144,7 +142,8 @@ export class ListComponent implements OnInit {
       ref.orderBy('updatedDate', 'desc').where('folderId', '==', folderId)
     );
 
-    this.selectFirstMemo();
+    // TODO: フォルダをリセットしないように最初のメモを選択する方法を検討する
+    // this.selectFirstMemo();
 
     this.setMemoList();
   }

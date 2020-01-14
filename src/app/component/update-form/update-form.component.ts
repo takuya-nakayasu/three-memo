@@ -128,6 +128,16 @@ export class UpdateFormComponent implements OnInit {
       ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
     );
 
+    this.setMemoList();
+  }
+
+  /**
+   * 取得したメモの一覧をセットする
+   *
+   * @private
+   * @memberof UpdateFormComponent
+   */
+  private setMemoList() {
     this.folderCollection.valueChanges().subscribe(data => {
       this.spinnerService.show();
       this.folderList = data;
