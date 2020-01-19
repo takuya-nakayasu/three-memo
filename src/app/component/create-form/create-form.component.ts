@@ -17,6 +17,13 @@ import * as firebase from 'firebase';
 import { Folder } from 'src/app/entity/folder.entity';
 import { FolderCode } from '../../constants/folder-code';
 
+/**
+ * メモ新規作成フォーム
+ *
+ * @export
+ * @class CreateFormComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-create-form',
   templateUrl: './create-form.component.html',
@@ -119,6 +126,11 @@ export class CreateFormComponent implements OnInit {
     );
   }
 
+  /**
+   * フォルダ一覧の取得とセット
+   *
+   * @memberof CreateFormComponent
+   */
   public retrieveFolder() {
     const user = this.afAuth.auth.currentUser;
     // 自分が作成したフォルダーを取得する

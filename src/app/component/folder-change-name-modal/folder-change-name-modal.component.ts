@@ -1,18 +1,16 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  FormBuilder,
-  Validators
-} from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Folder } from 'src/app/entity/folder.entity';
 import { AngularFirestoreCollection } from '@angular/fire/firestore/collection/collection';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SpinnerService } from 'src/app/services/spinner.service';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
 
+/**
+ * フォルダー名変更モーダル
+ *
+ * @export
+ * @class FolderChangeNameModalComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-folder-change-name-modal',
   templateUrl: './folder-change-name-modal.component.html',
@@ -35,7 +33,8 @@ export class FolderChangeNameModalComponent implements OnInit {
   ngOnInit() {}
 
   /**
-   * モーダルのキャンセルボタン押下時に呼び出し
+   * モーダルのキャンセルボタン押下時に呼び出し。
+   * 本モーダルを閉じる
    *
    * @memberof FolderCreateModalComponent
    */

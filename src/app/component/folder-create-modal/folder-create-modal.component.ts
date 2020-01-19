@@ -110,6 +110,11 @@ export class FolderCreateModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  /**
+   * フォルダ一覧の情報を取得する
+   *
+   * @memberof FolderCreateModalComponent
+   */
   public retrieveFolder() {
     this.folderCollection = this.afStore.collection('folder', ref =>
       ref.orderBy('updatedDate', 'desc')
