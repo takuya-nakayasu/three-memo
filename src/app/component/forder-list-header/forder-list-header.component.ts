@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FolderCreateModalComponent } from '../folder-create-modal/folder-create-modal.component';
 
+/**
+ * フォルダ一覧テーブルモーダルクラスコンポーネント
+ *
+ * @export
+ * @class ForderListHeaderComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-forder-list-header',
   templateUrl: './forder-list-header.component.html',
@@ -18,7 +25,6 @@ export class ForderListHeaderComponent implements OnInit {
    * @memberof ForderListHeaderComponent
    */
   public create() {
-    console.log('create');
     const dialogRef = this.dialog.open(FolderCreateModalComponent, {
       width: '360px'
     });

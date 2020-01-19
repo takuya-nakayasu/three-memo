@@ -5,7 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastService } from '../../services/toast.service';
 
 /**
- * ヘッダーのコンポーネントクラス
+ * 画面ヘッダーのコンポーネントクラス
  *
  * @export
  * @class HeaderComponent
