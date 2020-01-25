@@ -1,3 +1,9 @@
+/**
+ * メモのエンティティ
+ *
+ * @export
+ * @interface Memo
+ */
 export interface Memo {
   id: string;
   title: string;

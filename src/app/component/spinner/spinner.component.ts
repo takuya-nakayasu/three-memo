@@ -2,6 +2,12 @@ import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 import { SpinnerService } from '../../services/spinner.service';
 
+/**
+ * スピナーコンポーネントクラス
+ *
+ * @export
+ * @class SpinnerComponent
+ */
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',

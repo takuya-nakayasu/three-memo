@@ -17,6 +17,13 @@ import * as firebase from 'firebase';
 import { Folder } from 'src/app/entity/folder.entity';
 import { FolderCode } from 'src/app/constants/folder-code';
 
+/**
+ * メモ更新用入力フォームコンポーネントクラス
+ *
+ * @export
+ * @class UpdateFormComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-update-form',
   templateUrl: './update-form.component.html',
