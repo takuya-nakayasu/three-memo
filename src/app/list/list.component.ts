@@ -9,6 +9,7 @@ import { SpinnerService } from '../services/spinner.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastService } from '../services/toast.service';
 import { Folder } from '../entity/folder.entity';
+import { MemoService } from '../services/memo.service';
 
 /**
  *　メモ一覧コンポーネント
@@ -25,7 +26,6 @@ import { Folder } from '../entity/folder.entity';
 export class ListComponent implements OnInit {
   public memo: Memo;
   public memos: Memo[];
-  public memoCollection: AngularFirestoreCollection<Memo>;
   public folderCollection: AngularFirestoreCollection<Folder>;
   public numberOfMemos: number;
   public selectedFolderTitle: string;
@@ -36,6 +36,7 @@ export class ListComponent implements OnInit {
   constructor(
     private afStore: AngularFirestore,
     private spinnerService: SpinnerService,
+    private memoService: MemoService,
     private _toastService: ToastService,
     private afAuth: AngularFireAuth,
     private route: ActivatedRoute,
@@ -67,7 +68,7 @@ export class ListComponent implements OnInit {
       // ここから
       const user = this.afAuth.auth.currentUser;
       // 自分が作成したメモを取得する
-      this.memoCollection = this.afStore.collection('memos', ref =>
+      this.memoService.memoCollection = this.afStore.collection('memos', ref =>
         ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
       );
       // ここまでの処理にfolderIdを加えることでFolderIDに準拠したmemoCollectionを作成する
@@ -92,7 +93,7 @@ export class ListComponent implements OnInit {
   public delete(id: string): void {
     this.spinnerService.show();
     console.log(`id: ${id}`);
-    this.memoCollection
+    this.memoService.memoCollection
       .doc(id)
       .delete()
       .then(() => {
@@ -145,7 +146,7 @@ export class ListComponent implements OnInit {
    * @memberof ListComponent
    */
   private retrieveMemoByFolderId(folderId: string): void {
-    this.memoCollection = this.afStore.collection('memos', ref =>
+    this.memoService.memoCollection = this.afStore.collection('memos', ref =>
       ref.orderBy('updatedDate', 'desc').where('folderId', '==', folderId)
     );
 
@@ -162,7 +163,7 @@ export class ListComponent implements OnInit {
    * @memberof ListComponent
    */
   private selectFirstMemo() {
-    this.memoCollection.get().subscribe(querySnapshot => {
+    this.memoService.memoCollection.get().subscribe(querySnapshot => {
       // 先頭のメモを選択状態にするための処理
       let index = 0;
       querySnapshot.forEach(memoSnapshot => {
@@ -184,10 +185,10 @@ export class ListComponent implements OnInit {
    * @memberof ListComponent
    */
   private setMemoList() {
-    if (!this.memoCollection) {
+    if (!this.memoService.memoCollection) {
       return;
     }
-    this.memoCollection.valueChanges().subscribe(data => {
+    this.memoService.memoCollection.valueChanges().subscribe(data => {
       this.spinnerService.show();
       this.memos = data;
       this.numberOfMemos = this.memos.length;
