@@ -14,6 +14,13 @@ import { MatDialog } from '@angular/material/dialog';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 
+/**
+ * フォルダ一覧コンポーネントクラス
+ *
+ * @export
+ * @class FolderListComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-folder-list',
   templateUrl: './folder-list.component.html',
@@ -41,6 +48,11 @@ export class FolderListComponent implements OnInit {
     this.retrieveFolder();
   }
 
+  /**
+   * フォルダの一覧を取得する
+   *
+   * @memberof FolderListComponent
+   */
   public retrieveFolder() {
     const user = this.afAuth.auth.currentUser;
     // 自分が作成したフォルダーを取得する
@@ -63,13 +75,16 @@ export class FolderListComponent implements OnInit {
    * @memberof FolderListComponent
    */
   public changeFolderName(selectedFolder: Folder) {
+    // フォルダ名称変更モーダルを開く
     const dialogRef = this.dialog.open(FolderChangeNameModalComponent, {
       width: '360px',
       data: selectedFolder
     });
 
+    // モーダルを閉じた後の処理
     dialogRef.afterClosed().subscribe((updatedFolder: Folder) => {
       this.spinnerService.show();
+      // APIにアクセスしてフォルダ名称と更新日時をアップデートする
       this.folderCollection.doc(updatedFolder.id).update({
         title: updatedFolder.title,
         updatedDate: firebase.firestore.FieldValue.serverTimestamp()
@@ -99,8 +114,15 @@ export class FolderListComponent implements OnInit {
       .finally(() => this.spinnerService.hide());
   }
 
+  /**
+   * フォルダー内のメモ一覧を表示した更新画面に遷移する
+   *
+   * @param {Folder} selectedFolder
+   * @memberof FolderListComponent
+   */
   public moveToFolder(selectedFolder: Folder) {
     console.log(selectedFolder);
+    // フォルダー内のメモ一覧を表示した更新画面に遷移する
     this.router.navigate([`/home/folder/${selectedFolder.id}`]);
   }
 }
