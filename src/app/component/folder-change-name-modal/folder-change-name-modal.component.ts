@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Folder } from 'src/app/entity/folder.entity';
-import { AngularFirestoreCollection } from '@angular/fire/firestore/collection/collection';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 /**

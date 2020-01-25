@@ -6,10 +6,7 @@ import {
   Validators,
   NgForm
 } from '@angular/forms';
-import {
-  AngularFirestoreCollection,
-  AngularFirestore
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Memo } from 'src/app/entity/memo.entity';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from 'src/app/services/spinner.service';

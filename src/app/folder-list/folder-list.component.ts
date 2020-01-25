@@ -4,10 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { Folder } from '../entity/folder.entity';
 import { SpinnerService } from '../services/spinner.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastService } from '../services/toast.service';
 import { FolderChangeNameModalComponent } from '../component/folder-change-name-modal/folder-change-name-modal.component';
 import { MatDialog } from '@angular/material/dialog';

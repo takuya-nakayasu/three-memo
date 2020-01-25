@@ -9,10 +9,7 @@ import {
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Folder } from '../../entity/folder.entity';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { FolderService } from 'src/app/services/folder.service';
 

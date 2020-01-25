@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Memo } from '../entity/memo.entity';
-import {
-  AngularFirestoreCollection,
-  AngularFirestore
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from '../services/spinner.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
