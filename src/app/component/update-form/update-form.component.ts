@@ -16,6 +16,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import * as firebase from 'firebase';
 import { Folder } from 'src/app/entity/folder.entity';
 import { FolderCode } from 'src/app/constants/folder-code';
+import { MemoService } from 'src/app/services/memo.service';
 
 /**
  * メモ更新用入力フォームコンポーネントクラス
@@ -38,7 +39,6 @@ export class UpdateFormComponent implements OnInit {
   public descriptionControl: FormControl;
   public folderControl: FormControl;
   public memo: Memo;
-  public memoCollection: AngularFirestoreCollection<Memo>;
   public folderCollection: AngularFirestoreCollection<Folder>;
   public folderList: Folder[];
   public folderNone: number;
@@ -46,6 +46,7 @@ export class UpdateFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
+    private memoService: MemoService,
     private afAuth: AngularFireAuth,
     private afStore: AngularFirestore,
     private spinnerService: SpinnerService
@@ -85,7 +86,7 @@ export class UpdateFormComponent implements OnInit {
     this.spinnerService.show();
     console.log(`${this.titleControl.value}/${this.descriptionControl.value}`);
 
-    this.memoCollection
+    this.memoService.memoCollection
       .doc(this.memo.id)
       .update({
         title: this.titleControl.value,
@@ -112,11 +113,11 @@ export class UpdateFormComponent implements OnInit {
       console.log(paramId);
 
       // IDをキーにメモを取得
-      this.memoCollection = this.afStore.collection('memos', ref =>
+      this.memoService.memoCollection = this.afStore.collection('memos', ref =>
         ref.where('id', '==', paramId)
       );
 
-      this.memoCollection.valueChanges().subscribe(data => {
+      this.memoService.memoCollection.valueChanges().subscribe(data => {
         this.memo = data[0];
         if (this.memo) {
           this.titleControl.setValue(this.memo.title);

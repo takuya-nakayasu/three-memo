@@ -16,6 +16,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import * as firebase from 'firebase';
 import { Folder } from 'src/app/entity/folder.entity';
 import { FolderCode } from '../../constants/folder-code';
+import { MemoService } from '../../services/memo.service';
 
 /**
  * メモ新規作成フォーム
@@ -38,7 +39,6 @@ export class CreateFormComponent implements OnInit {
   public descriptionControl: FormControl;
   public folderControl: FormControl;
   public memo: Memo;
-  public memoCollection: AngularFirestoreCollection<Memo>;
   public folderCollection: AngularFirestoreCollection<Folder>;
   public folderList: Folder[];
   public folderNone: number;
@@ -47,6 +47,7 @@ export class CreateFormComponent implements OnInit {
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
     private afStore: AngularFirestore,
+    private memoService: MemoService,
     private spinnerService: SpinnerService
   ) {
     this.createForm();
@@ -103,7 +104,7 @@ export class CreateFormComponent implements OnInit {
       .collection('memos')
       .add(this.memo)
       .then(docRef => {
-        this.memoCollection.doc(docRef.id).update({
+        this.memoService.memoCollection.doc(docRef.id).update({
           id: docRef.id
         });
         // フォームの内容をリセットする
@@ -121,7 +122,7 @@ export class CreateFormComponent implements OnInit {
    * @memberof CreateComponent
    */
   public retrieveMemos() {
-    this.memoCollection = this.afStore.collection('memos', ref =>
+    this.memoService.memoCollection = this.afStore.collection('memos', ref =>
       ref.orderBy('updatedDate', 'desc')
     );
   }
