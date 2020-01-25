@@ -13,6 +13,7 @@ import { FolderChangeNameModalComponent } from '../component/folder-change-name-
 import { MatDialog } from '@angular/material/dialog';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
+import { FolderService } from '../services/folder.service';
 
 /**
  * フォルダ一覧コンポーネントクラス
@@ -27,7 +28,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./folder-list.component.scss']
 })
 export class FolderListComponent implements OnInit {
-  public folderCollection: AngularFirestoreCollection<Folder>;
   public ELEMENT_DATA: Folder[];
   public dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   displayedColumns: string[] = ['title', 'updatedDate', 'star'];
@@ -38,6 +38,7 @@ export class FolderListComponent implements OnInit {
     private spinnerService: SpinnerService,
     private afAuth: AngularFireAuth,
     private _toastService: ToastService,
+    private folderService: FolderService,
     private router: Router,
     public dialog: MatDialog,
     private afStore: AngularFirestore
@@ -56,11 +57,13 @@ export class FolderListComponent implements OnInit {
   public retrieveFolder() {
     const user = this.afAuth.auth.currentUser;
     // 自分が作成したフォルダーを取得する
-    this.folderCollection = this.afStore.collection('folder', ref =>
-      ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
+    this.folderService.folderCollection = this.afStore.collection(
+      'folder',
+      ref =>
+        ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
     );
 
-    this.folderCollection.valueChanges().subscribe(data => {
+    this.folderService.folderCollection.valueChanges().subscribe(data => {
       this.spinnerService.show();
       this.ELEMENT_DATA = data;
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
@@ -85,7 +88,7 @@ export class FolderListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((updatedFolder: Folder) => {
       this.spinnerService.show();
       // APIにアクセスしてフォルダ名称と更新日時をアップデートする
-      this.folderCollection.doc(updatedFolder.id).update({
+      this.folderService.folderCollection.doc(updatedFolder.id).update({
         title: updatedFolder.title,
         updatedDate: firebase.firestore.FieldValue.serverTimestamp()
       });
@@ -100,7 +103,7 @@ export class FolderListComponent implements OnInit {
    */
   public deleteFolder(selectedFolder: Folder) {
     this.spinnerService.show();
-    this.folderCollection
+    this.folderService.folderCollection
       .doc(selectedFolder.id)
       .delete()
       .then(() => {

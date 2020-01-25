@@ -22,7 +22,6 @@ export class FolderChangeNameModalComponent implements OnInit {
   // Titleフォームのコントロール定義
   public titleControl: FormControl;
   public folder: Folder;
-  public folderCollection: AngularFirestoreCollection<Folder>;
 
   // モーダルへの参照をDI
   constructor(

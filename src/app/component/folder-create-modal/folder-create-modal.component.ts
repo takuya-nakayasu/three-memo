@@ -14,6 +14,7 @@ import {
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
+import { FolderService } from 'src/app/services/folder.service';
 
 /**
  * フォルダ新規作成モーダルのコンポーネントクラス
@@ -33,13 +34,13 @@ export class FolderCreateModalComponent implements OnInit {
   // Titleフォームのコントロール定義
   public titleControl: FormControl;
   public folder: Folder;
-  public folderCollection: AngularFirestoreCollection<Folder>;
 
   // モーダルへの参照をDI
   constructor(
     public dialogRef: MatDialogRef<FolderCreateModalComponent>,
     private spinnerService: SpinnerService,
     private afAuth: AngularFireAuth,
+    private folderService: FolderService,
     private afStore: AngularFirestore,
     private fb: FormBuilder
   ) {}
@@ -88,7 +89,7 @@ export class FolderCreateModalComponent implements OnInit {
       .collection('folder')
       .add(this.folder)
       .then(docRef => {
-        this.folderCollection.doc(docRef.id).update({
+        this.folderService.folderCollection.doc(docRef.id).update({
           id: docRef.id
         });
       })
@@ -116,8 +117,9 @@ export class FolderCreateModalComponent implements OnInit {
    * @memberof FolderCreateModalComponent
    */
   public retrieveFolder() {
-    this.folderCollection = this.afStore.collection('folder', ref =>
-      ref.orderBy('updatedDate', 'desc')
+    this.folderService.folderCollection = this.afStore.collection(
+      'folder',
+      ref => ref.orderBy('updatedDate', 'desc')
     );
   }
 }

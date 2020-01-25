@@ -17,6 +17,7 @@ import * as firebase from 'firebase';
 import { Folder } from 'src/app/entity/folder.entity';
 import { FolderCode } from '../../constants/folder-code';
 import { MemoService } from '../../services/memo.service';
+import { FolderService } from 'src/app/services/folder.service';
 
 /**
  * メモ新規作成フォーム
@@ -39,7 +40,6 @@ export class CreateFormComponent implements OnInit {
   public descriptionControl: FormControl;
   public folderControl: FormControl;
   public memo: Memo;
-  public folderCollection: AngularFirestoreCollection<Folder>;
   public folderList: Folder[];
   public folderNone: number;
 
@@ -47,6 +47,7 @@ export class CreateFormComponent implements OnInit {
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
     private afStore: AngularFirestore,
+    private folderService: FolderService,
     private memoService: MemoService,
     private spinnerService: SpinnerService
   ) {
@@ -135,11 +136,13 @@ export class CreateFormComponent implements OnInit {
   public retrieveFolder() {
     const user = this.afAuth.auth.currentUser;
     // 自分が作成したフォルダーを取得する
-    this.folderCollection = this.afStore.collection('folder', ref =>
-      ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
+    this.folderService.folderCollection = this.afStore.collection(
+      'folder',
+      ref =>
+        ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
     );
 
-    this.folderCollection.valueChanges().subscribe(data => {
+    this.folderService.folderCollection.valueChanges().subscribe(data => {
       this.spinnerService.show();
       this.folderList = data;
       this.spinnerService.hide();

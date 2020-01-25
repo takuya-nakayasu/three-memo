@@ -10,6 +10,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastService } from '../services/toast.service';
 import { Folder } from '../entity/folder.entity';
 import { MemoService } from '../services/memo.service';
+import { FolderService } from '../services/folder.service';
 
 /**
  *　メモ一覧コンポーネント
@@ -26,7 +27,6 @@ import { MemoService } from '../services/memo.service';
 export class ListComponent implements OnInit {
   public memo: Memo;
   public memos: Memo[];
-  public folderCollection: AngularFirestoreCollection<Folder>;
   public numberOfMemos: number;
   public selectedFolderTitle: string;
   public selectedFolder: Folder;
@@ -37,6 +37,7 @@ export class ListComponent implements OnInit {
     private afStore: AngularFirestore,
     private spinnerService: SpinnerService,
     private memoService: MemoService,
+    private folderService: FolderService,
     private _toastService: ToastService,
     private afAuth: AngularFireAuth,
     private route: ActivatedRoute,
@@ -121,21 +122,24 @@ export class ListComponent implements OnInit {
 
   private retrieveSelectedFolder(folderId: string): void {
     // 選択したフォルダーを取得する
-    this.folderCollection = this.afStore.collection('folder', ref =>
-      ref.where('id', '==', folderId)
+    this.folderService.folderCollection = this.afStore.collection(
+      'folder',
+      ref => ref.where('id', '==', folderId)
     );
 
-    this.folderCollection.valueChanges().subscribe((data: Folder[]) => {
-      if (data.length === 0) {
-        return;
-      }
-      this.spinnerService.show();
-      this.selectedFolder = data[0];
-      this.selectedFolderTitle = this.selectedFolder.title;
-      this.retrieveMemoByFolderId(this.selectedFolder.id);
-      console.log(this.selectedFolder);
-      this.spinnerService.hide();
-    });
+    this.folderService.folderCollection
+      .valueChanges()
+      .subscribe((data: Folder[]) => {
+        if (data.length === 0) {
+          return;
+        }
+        this.spinnerService.show();
+        this.selectedFolder = data[0];
+        this.selectedFolderTitle = this.selectedFolder.title;
+        this.retrieveMemoByFolderId(this.selectedFolder.id);
+        console.log(this.selectedFolder);
+        this.spinnerService.hide();
+      });
   }
 
   /**
