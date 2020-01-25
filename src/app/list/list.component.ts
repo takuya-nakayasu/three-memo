@@ -137,6 +137,13 @@ export class ListComponent implements OnInit {
     });
   }
 
+  /**
+   * 選択したフォルダー内のメモをセットする
+   *
+   * @private
+   * @param {string} folderId
+   * @memberof ListComponent
+   */
   private retrieveMemoByFolderId(folderId: string): void {
     this.memoCollection = this.afStore.collection('memos', ref =>
       ref.orderBy('updatedDate', 'desc').where('folderId', '==', folderId)
