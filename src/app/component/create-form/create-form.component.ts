@@ -47,20 +47,21 @@ export class CreateFormComponent implements OnInit {
     private folderService: FolderService,
     private memoService: MemoService,
     private spinnerService: SpinnerService
-  ) {
-    this.createForm();
+  ) {}
 
+  ngOnInit() {
+    this.createForm();
     // フォームコントロールの設定
     this.folderControl = this.createFormGroup.get('folder') as FormControl;
     this.titleControl = this.createFormGroup.get('title') as FormControl;
     this.descriptionControl = this.createFormGroup.get(
       'description'
     ) as FormControl;
-  }
 
-  ngOnInit() {
-    this.retrieveMemos();
-    this.retrieveFolder();
+    this.memoService.retrieveMemos();
+    this.folderService.retrieveFolder();
+    this.setFolderList();
+
     this.folderNone = FolderCode.None;
   }
 
@@ -115,34 +116,13 @@ export class CreateFormComponent implements OnInit {
   }
 
   /**
-   * メモ一覧の取得
-   *
-   * @memberof CreateComponent
-   */
-  public retrieveMemos() {
-    this.memoService.memoCollection = this.afStore.collection('memos', ref =>
-      ref.orderBy('updatedDate', 'desc')
-    );
-  }
-
-  /**
-   * フォルダ一覧の取得とセット
+   * フォルダ一覧のセット
    *
    * @memberof CreateFormComponent
    */
-  public retrieveFolder() {
-    const user = this.afAuth.auth.currentUser;
-    // 自分が作成したフォルダーを取得する
-    this.folderService.folderCollection = this.afStore.collection(
-      'folder',
-      ref =>
-        ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
-    );
-
+  private setFolderList() {
     this.folderService.folderCollection.valueChanges().subscribe(data => {
-      this.spinnerService.show();
       this.folderList = data;
-      this.spinnerService.hide();
     });
   }
 }
