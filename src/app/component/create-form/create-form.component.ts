@@ -51,30 +51,12 @@ export class CreateFormComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    // フォームコントロールの設定
-    this.folderControl = this.createFormGroup.get('folder') as FormControl;
-    this.titleControl = this.createFormGroup.get('title') as FormControl;
-    this.descriptionControl = this.createFormGroup.get(
-      'description'
-    ) as FormControl;
 
     this.memoService.retrieveMemos();
     this.folderService.retrieveFolder();
     this.setFolderList();
 
     this.folderNone = FolderCode.None;
-  }
-
-  /**
-   * フォーム設定の作成
-   *
-   */
-  private createForm() {
-    this.createFormGroup = this.fb.group({
-      title: ['', [Validators.required]],
-      folder: ['', []],
-      description: ['', [Validators.required]]
-    });
   }
 
   /**
@@ -113,6 +95,25 @@ export class CreateFormComponent implements OnInit {
         // スピナーを非表示にする
         this.spinnerService.hide();
       });
+  }
+
+  /**
+   * フォーム設定の作成
+   *
+   */
+  private createForm() {
+    // フォームコントロールの設定
+    this.folderControl = this.createFormGroup.get('folder') as FormControl;
+    this.titleControl = this.createFormGroup.get('title') as FormControl;
+    this.descriptionControl = this.createFormGroup.get(
+      'description'
+    ) as FormControl;
+
+    this.createFormGroup = this.fb.group({
+      title: ['', [Validators.required]],
+      folder: ['', []],
+      description: ['', [Validators.required]]
+    });
   }
 
   /**
