@@ -6,7 +6,6 @@ import {
   Validators,
   NgForm
 } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Memo } from 'src/app/entity/memo.entity';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from 'src/app/services/spinner.service';
@@ -43,7 +42,6 @@ export class CreateFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
-    private afStore: AngularFirestore,
     private folderService: FolderService,
     private memoService: MemoService,
     private spinnerService: SpinnerService
@@ -81,9 +79,9 @@ export class CreateFormComponent implements OnInit {
       createdDate: firebase.firestore.FieldValue.serverTimestamp(),
       updatedDate: firebase.firestore.FieldValue.serverTimestamp()
     };
-    this.afStore
-      .collection('memos')
-      .add(this.memo)
+
+    this.memoService
+      .registerMemo(this.memo)
       .then(docRef => {
         this.memoService.memoCollection.doc(docRef.id).update({
           id: docRef.id
@@ -102,18 +100,18 @@ export class CreateFormComponent implements OnInit {
    *
    */
   private createForm() {
+    this.createFormGroup = this.fb.group({
+      title: ['', [Validators.required]],
+      folder: ['', []],
+      description: ['', [Validators.required]]
+    });
+
     // フォームコントロールの設定
     this.folderControl = this.createFormGroup.get('folder') as FormControl;
     this.titleControl = this.createFormGroup.get('title') as FormControl;
     this.descriptionControl = this.createFormGroup.get(
       'description'
     ) as FormControl;
-
-    this.createFormGroup = this.fb.group({
-      title: ['', [Validators.required]],
-      folder: ['', []],
-      description: ['', [Validators.required]]
-    });
   }
 
   /**

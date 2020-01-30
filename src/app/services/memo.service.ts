@@ -6,6 +6,7 @@ import {
 import { Memo } from '../entity/memo.entity';
 import { SpinnerService } from './spinner.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -39,11 +40,9 @@ export class MemoService {
    *
    * @memberof MemoService
    */
-  public registerMemo() {
-    // スピナーを表示する
-    this.spinnerService.show();
-
-    // ログインしているユーザ情報の取得
-    const user = this.angularFireAuth.auth.currentUser;
+  public registerMemo(
+    memo: Memo
+  ): Promise<firebase.firestore.DocumentReference> {
+    return this.angularFireStore.collection('memos').add(memo);
   }
 }
