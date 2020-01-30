@@ -45,8 +45,6 @@ export class FolderCreateModalComponent implements OnInit {
   ngOnInit() {
     this.createForm();
 
-    // フォームコントロールの設定
-    this.titleControl = this.folderFormGroup.get('title') as FormControl;
     this.retrieveFolder();
   }
 
@@ -58,6 +56,9 @@ export class FolderCreateModalComponent implements OnInit {
     this.folderFormGroup = this.fb.group({
       title: ['', [Validators.required]]
     });
+
+    // フォームコントロールの設定
+    this.titleControl = this.folderFormGroup.get('title') as FormControl;
   }
 
   /**
