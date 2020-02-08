@@ -94,6 +94,9 @@ export class UpdateFormComponent implements OnInit {
       })
       .then(() => {
         this.createFormGroup.reset();
+      })
+      .finally(() => {
+        // スピナーを非表示にする
         this.spinnerService.hide();
       });
   }
