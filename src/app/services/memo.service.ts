@@ -7,6 +7,12 @@ import { Memo } from '../entity/memo.entity';
 import { SpinnerService } from './spinner.service';
 import * as firebase from 'firebase';
 
+/**
+ * メモ関連のサービスクラス
+ *
+ * @export
+ * @class MemoService
+ */
 @Injectable({
   providedIn: 'root'
 })
