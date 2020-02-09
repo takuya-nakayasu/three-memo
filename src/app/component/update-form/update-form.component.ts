@@ -82,16 +82,14 @@ export class UpdateFormComponent implements OnInit {
    */
   public onSubmit() {
     this.spinnerService.show();
-    console.log(`${this.titleControl.value}/${this.descriptionControl.value}`);
 
-    this.memoService.memoCollection
-      .doc(this.memo.id)
-      .update({
-        title: this.titleControl.value,
-        description: this.descriptionControl.value,
-        folderId: this.folderControl.value,
-        updatedDate: firebase.firestore.FieldValue.serverTimestamp()
-      })
+    this.memo.title = this.titleControl.value;
+    this.memo.description = this.descriptionControl.value;
+    this.memo.folderId = this.folderControl.value;
+    this.memo.updatedDate = firebase.firestore.FieldValue.serverTimestamp();
+
+    this.memoService
+      .updateMemo(this.memo)
       .then(() => {
         this.createFormGroup.reset();
       })

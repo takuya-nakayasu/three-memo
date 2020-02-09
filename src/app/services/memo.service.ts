@@ -5,7 +5,6 @@ import {
 } from '@angular/fire/firestore';
 import { Memo } from '../entity/memo.entity';
 import { SpinnerService } from './spinner.service';
-import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 
 @Injectable({
@@ -16,7 +15,6 @@ export class MemoService {
 
   constructor(
     private angularFireStore: AngularFirestore,
-    private angularFireAuth: AngularFireAuth,
     private spinnerService: SpinnerService
   ) {}
 
@@ -44,5 +42,21 @@ export class MemoService {
     memo: Memo
   ): Promise<firebase.firestore.DocumentReference> {
     return this.angularFireStore.collection('memos').add(memo);
+  }
+
+  /**
+   * メモの更新
+   *
+   * @param {Memo} memo
+   * @returns {Promise<void>}
+   * @memberof MemoService
+   */
+  public updateMemo(memo: Memo): Promise<void> {
+    return this.memoCollection.doc(memo.id).update({
+      title: memo.title,
+      description: memo.description,
+      folderId: memo.folderId,
+      updatedDate: memo.updatedDate
+    });
   }
 }
