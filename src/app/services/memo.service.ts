@@ -24,11 +24,27 @@ export class MemoService {
    * @memberof MemoService
    *
    */
-  public retrieveMemos() {
+  public retrieveMemos(): void {
     // スピナーを表示する
     this.spinnerService.show();
     this.memoCollection = this.angularFireStore.collection('memos', ref =>
       ref.orderBy('updatedDate', 'desc')
+    );
+    this.spinnerService.hide();
+  }
+
+  /**
+   * メモ１件を取得する
+   *
+   * @param {string} memoId
+   * @memberof MemoService
+   */
+  public retrieveMemo(memoId: string): void {
+    // スピナーを表示する
+    this.spinnerService.show();
+    // IDをキーにメモを取得
+    this.memoCollection = this.angularFireStore.collection('memos', ref =>
+      ref.where('id', '==', memoId)
     );
     this.spinnerService.hide();
   }

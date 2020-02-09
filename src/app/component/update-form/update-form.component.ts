@@ -106,15 +106,8 @@ export class UpdateFormComponent implements OnInit {
    */
   public retrieveMemo() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.spinnerService.show();
-      // メモ一覧で選択したメモのIDを取得
-      const paramId = params.get('id');
-      console.log(paramId);
-
       // IDをキーにメモを取得
-      this.memoService.memoCollection = this.afStore.collection('memos', ref =>
-        ref.where('id', '==', paramId)
-      );
+      this.memoService.retrieveMemo(params.get('id'));
 
       this.memoService.memoCollection.valueChanges().subscribe(data => {
         this.memo = data[0];
@@ -124,7 +117,6 @@ export class UpdateFormComponent implements OnInit {
           this.folderControl.setValue(this.memo.folderId);
         }
       });
-      this.spinnerService.hide();
     });
   }
 
@@ -137,16 +129,16 @@ export class UpdateFormComponent implements OnInit {
         ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
     );
 
-    this.setMemoList();
+    this.setFolderList();
   }
 
   /**
-   * 取得したメモの一覧をセットする
+   * 取得したフォルダーの一覧をセットする
    *
    * @private
    * @memberof UpdateFormComponent
    */
-  private setMemoList() {
+  private setFolderList() {
     this.folderService.folderCollection.valueChanges().subscribe(data => {
       this.spinnerService.show();
       this.folderList = data;
