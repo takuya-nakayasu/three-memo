@@ -80,7 +80,8 @@ export class UpdateFormComponent implements OnInit {
    *
    * @memberof UpdateComponent
    */
-  public onSubmit() {
+  public async onSubmit() {
+    // スピナーを表示する
     this.spinnerService.show();
 
     this.memo.title = this.titleControl.value;
@@ -88,15 +89,16 @@ export class UpdateFormComponent implements OnInit {
     this.memo.folderId = this.folderControl.value;
     this.memo.updatedDate = firebase.firestore.FieldValue.serverTimestamp();
 
-    this.memoService
-      .updateMemo(this.memo)
-      .then(() => {
-        this.createFormGroup.reset();
-      })
-      .finally(() => {
-        // スピナーを非表示にする
-        this.spinnerService.hide();
-      });
+    try {
+      await this.memoService.updateMemo(this.memo);
+      // Promiseが成功したら入力フォームをリセットする
+      this.createFormGroup.reset();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      // Promiseが成功しても失敗してもスピナーを非表示にする
+      this.spinnerService.hide();
+    }
   }
 
   /**
