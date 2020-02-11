@@ -62,7 +62,7 @@ export class CreateFormComponent implements OnInit {
    *
    * @memberof CreateComponent
    */
-  public onSubmit(form: NgForm) {
+  public async onSubmit(form: NgForm) {
     // スピナーを表示する
     this.spinnerService.show();
 
@@ -80,19 +80,19 @@ export class CreateFormComponent implements OnInit {
       updatedDate: firebase.firestore.FieldValue.serverTimestamp()
     };
 
-    this.memoService
-      .registerMemo(this.memo)
-      .then(docRef => {
-        this.memoService.memoCollection.doc(docRef.id).update({
-          id: docRef.id
-        });
-        // フォームの内容をリセットする
-        form.resetForm();
-      })
-      .finally(() => {
-        // スピナーを非表示にする
-        this.spinnerService.hide();
+    try {
+      const docRef = await this.memoService.registerMemo(this.memo);
+
+      this.memoService.memoCollection.doc(docRef.id).update({
+        id: docRef.id
       });
+      form.resetForm();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      // スピナーを非表示にする
+      this.spinnerService.hide();
+    }
   }
 
   /**
