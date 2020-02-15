@@ -9,6 +9,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { SpinnerService } from '../services/spinner.service';
 import { ToastService } from '../services/toast.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 /**
  * ログイン画面コンポーネント
@@ -34,10 +35,10 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private afAuth: AngularFireAuth,
     private router: Router,
     // tslint:disable-next-line:variable-name
     private _toastService: ToastService,
+    private authenticationService: AuthenticationService,
     private spinnerService: SpinnerService
   ) {}
 
@@ -51,27 +52,25 @@ export class LoginComponent implements OnInit {
    * ログインボタン押下時に呼び出し
    *
    */
-  public onSubmit() {
-    // メールアドレスとパスワードをFirebase Authenticationに渡す
-    this.spinnerService.show();
-    this.afAuth.auth
-      .signInWithEmailAndPassword(
+  public async onSubmit() {
+    try {
+      this.spinnerService.show();
+      // メールアドレスとパスワードをFirebase Authenticationに渡す
+      await this.authenticationService.signInWithEmailAndPassword(
         this.emailControl.value,
         this.passwordControl.value
-      )
+      );
       // ログインに成功したらホーム画面に遷移する
-      .then(user => {
-        this.router.navigate(['/home']);
-      })
-      // ログインに失敗したらエラーメッセージを画面に出力
-      .catch(error => {
-        console.log(error);
-        this._toastService.open(
-          'ログインに失敗しました。エラーメッセージを確認してください。'
-        );
-        this.apiErrorMessage = error ? error.message : undefined;
-      })
-      .finally(() => this.spinnerService.hide());
+      this.router.navigate(['/home']);
+    } catch (error) {
+      console.log(error);
+      this._toastService.open(
+        'ログインに失敗しました。エラーメッセージを確認してください。'
+      );
+      this.apiErrorMessage = error ? error.message : undefined;
+    } finally {
+      this.spinnerService.hide();
+    }
   }
 
   /**
