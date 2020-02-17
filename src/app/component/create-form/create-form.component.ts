@@ -7,13 +7,13 @@ import {
   NgForm
 } from '@angular/forms';
 import { Memo } from 'src/app/entity/memo.entity';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import * as firebase from 'firebase';
 import { Folder } from 'src/app/entity/folder.entity';
 import { FolderCode } from '../../constants/folder-code';
 import { MemoService } from '../../services/memo.service';
 import { FolderService } from 'src/app/services/folder.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 /**
  * メモ新規作成フォーム
@@ -41,8 +41,8 @@ export class CreateFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private afAuth: AngularFireAuth,
     private folderService: FolderService,
+    private authenticationService: AuthenticationService,
     private memoService: MemoService,
     private spinnerService: SpinnerService
   ) {}
@@ -67,7 +67,7 @@ export class CreateFormComponent implements OnInit {
     this.spinnerService.show();
 
     // ログインしているユーザ情報の取得
-    const user = this.afAuth.auth.currentUser;
+    const user = this.authenticationService.getCurrentUser();
 
     // メモを新規作成する
     this.memo = {

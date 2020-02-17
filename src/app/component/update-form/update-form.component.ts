@@ -8,13 +8,13 @@ import {
 import { Memo } from 'src/app/entity/memo.entity';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import * as firebase from 'firebase';
 import { Folder } from 'src/app/entity/folder.entity';
 import { FolderCode } from 'src/app/constants/folder-code';
 import { MemoService } from 'src/app/services/memo.service';
 import { FolderService } from 'src/app/services/folder.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 /**
  * メモ更新用入力フォームコンポーネントクラス
@@ -45,7 +45,7 @@ export class UpdateFormComponent implements OnInit {
     private fb: FormBuilder,
     private memoService: MemoService,
     private folderService: FolderService,
-    private afAuth: AngularFireAuth,
+    private authenticationService: AuthenticationService,
     private afStore: AngularFirestore,
     private spinnerService: SpinnerService
   ) {
@@ -123,7 +123,7 @@ export class UpdateFormComponent implements OnInit {
   }
 
   public retrieveFolder() {
-    const user = this.afAuth.auth.currentUser;
+    const user = this.authenticationService.getCurrentUser();
     // 自分が作成したフォルダーを取得する
     this.folderService.folderCollection = this.afStore.collection(
       'folder',

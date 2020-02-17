@@ -3,7 +3,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Folder } from '../entity/folder.entity';
 import { SpinnerService } from '../services/spinner.service';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastService } from '../services/toast.service';
 import { FolderChangeNameModalComponent } from '../component/folder-change-name-modal/folder-change-name-modal.component';
@@ -11,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 import { FolderService } from '../services/folder.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 /**
  * フォルダ一覧コンポーネントクラス
@@ -33,8 +33,8 @@ export class FolderListComponent implements OnInit {
 
   constructor(
     private spinnerService: SpinnerService,
-    private afAuth: AngularFireAuth,
     private _toastService: ToastService,
+    private authenticationService: AuthenticationService,
     private folderService: FolderService,
     private router: Router,
     public dialog: MatDialog,
@@ -52,7 +52,7 @@ export class FolderListComponent implements OnInit {
    * @memberof FolderListComponent
    */
   public retrieveFolder() {
-    const user = this.afAuth.auth.currentUser;
+    const user = this.authenticationService.getCurrentUser();
     // 自分が作成したフォルダーを取得する
     this.folderService.folderCollection = this.afStore.collection(
       'folder',

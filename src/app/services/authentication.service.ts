@@ -14,4 +14,8 @@ export class AuthenticationService {
   ): Promise<firebase.auth.UserCredential> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
+
+  public getCurrentUser(): firebase.User {
+    return this.afAuth.auth.currentUser;
+  }
 }

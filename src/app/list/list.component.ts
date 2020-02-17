@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Memo } from '../entity/memo.entity';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from '../services/spinner.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastService } from '../services/toast.service';
 import { Folder } from '../entity/folder.entity';
 import { MemoService } from '../services/memo.service';
 import { FolderService } from '../services/folder.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 /**
  *　メモ一覧コンポーネント
@@ -36,7 +36,7 @@ export class ListComponent implements OnInit {
     private memoService: MemoService,
     private folderService: FolderService,
     private _toastService: ToastService,
-    private afAuth: AngularFireAuth,
+    private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -64,7 +64,7 @@ export class ListComponent implements OnInit {
       }
       // すべてのメモで検索をスタートする
       // ここから
-      const user = this.afAuth.auth.currentUser;
+      const user = this.authenticationService.getCurrentUser();
       // 自分が作成したメモを取得する
       this.memoService.memoCollection = this.afStore.collection('memos', ref =>
         ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)

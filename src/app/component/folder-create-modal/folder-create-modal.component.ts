@@ -7,11 +7,11 @@ import {
   FormBuilder
 } from '@angular/forms';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { Folder } from '../../entity/folder.entity';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { FolderService } from 'src/app/services/folder.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 /**
  * フォルダ新規作成モーダルのコンポーネントクラス
@@ -36,7 +36,7 @@ export class FolderCreateModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<FolderCreateModalComponent>,
     private spinnerService: SpinnerService,
-    private afAuth: AngularFireAuth,
+    private authenticationService: AuthenticationService,
     private folderService: FolderService,
     private afStore: AngularFirestore,
     private fb: FormBuilder
@@ -73,7 +73,7 @@ export class FolderCreateModalComponent implements OnInit {
     this.spinnerService.show();
 
     // ログインしているユーザ情報の取得
-    const user = this.afAuth.auth.currentUser;
+    const user = this.authenticationService.getCurrentUser();
 
     // フォルダを新規作成する
     this.folder = {
