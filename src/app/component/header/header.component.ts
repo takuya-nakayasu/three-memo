@@ -3,6 +3,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastService } from '../../services/toast.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 /**
  * 画面ヘッダーのコンポーネントクラス
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
     public afAuth: AngularFireAuth,
     private router: Router,
     private _toastService: ToastService,
+    private authenticationService: AuthenticationService,
     private spinnerService: SpinnerService
   ) {}
 
@@ -31,22 +33,20 @@ export class HeaderComponent implements OnInit {
    *
    * @memberof HeaderComponent
    */
-  public signOut(): void {
+  public async signOut() {
     // スピナー表示
     this.spinnerService.show();
     // ログアウトAPIを呼び出す
-    this.afAuth.auth
-      .signOut()
-      .then(() => {
-        // ログアウトが成功したら、ログイン画面に遷移
-        this.router.navigate(['/login']);
-        this._toastService.open('ログアウトしました。');
-      })
-      .catch(error => {
-        this._toastService.open('ログアウトに失敗しました。');
-        console.log(error);
-      })
-      // 一連の処理が完了したらスピナーを消す
-      .finally(() => this.spinnerService.hide());
+    try {
+      await this.authenticationService.signOut();
+      // ログアウトが成功したら、ログイン画面に遷移
+      this.router.navigate(['/login']);
+      this._toastService.open('ログアウトしました。');
+    } catch (error) {
+      this._toastService.open('ログアウトに失敗しました。');
+      console.log(error);
+    } finally {
+      this.spinnerService.hide();
+    }
   }
 }

@@ -25,4 +25,8 @@ export class AuthenticationService {
   ): Promise<firebase.auth.UserCredential> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
+
+  public signOut(): Promise<void> {
+    return this.afAuth.auth.signOut();
+  }
 }
