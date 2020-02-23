@@ -7,10 +7,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastService } from '../services/toast.service';
 import { FolderChangeNameModalComponent } from '../component/folder-change-name-modal/folder-change-name-modal.component';
 import { MatDialog } from '@angular/material/dialog';
-import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 import { FolderService } from '../services/folder.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { firestore } from 'firebase';
 
 /**
  * フォルダ一覧コンポーネントクラス
@@ -87,7 +87,7 @@ export class FolderListComponent implements OnInit {
       // APIにアクセスしてフォルダ名称と更新日時をアップデートする
       this.folderService.folderCollection.doc(updatedFolder.id).update({
         title: updatedFolder.title,
-        updatedDate: firebase.firestore.FieldValue.serverTimestamp()
+        updatedDate: firestore.FieldValue.serverTimestamp()
       });
     });
   }

@@ -9,9 +9,9 @@ import {
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { Folder } from '../../entity/folder.entity';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
 import { FolderService } from 'src/app/services/folder.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { firestore } from 'firebase';
 
 /**
  * フォルダ新規作成モーダルのコンポーネントクラス
@@ -80,8 +80,8 @@ export class FolderCreateModalComponent implements OnInit {
       id: '',
       title: this.titleControl.value,
       createdUser: user.uid,
-      createdDate: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedDate: firebase.firestore.FieldValue.serverTimestamp()
+      createdDate: firestore.FieldValue.serverTimestamp(),
+      updatedDate: firestore.FieldValue.serverTimestamp()
     };
     this.afStore
       .collection('folder')

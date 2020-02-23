@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { User, auth } from 'firebase';
 
@@ -24,7 +23,7 @@ export class AuthenticationService {
   public createUserWithEmailAndPassword(
     email: string,
     password: string
-  ): Promise<firebase.auth.UserCredential> {
+  ): Promise<auth.UserCredential> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 

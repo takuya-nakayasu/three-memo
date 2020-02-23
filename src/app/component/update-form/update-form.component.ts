@@ -9,12 +9,12 @@ import { Memo } from 'src/app/entity/memo.entity';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import * as firebase from 'firebase';
 import { Folder } from 'src/app/entity/folder.entity';
 import { FolderCode } from 'src/app/constants/folder-code';
 import { MemoService } from 'src/app/services/memo.service';
 import { FolderService } from 'src/app/services/folder.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { firestore } from 'firebase';
 
 /**
  * メモ更新用入力フォームコンポーネントクラス
@@ -87,16 +87,16 @@ export class UpdateFormComponent implements OnInit {
     this.memo.title = this.titleControl.value;
     this.memo.description = this.descriptionControl.value;
     this.memo.folderId = this.folderControl.value;
-    this.memo.updatedDate = firebase.firestore.FieldValue.serverTimestamp();
+    this.memo.updatedDate = firestore.FieldValue.serverTimestamp();
 
     try {
       await this.memoService.updateMemo(this.memo);
-      // Promiseが成功したら入力フォームをリセットする
+      // 入力フォームをリセットする
       this.createFormGroup.reset();
     } catch (err) {
       console.log(err);
     } finally {
-      // Promiseが成功しても失敗してもスピナーを非表示にする
+      // スピナーを非表示にする
       this.spinnerService.hide();
     }
   }

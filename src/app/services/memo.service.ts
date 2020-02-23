@@ -5,7 +5,7 @@ import {
 } from '@angular/fire/firestore';
 import { Memo } from '../entity/memo.entity';
 import { SpinnerService } from './spinner.service';
-import * as firebase from 'firebase';
+import { firestore } from 'firebase';
 
 /**
  * メモ関連のサービスクラス
@@ -60,9 +60,7 @@ export class MemoService {
    *
    * @memberof MemoService
    */
-  public registerMemo(
-    memo: Memo
-  ): Promise<firebase.firestore.DocumentReference> {
+  public registerMemo(memo: Memo): Promise<firestore.DocumentReference> {
     return this.angularFireStore.collection('memos').add(memo);
   }
 

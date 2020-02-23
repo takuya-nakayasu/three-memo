@@ -8,12 +8,12 @@ import {
 } from '@angular/forms';
 import { Memo } from 'src/app/entity/memo.entity';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import * as firebase from 'firebase';
 import { Folder } from 'src/app/entity/folder.entity';
 import { FolderCode } from '../../constants/folder-code';
 import { MemoService } from '../../services/memo.service';
 import { FolderService } from 'src/app/services/folder.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { firestore } from 'firebase';
 
 /**
  * メモ新規作成フォーム
@@ -76,8 +76,8 @@ export class CreateFormComponent implements OnInit {
       description: this.descriptionControl.value,
       folderId: this.folderControl.value,
       createdUser: user.uid,
-      createdDate: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedDate: firebase.firestore.FieldValue.serverTimestamp()
+      createdDate: firestore.FieldValue.serverTimestamp(),
+      updatedDate: firestore.FieldValue.serverTimestamp()
     };
 
     try {
