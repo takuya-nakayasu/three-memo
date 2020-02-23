@@ -5,7 +5,6 @@ import {
   FormBuilder,
   Validators
 } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { CustomValidator } from '../validation/custom-validator';
 import { SpinnerService } from '../services/spinner.service';
@@ -35,7 +34,6 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private afAuth: AngularFireAuth,
     private router: Router,
     private authenticationService: AuthenticationService,
     private spinnerService: SpinnerService
