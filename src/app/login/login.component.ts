@@ -5,7 +5,6 @@ import {
   FormGroup,
   FormBuilder
 } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { SpinnerService } from '../services/spinner.service';
 import { ToastService } from '../services/toast.service';

@@ -18,4 +18,11 @@ export class AuthenticationService {
   public getCurrentUser(): firebase.User {
     return this.afAuth.auth.currentUser;
   }
+
+  public createUserWithEmailAndPassword(
+    email: string,
+    password: string
+  ): Promise<firebase.auth.UserCredential> {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+  }
 }

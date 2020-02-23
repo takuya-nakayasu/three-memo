@@ -9,6 +9,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { CustomValidator } from '../validation/custom-validator';
 import { SpinnerService } from '../services/spinner.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 /**
  * アカウント登録画面コンポーネント
@@ -36,6 +37,7 @@ export class SignUpComponent implements OnInit {
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
     private router: Router,
+    private authenticationService: AuthenticationService,
     private spinnerService: SpinnerService
   ) {}
 
@@ -53,32 +55,27 @@ export class SignUpComponent implements OnInit {
    * アカウント登録ボタン押下時に呼び出し
    *
    */
-  public onSubmit() {
+  public async onSubmit() {
     this.spinnerService.show();
-    this.afAuth.auth
-      // Firebaseのアカウント登録処理の呼び出し
-      .createUserWithEmailAndPassword(
+    try {
+      const created = await this.authenticationService.createUserWithEmailAndPassword(
         this.emailControl.value,
         this.passwordControl.value
-      )
-      .then(created => {
-        const newUser = created.user;
-        // 作成したアカウントにdisplayNameを設定する
-        newUser
-          .updateProfile({
-            displayName: this.userNameControl.value,
-            photoURL: ''
-          })
-          .then(() => {
-            // アカウント登録処理が成功したらログイン画面に戻る
-            this.router.navigate(['/login']);
-          });
-      })
-      .catch(error => {
-        console.log(error);
-        this.apiErrorMessage = error ? error.message : undefined;
-      })
-      .finally(() => this.spinnerService.hide());
+      );
+      const newUser = created.user;
+      // 作成したアカウントにdisplayNameを設定する
+      await newUser.updateProfile({
+        displayName: this.userNameControl.value,
+        photoURL: ''
+      });
+      // アカウント登録処理が成功したらログイン画面に戻る
+      this.router.navigate(['/login']);
+    } catch (error) {
+      console.log(error);
+      this.apiErrorMessage = error ? error.message : undefined;
+    } finally {
+      this.spinnerService.hide();
+    }
   }
 
   /**
