@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastService } from '../../services/toast.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -19,7 +18,6 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class HeaderComponent implements OnInit {
   constructor(
-    public afAuth: AngularFireAuth,
     private router: Router,
     private _toastService: ToastService,
     private authenticationService: AuthenticationService,

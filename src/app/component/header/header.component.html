@@ -7,7 +7,8 @@
       <span class="title">3Memo</span>
     </span>
     <!-- ログアウトボタン(ログインしている時のみ表示される) -->
-    <mat-icon matTooltip="ログアウトする" (click)="signOut()" *ngIf="afAuth.user | async" class="right-icon">exit_to_app
+    <mat-icon matTooltip="ログアウトする" (click)="signOut()" *ngIf="authenticationService.getUser() | async"
+      class="right-icon">exit_to_app
     </mat-icon>
   </div>
 </mat-toolbar>
