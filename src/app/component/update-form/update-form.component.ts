@@ -108,7 +108,7 @@ export class UpdateFormComponent implements OnInit {
    */
   public retrieveMemo() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      // IDをキーにメモを取得
+      // 画面遷移で渡したIDをキーにメモを取得
       this.memoService.retrieveMemo(params.get('id'));
 
       this.memoService.memoCollection.valueChanges().subscribe(data => {

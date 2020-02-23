@@ -52,6 +52,7 @@ export class ListComponent implements OnInit {
    */
   public retrieveMemos(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
+      // listコンポーネントに遷移してきたら
       const memoId: string = params.get('id');
       const folderId: string = params.get('folderId');
       console.log(`memoId: ${memoId}`);
