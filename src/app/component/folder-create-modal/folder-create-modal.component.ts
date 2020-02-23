@@ -67,8 +67,7 @@ export class FolderCreateModalComponent implements OnInit {
    *
    * @memberof FolderCreateModalComponent
    */
-  public onOkClick(): void {
-    console.log(this.titleControl.value);
+  public async onOkClick() {
     // スピナーを表示する
     this.spinnerService.show();
 
@@ -83,20 +82,19 @@ export class FolderCreateModalComponent implements OnInit {
       createdDate: firestore.FieldValue.serverTimestamp(),
       updatedDate: firestore.FieldValue.serverTimestamp()
     };
-    this.afStore
-      .collection('folder')
-      .add(this.folder)
-      .then(docRef => {
-        this.folderService.folderCollection.doc(docRef.id).update({
-          id: docRef.id
-        });
-      })
-      .finally(() => {
-        // スピナーを非表示にする
-        this.spinnerService.hide();
-        // モーダルを閉じる
-        this.dialogRef.close();
+    try {
+      const docRef = await this.folderService.registerFolder(this.folder);
+      this.folderService.folderCollection.doc(docRef.id).update({
+        id: docRef.id
       });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      // スピナーを非表示にする
+      this.spinnerService.hide();
+      // モーダルを閉じる
+      this.dialogRef.close();
+    }
   }
 
   /**

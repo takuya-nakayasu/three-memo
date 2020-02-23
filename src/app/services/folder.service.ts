@@ -6,6 +6,7 @@ import {
 import { Folder } from '../entity/folder.entity';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SpinnerService } from './spinner.service';
+import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class FolderService {
    * フォルダ一覧の取得とセット
    *
    */
-  public retrieveFolder() {
+  public retrieveFolderList() {
     this.spinnerService.show();
     const user = this.angularFireAuth.auth.currentUser;
     // 自分が作成したフォルダーを取得する
@@ -31,5 +32,9 @@ export class FolderService {
       ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
     );
     this.spinnerService.hide();
+  }
+
+  public registerFolder(folder: Folder): Promise<firestore.DocumentReference> {
+    return this.angularFireStore.collection('folder').add(folder);
   }
 }

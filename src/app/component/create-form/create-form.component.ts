@@ -51,7 +51,7 @@ export class CreateFormComponent implements OnInit {
     this.createForm();
 
     this.memoService.retrieveMemos();
-    this.folderService.retrieveFolder();
+    this.folderService.retrieveFolderList();
     this.setFolderList();
 
     this.folderNone = FolderCode.None;
