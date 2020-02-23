@@ -7,8 +7,8 @@ import {
   Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { take, map } from 'rxjs/operators';
+import { AuthenticationService } from './services/authentication.service';
 
 /**
  * ログインしていないアカウントをログイン画面に遷移させる
@@ -21,7 +21,10 @@ import { take, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthenticationGuard implements CanActivate {
-  constructor(private afAuth: AngularFireAuth, private router: Router) {}
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -31,7 +34,7 @@ export class AuthenticationGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.afAuth.user.pipe(
+    return this.authenticationService.afAuth.user.pipe(
       take(1),
       map(user => {
         if (user != null) {

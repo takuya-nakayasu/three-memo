@@ -8,7 +8,7 @@ import { User, auth } from 'firebase';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  constructor(private afAuth: AngularFireAuth) {}
+  constructor(public afAuth: AngularFireAuth) {}
 
   public signInWithEmailAndPassword(
     email: string,
