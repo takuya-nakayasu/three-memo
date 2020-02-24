@@ -103,8 +103,12 @@ export class UpsertFormComponent implements OnInit {
    */
   public retrieveMemo() {
     this.route.paramMap.subscribe((params: ParamMap) => {
+      this.memoId = params.get('id');
+      if (!this.memoId) {
+        return;
+      }
       // 画面遷移で渡したIDをキーにメモを取得
-      this.memoService.retrieveMemo(params.get('id'));
+      this.memoService.retrieveMemo(this.memoId);
 
       this.memoService.memoCollection.valueChanges().subscribe(data => {
         this.memo = data[0];
