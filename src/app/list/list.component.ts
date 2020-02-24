@@ -115,7 +115,7 @@ export class ListComponent implements OnInit {
    * @memberof ListComponent
    */
   public update(id: string): void {
-    this.router.navigate(['/home/update', id]);
+    this.router.navigate(['/home/upsert', id]);
   }
 
   private retrieveSelectedFolder(folderId: string): void {
@@ -174,7 +174,7 @@ export class ListComponent implements OnInit {
         index++;
         if (memo && index === 1) {
           // デフォルトでは、先頭のメモを参照する
-          this.router.navigate([`/home/update/${memo.id}`]);
+          this.router.navigate([`/home/upsert/${memo.id}`]);
         }
       });
     });

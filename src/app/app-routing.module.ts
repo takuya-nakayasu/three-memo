@@ -8,6 +8,7 @@ import { AuthenticatedGuard } from './authenticated.guard';
 import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { FolderListComponent } from './folder-list/folder-list.component';
+import { MemoUpsertComponent } from './memo-upsert/memo-upsert.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -26,7 +27,7 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [AuthenticationGuard],
     children: [
-      { path: '', redirectTo: 'create', pathMatch: 'full' },
+      { path: '', redirectTo: 'upsert', pathMatch: 'full' },
       {
         path: 'create',
         component: CreateComponent,
@@ -35,6 +36,16 @@ const routes: Routes = [
       {
         path: 'update/:id',
         component: UpdateComponent,
+        canActivate: [AuthenticationGuard]
+      },
+      {
+        path: 'upsert',
+        component: MemoUpsertComponent,
+        canActivate: [AuthenticationGuard]
+      },
+      {
+        path: 'upsert/:id',
+        component: MemoUpsertComponent,
         canActivate: [AuthenticationGuard]
       },
       {
