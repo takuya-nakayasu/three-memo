@@ -48,6 +48,8 @@ import { ForderListHeaderComponent } from './component/forder-list-header/forder
 import { FolderCreateModalComponent } from './component/folder-create-modal/folder-create-modal.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { FolderChangeNameModalComponent } from './component/folder-change-name-modal/folder-change-name-modal.component';
+import { MemoUpsertComponent } from './memo-upsert/memo-upsert.component';
+import { UpsertFormComponent } from './component/upsert-form/upsert-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +68,9 @@ import { FolderChangeNameModalComponent } from './component/folder-change-name-m
     UpdateFormComponent,
     ForderListHeaderComponent,
     FolderCreateModalComponent,
-    FolderChangeNameModalComponent
+    FolderChangeNameModalComponent,
+    MemoUpsertComponent,
+    UpsertFormComponent
   ],
   entryComponents: [FolderCreateModalComponent, FolderChangeNameModalComponent],
   imports: [
