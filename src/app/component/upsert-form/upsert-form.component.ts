@@ -3,7 +3,8 @@ import {
   FormGroup,
   FormControl,
   FormBuilder,
-  Validators
+  Validators,
+  NgForm
 } from '@angular/forms';
 import { Memo } from 'src/app/entity/memo.entity';
 import { Folder } from 'src/app/entity/folder.entity';
@@ -75,24 +76,11 @@ export class UpsertFormComponent implements OnInit {
    *
    * @memberof UpdateComponent
    */
-  public async onSubmit() {
-    // スピナーを表示する
-    this.spinnerService.show();
-
-    this.memo.title = this.titleControl.value;
-    this.memo.description = this.descriptionControl.value;
-    this.memo.folderId = this.folderControl.value;
-    this.memo.updatedDate = firestore.FieldValue.serverTimestamp();
-
-    try {
-      await this.memoService.updateMemo(this.memo);
-      // 入力フォームをリセットする
-      this.createFormGroup.reset();
-    } catch (err) {
-      console.log(err);
-    } finally {
-      // スピナーを非表示にする
-      this.spinnerService.hide();
+  public onSubmit(form: NgForm) {
+    if (this.memoId) {
+      this.updateMemo();
+    } else {
+      this.registerMemo(form);
     }
   }
 
@@ -145,5 +133,64 @@ export class UpsertFormComponent implements OnInit {
       this.folderList = data;
       this.spinnerService.hide();
     });
+  }
+
+  private async updateMemo() {
+    // スピナーを表示する
+    this.spinnerService.show();
+
+    this.memo.title = this.titleControl.value;
+    this.memo.description = this.descriptionControl.value;
+    this.memo.folderId = this.folderControl.value;
+    this.memo.updatedDate = firestore.FieldValue.serverTimestamp();
+
+    try {
+      await this.memoService.updateMemo(this.memo);
+      // 入力フォームをリセットする
+      this.createFormGroup.reset();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      // スピナーを非表示にする
+      this.spinnerService.hide();
+    }
+  }
+
+  /**
+   * メモの新規作成
+   *
+   * @memberof CreateComponent
+   */
+  private async registerMemo(form: NgForm) {
+    // スピナーを表示する
+    this.spinnerService.show();
+
+    // ログインしているユーザ情報の取得
+    const user = this.authenticationService.getCurrentUser();
+
+    // メモを新規作成する
+    this.memo = {
+      id: '',
+      title: this.titleControl.value,
+      description: this.descriptionControl.value,
+      folderId: this.folderControl.value,
+      createdUser: user.uid,
+      createdDate: firestore.FieldValue.serverTimestamp(),
+      updatedDate: firestore.FieldValue.serverTimestamp()
+    };
+
+    try {
+      const docRef = await this.memoService.registerMemo(this.memo);
+
+      this.memoService.memoCollection.doc(docRef.id).update({
+        id: docRef.id
+      });
+      form.resetForm();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      // スピナーを非表示にする
+      this.spinnerService.hide();
+    }
   }
 }
