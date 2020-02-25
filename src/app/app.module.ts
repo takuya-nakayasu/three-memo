@@ -33,14 +33,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { MatListModule } from '@angular/material/list';
-import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
-import { UpdateComponent } from './update/update.component';
 import { ListHeaderComponent } from './component/list-header/list-header.component';
 import { MainSideMenuComponent } from './component/main-side-menu/main-side-menu.component';
 import { FolderListComponent } from './folder-list/folder-list.component';
-import { CreateFormComponent } from './component/create-form/create-form.component';
-import { UpdateFormComponent } from './component/update-form/update-form.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -58,14 +54,10 @@ import { UpsertFormComponent } from './component/upsert-form/upsert-form.compone
     SpinnerComponent,
     LoginComponent,
     SignUpComponent,
-    CreateComponent,
     ListComponent,
-    UpdateComponent,
     ListHeaderComponent,
     MainSideMenuComponent,
     FolderListComponent,
-    CreateFormComponent,
-    UpdateFormComponent,
     ForderListHeaderComponent,
     FolderCreateModalComponent,
     FolderChangeNameModalComponent,

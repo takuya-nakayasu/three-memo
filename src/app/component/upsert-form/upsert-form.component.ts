@@ -74,7 +74,7 @@ export class UpsertFormComponent implements OnInit {
   /**
    * メモ更新処理
    *
-   * @memberof UpdateComponent
+   * @memberof UpsertComponent
    */
   public onSubmit(form: NgForm) {
     if (this.memoId) {
@@ -87,7 +87,7 @@ export class UpsertFormComponent implements OnInit {
   /**
    * メモ一覧で選択したメモを取得
    *
-   * @memberof UpdateComponent
+   * @memberof UpsertComponent
    */
   public retrieveMemo() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -125,7 +125,7 @@ export class UpsertFormComponent implements OnInit {
    * 取得したフォルダーの一覧をセットする
    *
    * @private
-   * @memberof UpdateFormComponent
+   * @memberof UpsertFormComponent
    */
   private setFolderList() {
     this.folderService.folderCollection.valueChanges().subscribe(data => {

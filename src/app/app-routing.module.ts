@@ -5,8 +5,6 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthenticationGuard } from './authentication.guard';
 import { AuthenticatedGuard } from './authenticated.guard';
-import { CreateComponent } from './create/create.component';
-import { UpdateComponent } from './update/update.component';
 import { FolderListComponent } from './folder-list/folder-list.component';
 import { MemoUpsertComponent } from './memo-upsert/memo-upsert.component';
 
@@ -29,16 +27,6 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'upsert', pathMatch: 'full' },
       {
-        path: 'create',
-        component: CreateComponent,
-        canActivate: [AuthenticationGuard]
-      },
-      {
-        path: 'update/:id',
-        component: UpdateComponent,
-        canActivate: [AuthenticationGuard]
-      },
-      {
         path: 'upsert',
         component: MemoUpsertComponent,
         canActivate: [AuthenticationGuard]
@@ -49,13 +37,8 @@ const routes: Routes = [
         canActivate: [AuthenticationGuard]
       },
       {
-        path: 'update',
-        component: UpdateComponent,
-        canActivate: [AuthenticationGuard]
-      },
-      {
         path: 'folder/:folderId',
-        component: UpdateComponent,
+        component: MemoUpsertComponent,
         canActivate: [AuthenticationGuard]
       },
       {
