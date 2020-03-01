@@ -135,6 +135,12 @@ export class UpsertFormComponent implements OnInit {
     });
   }
 
+  /**
+   * メモの更新処理
+   *
+   * @private
+   * @memberof UpsertFormComponent
+   */
   private async updateMemo() {
     // スピナーを表示する
     this.spinnerService.show();
