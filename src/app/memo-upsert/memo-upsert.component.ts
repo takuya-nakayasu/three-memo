@@ -7,14 +7,17 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./memo-upsert.component.scss']
 })
 export class MemoUpsertComponent implements OnInit {
+  public selectedMemoId: string;
+  public selectedFolderId: string;
+
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      const memoId = params.get('id');
-      const folderId: string = params.get('folderId');
-      console.log(`upsert-memoId: ${memoId}`);
-      console.log(`upsert-folderId: ${folderId}`);
+      this.selectedMemoId = params.get('id');
+      this.selectedFolderId = params.get('folderId');
+      console.log(`upsert-memoId: ${this.selectedMemoId}`);
+      console.log(`upsert-folderId: ${this.selectedFolderId}`);
     });
   }
 }

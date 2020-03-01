@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -35,6 +35,8 @@ export class UpsertFormComponent implements OnInit {
   public folderNone: number;
   // insertかupdateの判断で使用する
   public memoId: string;
+
+  @Input() selectedMemoId: string;
 
   constructor(
     private route: ActivatedRoute,

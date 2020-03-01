@@ -3,10 +3,10 @@
   <!-- サブサイドメニュー（サイドメニュー） -->
   <mat-sidenav mode="side" class="sub-side-menu" opened>
     <!-- メモ一覧 -->
-    <app-list></app-list>
+    <app-list [selectedFolderId]='selectedFolderId' [selectedMemoId]='selectedMemoId'></app-list>
   </mat-sidenav>
   <!-- サブサイドメニュー（メインコンテンツ） -->
   <mat-sidenav-content>
-    <app-upsert-form></app-upsert-form>
+    <app-upsert-form [selectedMemoId]='selectedMemoId'></app-upsert-form>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -29,6 +29,8 @@ export class ListComponent implements OnInit {
   public selectedFolder: Folder;
 
   @Input() isSelected: boolean;
+  @Input() selectedMemoId: string;
+  @Input() selectedFolderId: string;
 
   constructor(
     private afStore: AngularFirestore,
