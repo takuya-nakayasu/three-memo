@@ -1,4 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -8,7 +14,6 @@ import {
 } from '@angular/forms';
 import { Memo } from 'src/app/entity/memo.entity';
 import { Folder } from 'src/app/entity/folder.entity';
-import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MemoService } from 'src/app/services/memo.service';
 import { FolderService } from 'src/app/services/folder.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -22,7 +27,7 @@ import { firestore } from 'firebase';
   templateUrl: './upsert-form.component.html',
   styleUrls: ['./upsert-form.component.scss']
 })
-export class UpsertFormComponent implements OnInit {
+export class UpsertFormComponent implements OnInit, OnChanges {
   // FormGroup定義
   public createFormGroup: FormGroup;
   // Titleフォームのコントロール定義
@@ -39,7 +44,6 @@ export class UpsertFormComponent implements OnInit {
   @Input() selectedMemoId: string;
 
   constructor(
-    private route: ActivatedRoute,
     private fb: FormBuilder,
     private memoService: MemoService,
     private folderService: FolderService,
@@ -56,9 +60,25 @@ export class UpsertFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.retrieveMemo();
     this.retrieveFolder();
     this.folderNone = FolderCode.None;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (!this.selectedMemoId) {
+      return;
+    }
+    // 画面遷移で渡したIDをキーにメモを取得
+    this.memoService.retrieveMemo(this.selectedMemoId);
+
+    this.memoService.memoCollection.valueChanges().subscribe(data => {
+      this.memo = data[0];
+      if (this.memo) {
+        this.titleControl.setValue(this.memo.title);
+        this.descriptionControl.setValue(this.memo.description);
+        this.folderControl.setValue(this.memo.folderId);
+      }
+    });
   }
 
   /**
@@ -84,31 +104,6 @@ export class UpsertFormComponent implements OnInit {
     } else {
       this.registerMemo(form);
     }
-  }
-
-  /**
-   * メモ一覧で選択したメモを取得
-   *
-   * @memberof UpsertComponent
-   */
-  public retrieveMemo() {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.memoId = params.get('id');
-      if (!this.memoId) {
-        return;
-      }
-      // 画面遷移で渡したIDをキーにメモを取得
-      this.memoService.retrieveMemo(this.memoId);
-
-      this.memoService.memoCollection.valueChanges().subscribe(data => {
-        this.memo = data[0];
-        if (this.memo) {
-          this.titleControl.setValue(this.memo.title);
-          this.descriptionControl.setValue(this.memo.description);
-          this.folderControl.setValue(this.memo.folderId);
-        }
-      });
-    });
   }
 
   public retrieveFolder() {
