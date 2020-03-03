@@ -59,12 +59,12 @@ export class UpsertFormComponent implements OnInit, OnChanges {
     ) as FormControl;
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.retrieveFolder();
     this.folderNone = FolderCode.None;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(changes: SimpleChanges) {
     if (!this.selectedMemoId) {
       return;
     }

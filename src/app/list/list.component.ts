@@ -1,8 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { Memo } from '../entity/memo.entity';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SpinnerService } from '../services/spinner.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastService } from '../services/toast.service';
 import { Folder } from '../entity/folder.entity';
 import { MemoService } from '../services/memo.service';
@@ -21,7 +27,7 @@ import { AuthenticationService } from '../services/authentication.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnChanges {
   public memo: Memo;
   public memos: Memo[];
   public numberOfMemos: number;
@@ -39,50 +45,37 @@ export class ListComponent implements OnInit {
     private folderService: FolderService,
     private _toastService: ToastService,
     private authenticationService: AuthenticationService,
-    private route: ActivatedRoute,
     private router: Router
   ) {}
 
   public ngOnInit() {
-    this.retrieveMemos();
+    this.setMemoList();
   }
 
-  /**
-   *　メモ一覧の取得
-   *
-   * @memberof ListComponent
-   */
-  public retrieveMemos(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      // listコンポーネントに遷移してきたら
-      const memoId: string = params.get('id');
-      const folderId: string = params.get('folderId');
-      console.log(`memoId: ${memoId}`);
-      console.log(`folderId: ${folderId}`);
+  public ngOnChanges(changes: SimpleChanges) {
+    console.log(`memoId: ${this.selectedMemoId}`);
+    console.log(`folderId: ${this.selectedFolderId}`);
 
-      this.retrieveSelectedFolder(folderId);
+    this.retrieveSelectedFolder(this.selectedFolderId);
 
-      if (folderId) {
-        return;
-      }
-      // すべてのメモで検索をスタートする
-      // ここから
-      const user = this.authenticationService.getCurrentUser();
-      // 自分が作成したメモを取得する
-      this.memoService.memoCollection = this.afStore.collection('memos', ref =>
-        ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
-      );
-      // ここまでの処理にfolderIdを加えることでFolderIDに準拠したmemoCollectionを作成する
+    if (this.selectedFolderId) {
+      return;
+    }
+    // すべてのメモで検索をスタートする
+    // ここから
+    const user = this.authenticationService.getCurrentUser();
+    // 自分が作成したメモを取得する
+    this.memoService.memoCollection = this.afStore.collection('memos', ref =>
+      ref.orderBy('updatedDate', 'desc').where('createdUser', '==', user.uid)
+    );
+    // ここまでの処理にfolderIdを加えることでFolderIDに準拠したmemoCollectionを作成する
 
-      if (this.isSelected && !memoId) {
-        // メモの新規作成画面ではなく更新画面の場合は、isSelectedがTRUEになる
-        // 画面の初期表示のタイミングでのみ呼び出し
-        // メモを選択している場合はこの処理をスキップする
-        this.selectFirstMemo();
-      }
-    });
-
-    this.setMemoList();
+    if (this.isSelected && !this.selectedMemoId) {
+      // メモの新規作成画面ではなく更新画面の場合は、isSelectedがTRUEになる
+      // 画面の初期表示のタイミングでのみ呼び出し
+      // メモを選択している場合はこの処理をスキップする
+      this.selectFirstMemo();
+    }
   }
 
   /**
