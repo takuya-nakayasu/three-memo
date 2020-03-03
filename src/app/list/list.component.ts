@@ -34,7 +34,6 @@ export class ListComponent implements OnInit, OnChanges {
   public selectedFolderTitle: string;
   public selectedFolder: Folder;
 
-  @Input() isSelected: boolean;
   @Input() selectedMemoId: string;
   @Input() selectedFolderId: string;
 
@@ -55,7 +54,7 @@ export class ListComponent implements OnInit, OnChanges {
   public ngOnChanges(changes: SimpleChanges) {
     console.log(`memoId: ${this.selectedMemoId}`);
     console.log(`folderId: ${this.selectedFolderId}`);
-
+    // 選択したフォルダーの情報をセットした後、そのフォルダーに紐づくメモを取得する
     this.retrieveSelectedFolder(this.selectedFolderId);
 
     if (this.selectedFolderId) {
@@ -70,8 +69,7 @@ export class ListComponent implements OnInit, OnChanges {
     );
     // ここまでの処理にfolderIdを加えることでFolderIDに準拠したmemoCollectionを作成する
 
-    if (this.isSelected && !this.selectedMemoId) {
-      // メモの新規作成画面ではなく更新画面の場合は、isSelectedがTRUEになる
+    if (!this.selectedMemoId) {
       // 画面の初期表示のタイミングでのみ呼び出し
       // メモを選択している場合はこの処理をスキップする
       this.selectFirstMemo();
@@ -113,6 +111,14 @@ export class ListComponent implements OnInit, OnChanges {
     this.router.navigate(['/home/upsert', id]);
   }
 
+  /**
+   * 選択したフォルダーの情報を設定する
+   * そのフォルダー内のメモ一覧も取得する
+   *
+   * @private
+   * @param {string} folderId
+   * @memberof ListComponent
+   */
   private retrieveSelectedFolder(folderId: string): void {
     // 選択したフォルダーを取得する
     this.folderService.folderCollection = this.afStore.collection(
@@ -169,6 +175,8 @@ export class ListComponent implements OnInit, OnChanges {
         index++;
         if (memo && index === 1) {
           // デフォルトでは、先頭のメモを参照する
+          // TODO: ここでmemoIdとFolderIdの両方を渡せば、最初のメモを選択状態にできる
+          // TODO: また、メモIDだけ渡している処理をすべて見直して、フォルダーIDを渡すようにすれば、解決するのでは
           this.router.navigate([`/home/upsert/${memo.id}`]);
         }
       });
