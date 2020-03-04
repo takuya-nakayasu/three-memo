@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { UpsertRoutingParam } from '../entity/upsert-routing-param.entity';
 
 @Component({
   selector: 'app-memo-upsert',

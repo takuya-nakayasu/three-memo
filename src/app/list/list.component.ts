@@ -110,8 +110,8 @@ export class ListComponent implements OnInit, OnChanges {
    */
   public update(id: string): void {
     const param: UpsertRoutingParam = {
-      selectedMemoId: id,
-      selectedFolderId: this.selectedFolderId
+      selectedMemoId: id || '',
+      selectedFolderId: this.selectedFolderId || ''
     };
     this.router.navigate(['/home/upsert', param]);
   }
@@ -182,8 +182,8 @@ export class ListComponent implements OnInit, OnChanges {
           // TODO: ここでmemoIdとFolderIdの両方を渡せば、最初のメモを選択状態にできる
           // TODO: また、メモIDだけ渡している処理をすべて見直して、フォルダーIDを渡すようにすれば、解決するのでは
           const param: UpsertRoutingParam = {
-            selectedMemoId: memo.id,
-            selectedFolderId: this.selectedFolderId
+            selectedMemoId: memo.id || '',
+            selectedFolderId: this.selectedFolderId || ''
           };
           this.router.navigate(['/home/upsert', param]);
         }

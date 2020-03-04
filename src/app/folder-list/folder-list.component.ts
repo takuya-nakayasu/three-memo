@@ -125,8 +125,8 @@ export class FolderListComponent implements OnInit {
     console.log(selectedFolder);
     // フォルダー内のメモ一覧を表示した更新画面に遷移する
     const param: UpsertRoutingParam = {
-      selectedMemoId: undefined,
-      selectedFolderId: selectedFolder.id
+      selectedMemoId: '',
+      selectedFolderId: selectedFolder.id || ''
     };
     this.router.navigate(['/home/upsert', param]);
   }
