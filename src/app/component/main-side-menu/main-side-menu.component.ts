@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UpsertRoutingParam } from '../../entity/upsert-routing-param.entity';
 
 /**
  * 左端に表示されているサイドメニュー
@@ -14,7 +16,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-side-menu.component.scss']
 })
 export class MainSideMenuComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
+
+  /**
+   * メモのUpsert画面に遷移する
+   *
+   * @memberof MainSideMenuComponent
+   */
+  public gotoUpsert() {
+    const param: UpsertRoutingParam = {
+      selectedMemoId: undefined,
+      selectedFolderId: undefined
+    };
+    this.router.navigate(['/home/upsert', param]);
+  }
 }

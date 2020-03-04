@@ -32,16 +32,6 @@ const routes: Routes = [
         canActivate: [AuthenticationGuard]
       },
       {
-        path: 'upsert/:id',
-        component: MemoUpsertComponent,
-        canActivate: [AuthenticationGuard]
-      },
-      {
-        path: 'folder/:folderId',
-        component: MemoUpsertComponent,
-        canActivate: [AuthenticationGuard]
-      },
-      {
         path: 'folder-list',
         component: FolderListComponent,
         canActivate: [AuthenticationGuard]

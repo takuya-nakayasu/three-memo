@@ -1,11 +1,11 @@
 <mat-nav-list class="side-menu">
-  <a mat-list-item [routerLink]="'./upsert'" routerLinkActive="active">
+  <a mat-list-item (click)="gotoUpsert()">
     <div class="menu-item">
       <mat-icon class="menu-icon">add_circle</mat-icon>
       <div>新規メモ</div>
     </div>
   </a>
-  <a mat-list-item [routerLink]="'./upsert'" routerLinkActive="active">
+  <a mat-list-item (click)="gotoUpsert()">
     <div class="menu-item">
       <mat-icon class="menu-icon">note</mat-icon>
       <div>すべてのメモ</div>
