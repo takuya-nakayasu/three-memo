@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { UpsertRoutingParam } from '../entity/upsert-routing-param.entity';
 
 @Component({
   selector: 'app-memo-upsert',
@@ -14,8 +15,8 @@ export class MemoUpsertComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.selectedMemoId = params.get('id');
-      this.selectedFolderId = params.get('folderId');
+      this.selectedMemoId = params.get('selectedMemoId');
+      this.selectedFolderId = params.get('selectedFolderId');
       console.log(`upsert-memoId: ${this.selectedMemoId}`);
       console.log(`upsert-folderId: ${this.selectedFolderId}`);
     });

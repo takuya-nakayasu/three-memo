@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { FolderService } from '../services/folder.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { firestore } from 'firebase';
+import { UpsertRoutingParam } from '../entity/upsert-routing-param.entity';
 
 /**
  * フォルダ一覧コンポーネントクラス
@@ -123,6 +124,10 @@ export class FolderListComponent implements OnInit {
   public moveToFolder(selectedFolder: Folder) {
     console.log(selectedFolder);
     // フォルダー内のメモ一覧を表示した更新画面に遷移する
-    this.router.navigate([`/home/folder/${selectedFolder.id}`]);
+    const param: UpsertRoutingParam = {
+      selectedMemoId: undefined,
+      selectedFolderId: selectedFolder.id
+    };
+    this.router.navigate(['/home/upsert', param]);
   }
 }

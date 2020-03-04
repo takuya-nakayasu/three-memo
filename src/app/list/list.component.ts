@@ -14,6 +14,7 @@ import { Folder } from '../entity/folder.entity';
 import { MemoService } from '../services/memo.service';
 import { FolderService } from '../services/folder.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { UpsertRoutingParam } from '../entity/upsert-routing-param.entity';
 
 /**
  *　メモ一覧コンポーネント
@@ -108,7 +109,11 @@ export class ListComponent implements OnInit, OnChanges {
    * @memberof ListComponent
    */
   public update(id: string): void {
-    this.router.navigate(['/home/upsert', id]);
+    const param: UpsertRoutingParam = {
+      selectedMemoId: id,
+      selectedFolderId: this.selectedFolderId
+    };
+    this.router.navigate(['/home/upsert', param]);
   }
 
   /**
@@ -177,7 +182,11 @@ export class ListComponent implements OnInit, OnChanges {
           // デフォルトでは、先頭のメモを参照する
           // TODO: ここでmemoIdとFolderIdの両方を渡せば、最初のメモを選択状態にできる
           // TODO: また、メモIDだけ渡している処理をすべて見直して、フォルダーIDを渡すようにすれば、解決するのでは
-          this.router.navigate([`/home/upsert/${memo.id}`]);
+          const param: UpsertRoutingParam = {
+            selectedMemoId: memo.id,
+            selectedFolderId: this.selectedFolderId
+          };
+          this.router.navigate(['/home/upsert', param]);
         }
       });
     });
