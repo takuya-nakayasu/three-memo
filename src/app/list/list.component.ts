@@ -158,8 +158,7 @@ export class ListComponent implements OnInit, OnChanges {
       ref.orderBy('updatedDate', 'desc').where('folderId', '==', folderId)
     );
 
-    // TODO: フォルダをリセットしないように最初のメモを選択する方法を検討する
-    // this.selectFirstMemo();
+    this.selectFirstMemo();
 
     this.setMemoList();
   }

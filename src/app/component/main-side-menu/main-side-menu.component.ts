@@ -27,8 +27,8 @@ export class MainSideMenuComponent implements OnInit {
    */
   public gotoUpsert() {
     const param: UpsertRoutingParam = {
-      selectedMemoId: undefined,
-      selectedFolderId: undefined
+      selectedMemoId: '',
+      selectedFolderId: ''
     };
     this.router.navigate(['/home/upsert', param]);
   }
