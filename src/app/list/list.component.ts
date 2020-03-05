@@ -74,6 +74,7 @@ export class ListComponent implements OnInit, OnChanges {
       // 画面の初期表示のタイミングでのみ呼び出し
       // メモを選択している場合はこの処理をスキップする
       this.selectFirstMemo();
+      this.setMemoList();
     }
   }
 
@@ -179,8 +180,6 @@ export class ListComponent implements OnInit, OnChanges {
         index++;
         if (memo && index === 1) {
           // デフォルトでは、先頭のメモを参照する
-          // TODO: ここでmemoIdとFolderIdの両方を渡せば、最初のメモを選択状態にできる
-          // TODO: また、メモIDだけ渡している処理をすべて見直して、フォルダーIDを渡すようにすれば、解決するのでは
           const param: UpsertRoutingParam = {
             selectedMemoId: memo.id || '',
             selectedFolderId: this.selectedFolderId || ''
@@ -204,6 +203,10 @@ export class ListComponent implements OnInit, OnChanges {
     this.memoService.memoCollection.valueChanges().subscribe(data => {
       this.spinnerService.show();
       this.memos = data;
+      if (!this.selectedFolderId) {
+        // 選択状態のフォルダーがない場合は、すべてのメモを表示する
+        this.selectedFolderTitle = '';
+      }
       this.numberOfMemos = this.memos.length;
       this.spinnerService.hide();
     });
