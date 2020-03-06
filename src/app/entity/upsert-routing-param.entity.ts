@@ -7,4 +7,5 @@
 export interface UpsertRoutingParam {
   selectedMemoId: string;
   selectedFolderId: string;
+  isCreate?: boolean;
 }

@@ -17,7 +17,7 @@
       formControlName="description"></textarea>
   </mat-form-field>
   <button type="submit" class="login-button" mat-raised-button [disabled]="!createFormGroup.valid" color="primary">
-    <ng-container *ngIf="memoId; else createLabel">Update</ng-container>
+    <ng-container *ngIf="selectedMemoId; else createLabel">Update</ng-container>
     <ng-template #createLabel>Create</ng-template>
   </button>
 </form>

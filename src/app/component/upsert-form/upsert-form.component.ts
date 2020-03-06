@@ -38,8 +38,6 @@ export class UpsertFormComponent implements OnInit, OnChanges {
   public memo: Memo;
   public folderList: Folder[];
   public folderNone: number;
-  // insertかupdateの判断で使用する
-  public memoId: string;
 
   @Input() selectedMemoId: string;
 
@@ -66,19 +64,20 @@ export class UpsertFormComponent implements OnInit, OnChanges {
 
   public ngOnChanges(changes: SimpleChanges) {
     if (!this.selectedMemoId) {
-      return;
-    }
-    // 画面遷移で渡したIDをキーにメモを取得
-    this.memoService.retrieveMemo(this.selectedMemoId);
+      this.createFormGroup.reset();
+    } else {
+      // 画面遷移で渡したIDをキーにメモを取得
+      this.memoService.retrieveMemo(this.selectedMemoId);
 
-    this.memoService.memoCollection.valueChanges().subscribe(data => {
-      this.memo = data[0];
-      if (this.memo) {
-        this.titleControl.setValue(this.memo.title);
-        this.descriptionControl.setValue(this.memo.description);
-        this.folderControl.setValue(this.memo.folderId);
-      }
-    });
+      this.memoService.memoCollection.valueChanges().subscribe(data => {
+        this.memo = data[0];
+        if (this.memo) {
+          this.titleControl.setValue(this.memo.title);
+          this.descriptionControl.setValue(this.memo.description);
+          this.folderControl.setValue(this.memo.folderId);
+        }
+      });
+    }
   }
 
   /**
@@ -99,7 +98,7 @@ export class UpsertFormComponent implements OnInit, OnChanges {
    * @memberof UpsertComponent
    */
   public onSubmit(form: NgForm) {
-    if (this.memoId) {
+    if (this.selectedMemoId) {
       this.updateMemo();
     } else {
       this.registerMemo(form);

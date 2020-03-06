@@ -37,6 +37,7 @@ export class ListComponent implements OnInit, OnChanges {
 
   @Input() selectedMemoId: string;
   @Input() selectedFolderId: string;
+  @Input() isCreate: boolean;
 
   constructor(
     private afStore: AngularFirestore,
@@ -73,7 +74,9 @@ export class ListComponent implements OnInit, OnChanges {
     if (!this.selectedMemoId) {
       // 画面の初期表示のタイミングでのみ呼び出し
       // メモを選択している場合はこの処理をスキップする
-      this.selectFirstMemo();
+      if (!this.isCreate) {
+        this.selectFirstMemo();
+      }
       this.setMemoList();
     }
   }
