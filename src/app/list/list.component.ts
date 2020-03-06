@@ -161,8 +161,9 @@ export class ListComponent implements OnInit, OnChanges {
     this.memoService.memoCollection = this.afStore.collection('memos', ref =>
       ref.orderBy('updatedDate', 'desc').where('folderId', '==', folderId)
     );
-
-    this.selectFirstMemo();
+    if (!this.selectedMemoId) {
+      this.selectFirstMemo();
+    }
 
     this.setMemoList();
   }
