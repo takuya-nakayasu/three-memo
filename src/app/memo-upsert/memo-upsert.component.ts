@@ -18,8 +18,6 @@ export class MemoUpsertComponent implements OnInit {
       this.selectedMemoId = params.get('selectedMemoId');
       this.selectedFolderId = params.get('selectedFolderId');
       this.isCreate = params.get('isCreate') === 'true';
-      console.log(`upsert-memoId: ${this.selectedMemoId}`);
-      console.log(`upsert-folderId: ${this.selectedFolderId}`);
     });
   }
 }
