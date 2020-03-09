@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast.service';
@@ -17,6 +17,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  @Input() isHandset: boolean;
   constructor(
     private router: Router,
     private _toastService: ToastService,

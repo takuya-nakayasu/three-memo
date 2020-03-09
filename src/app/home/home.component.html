@@ -1,5 +1,5 @@
 <!-- ヘッダー -->
-<app-header></app-header>
+<app-header [isHandset]="(isHandset$ | async)"></app-header>
 
 <mat-sidenav-container class="container">
   <!-- サイドメニュー -->
