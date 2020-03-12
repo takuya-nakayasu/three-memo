@@ -1,7 +1,6 @@
 .wrapper {
   background-color: #fafafa;
   height: 100%;
-  width: 400px;
 
   .list-wrapper {
     padding: 5px 20px 20px;
@@ -16,7 +15,7 @@
       .title {
         overflow: hidden;
         white-space: nowrap;
-        width: 300px;
+        width: 200px;
         text-overflow: ellipsis;
       }
 
@@ -33,7 +32,7 @@
           overflow: hidden;
           margin-left: 10px;
           white-space: nowrap;
-          width: 150px;
+          width: 100px;
           text-overflow: ellipsis;
         }
       }
