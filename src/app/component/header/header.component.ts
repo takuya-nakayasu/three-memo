@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast.service';
@@ -19,6 +19,8 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   @Input() isHandset$: Observable<boolean>;
+  @Output() drawerToggled = new EventEmitter<void>();
+
   constructor(
     private router: Router,
     private _toastService: ToastService,
@@ -48,5 +50,10 @@ export class HeaderComponent implements OnInit {
     } finally {
       this.spinnerService.hide();
     }
+  }
+
+  public toggle() {
+    console.log('toggle');
+    this.drawerToggled.emit();
   }
 }

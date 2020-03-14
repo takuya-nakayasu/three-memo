@@ -1,9 +1,10 @@
 <!-- ヘッダー -->
-<app-header [isHandset$]="isHandset$"></app-header>
+<app-header [isHandset$]="isHandset$" (drawerToggled)="drawer.toggle()"></app-header>
 
 <mat-sidenav-container class="container">
   <!-- サイドメニュー -->
-  <mat-sidenav [ngClass]="{'hidden': (isHandset$ | async)}" mode="side" class="side-menu" opened>
+  <mat-sidenav #drawer [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" class="side-menu" [opened]="!(isHandset$ | async)">
     <app-main-side-menu></app-main-side-menu>
   </mat-sidenav>
   <!-- メイン コンテンツ -->

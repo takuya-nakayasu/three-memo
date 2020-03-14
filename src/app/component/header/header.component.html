@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <div class="main">
-    <button type="button" mat-icon-button *ngIf="(isHandset$ | async)">
+    <button type="button" mat-icon-button *ngIf="(isHandset$ | async)" (click)="toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <span class="logo" (click)="signOut()">
