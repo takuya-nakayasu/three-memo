@@ -5,7 +5,7 @@
   <!-- サイドメニュー -->
   <mat-sidenav #drawer [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" class="side-menu" [opened]="!(isHandset$ | async)">
-    <app-main-side-menu></app-main-side-menu>
+    <app-main-side-menu [isHandset]="(isHandset$ | async)" (drawerClosed)="drawer.close()"></app-main-side-menu>
   </mat-sidenav>
   <!-- メイン コンテンツ -->
   <mat-sidenav-content class="main-contents">
