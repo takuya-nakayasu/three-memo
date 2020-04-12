@@ -104,4 +104,8 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]]
     });
   }
+
+  public loginTwitter() {
+    this.authenticationService.signInWithTwitter();
+  }
 }
