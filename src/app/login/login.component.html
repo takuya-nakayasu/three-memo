@@ -8,7 +8,7 @@
       <button class="twitter" mat-raised-button>
         <mat-icon class="sns-icon fab fa-twitter"></mat-icon>Twitterでログイン
       </button>
-      <div>メールアドレスでログイン</div>
+      <div class="email-login-title">メールアドレスでログイン</div>
       <form (ngSubmit)="onSubmit()" class="login-form" [formGroup]="loginFormGroup">
         <mat-form-field>
           <input matInput placeholder="メールアドレス" id="email" formControlName="email" required>
