@@ -2,23 +2,23 @@
 <div class="wrapper">
   <mat-card class="login-card">
     <mat-card-header>
-      <mat-card-title class="login-title">Sign in</mat-card-title>
+      <mat-card-title class="login-title">ログイン</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <form (ngSubmit)="onSubmit()" class="login-form" [formGroup]="loginFormGroup">
         <mat-form-field>
-          <input matInput placeholder="email" id="email" formControlName="email" required>
+          <input matInput placeholder="メールアドレス" id="email" formControlName="email" required>
           <mat-error *ngIf="emailControl.invalid">{{getErrorMessageToEmail()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input [type]="hide ? 'password' : 'text'" matInput placeholder="password" id="password"
+          <input [type]="hide ? 'password' : 'text'" matInput placeholder="パスワード" id="password"
             formControlName="password" required>
           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           <mat-error *ngIf="passwordControl.invalid">{{getErrorMessageToPassword()}}</mat-error>
         </mat-form-field>
         <button type="submit" class="login-button" mat-raised-button [disabled]="!loginFormGroup.valid"
-          color="primary">Login</button>
+          color="primary">メールアドレスでログイン</button>
         <mat-error *ngIf="apiErrorMessage" class="apiErrorMessage">{{apiErrorMessage}}</mat-error>
       </form>
     </mat-card-content>
