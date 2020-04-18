@@ -17,8 +17,10 @@ export class AuthenticationService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
-  public signInWithTwitter() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
+  public signInWithTwitter(): Promise<auth.UserCredential> {
+    return this.afAuth.auth.signInWithPopup(
+      new firebase.auth.TwitterAuthProvider()
+    );
   }
 
   public getCurrentUser(): User {

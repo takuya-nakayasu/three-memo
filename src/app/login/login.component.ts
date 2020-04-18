@@ -105,7 +105,18 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public signInWithTwitter() {
-    this.authenticationService.signInWithTwitter();
+  /**
+   * Twitter認証でログイン
+   *
+   * @memberof LoginComponent
+   */
+  public async signInWithTwitter() {
+    try {
+      await this.authenticationService.signInWithTwitter();
+      // ログインに成功したらホーム画面に遷移する
+      this.router.navigate(['/home']);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
