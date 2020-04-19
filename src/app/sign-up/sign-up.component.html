@@ -33,6 +33,9 @@
         <mat-error *ngIf="apiErrorMessage" class="apiErrorMessage">{{apiErrorMessage}}</mat-error>
       </form>
       <div class="social-signup-title">ソーシャルアカウントで登録</div>
+      <button (click)="signInWithTwitter()" class="twitter" mat-raised-button>
+        <mat-icon class="sns-icon fab fa-twitter"></mat-icon>Twitter
+      </button>
     </mat-card-content>
   </mat-card>
 </div>
