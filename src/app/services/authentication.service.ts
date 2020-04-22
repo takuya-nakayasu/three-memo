@@ -23,6 +23,12 @@ export class AuthenticationService {
     );
   }
 
+  public signInWithFacebook(): Promise<auth.UserCredential> {
+    return this.afAuth.auth.signInWithPopup(
+      new firebase.auth.FacebookAuthProvider()
+    );
+  }
+
   public getCurrentUser(): User {
     return this.afAuth.auth.currentUser;
   }
