@@ -149,4 +149,19 @@ export class SignUpComponent implements OnInit {
       console.log(error);
     }
   }
+
+  /**
+   * Facebook認証でログイン
+   *
+   * @memberof LoginComponent
+   */
+  public async signInWithFacebook() {
+    try {
+      await this.authenticationService.signInWithFacebook();
+      // ログインに成功したらホーム画面に遷移する
+      this.router.navigate(['/home']);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

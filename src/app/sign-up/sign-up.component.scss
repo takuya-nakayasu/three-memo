@@ -32,20 +32,32 @@
     color: #3f51b5;
   }
 
-  .sns-icon {
-    font-size: 20px;
-    position: absolute;
-    left: 15px;
-    top: 25%;
-  }
+  .social-group {
+    display: flex;
 
-  .twitter {
-    color: #FFF;
-    background-color: #00acee;
-    border-color: #00acee;
-    font-weight: bold;
-    width: 100%;
-    margin-bottom: 10px;
+    .sns-icon {
+      font-size: 20px;
+      position: absolute;
+      left: 15px;
+      top: 25%;
+    }
+
+    .facebook {
+      color: #FFF;
+      background-color: #3b5998;
+      border-color: #3b5998;
+      font-weight: bold;
+      width: 100%;
+    }
+
+    .twitter {
+      color: #FFF;
+      background-color: #00acee;
+      border-color: #00acee;
+      font-weight: bold;
+      width: 100%;
+      margin-right: 10px;
+    }
   }
 }
 
