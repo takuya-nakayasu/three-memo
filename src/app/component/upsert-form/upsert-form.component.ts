@@ -15,6 +15,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { FolderCode } from 'src/app/constants/folder-code';
 import { firestore } from 'firebase';
+import { CustomValidator } from '../../validation/custom-validator';
 
 /**
  * メモの新規作成・更新フォーム
@@ -87,11 +88,16 @@ export class UpsertFormComponent implements OnInit, OnChanges {
    *
    */
   private createForm() {
-    this.createFormGroup = this.fb.group({
-      title: ['', []],
-      folder: ['', []],
-      description: ['', []]
-    });
+    this.createFormGroup = this.fb.group(
+      {
+        title: ['', []],
+        folder: ['', []],
+        description: ['', []]
+      },
+      {
+        validators: CustomValidator.titleOrDescriptionRequired
+      }
+    );
   }
 
   /**

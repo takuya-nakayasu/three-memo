@@ -82,7 +82,7 @@ export class SignUpComponent implements OnInit {
    */
   public getErrorMessageToUserName() {
     return this.userNameControl.hasError('required')
-      ? 'You must enter a value'
+      ? 'ニックネームは必須です'
       : '';
   }
 
@@ -92,19 +92,19 @@ export class SignUpComponent implements OnInit {
    */
   public getErrorMessageToEmail() {
     return this.emailControl.hasError('required')
-      ? 'You must enter a value'
+      ? 'メールアドレスは必須です'
       : this.emailControl.hasError('email')
-      ? 'Not a valid email'
+      ? '正しいメールアドレスの形式ではありません'
       : '';
   }
 
   /**
-   * Eメールフォームにバリデーションエラーメッセージを表示
+   * パスワードにバリデーションエラーメッセージを表示
    *
    */
   public getErrorMessageToPassword() {
     return this.passwordControl.hasError('required')
-      ? 'You must enter a value'
+      ? 'パスワードは必須です'
       : '';
   }
 
@@ -116,9 +116,9 @@ export class SignUpComponent implements OnInit {
    */
   public getErrorMessageToConfirmPassword() {
     return this.confirmPasswordControl.hasError('required')
-      ? 'You must enter a value'
+      ? '確認用パスワードは必須です'
       : this.confirmPasswordControl.hasError('notMatchPassword')
-      ? 'Password and confirm password do not match'
+      ? 'パスワードが一致していません'
       : '';
   }
 

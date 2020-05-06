@@ -78,9 +78,9 @@ export class LoginComponent implements OnInit {
    */
   public getErrorMessageToEmail() {
     return this.emailControl.hasError('required')
-      ? 'You must enter a value'
+      ? 'メールアドレスは必須です'
       : this.emailControl.hasError('email')
-      ? 'Not a valid email'
+      ? '正しいメールアドレスの形式ではありません'
       : '';
   }
 
@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
    */
   public getErrorMessageToPassword() {
     return this.passwordControl.hasError('required')
-      ? 'You must enter a value'
+      ? 'パスワードは必須です'
       : '';
   }
 
