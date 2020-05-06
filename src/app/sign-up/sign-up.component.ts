@@ -108,6 +108,12 @@ export class SignUpComponent implements OnInit {
       : '';
   }
 
+  /**
+   * 確認用パスワードにバリデーションエラーメッセージを表示する
+   *
+   * @returns
+   * @memberof SignUpComponent
+   */
   public getErrorMessageToConfirmPassword() {
     return this.confirmPasswordControl.hasError('required')
       ? 'You must enter a value'
