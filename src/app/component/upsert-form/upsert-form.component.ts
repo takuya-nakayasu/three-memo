@@ -5,13 +5,7 @@ import {
   OnChanges,
   SimpleChanges
 } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  FormBuilder,
-  Validators,
-  NgForm
-} from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, NgForm } from '@angular/forms';
 import { Memo } from 'src/app/entity/memo.entity';
 import { Folder } from 'src/app/entity/folder.entity';
 import { MemoService } from 'src/app/services/memo.service';
@@ -22,6 +16,14 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import { FolderCode } from 'src/app/constants/folder-code';
 import { firestore } from 'firebase';
 
+/**
+ * メモの新規作成・更新フォーム
+ *
+ * @export
+ * @class UpsertFormComponent
+ * @implements {OnInit}
+ * @implements {OnChanges}
+ */
 @Component({
   selector: 'app-upsert-form',
   templateUrl: './upsert-form.component.html',
@@ -86,9 +88,9 @@ export class UpsertFormComponent implements OnInit, OnChanges {
    */
   private createForm() {
     this.createFormGroup = this.fb.group({
-      title: ['', [Validators.required]],
+      title: ['', []],
       folder: ['', []],
-      description: ['', [Validators.required]]
+      description: ['', []]
     });
   }
 
@@ -141,7 +143,7 @@ export class UpsertFormComponent implements OnInit, OnChanges {
     // スピナーを表示する
     this.spinnerService.show();
 
-    this.memo.title = this.titleControl.value;
+    this.memo.title = this.titleControl.value || '無題';
     this.memo.description = this.descriptionControl.value;
     this.memo.folderId = this.folderControl.value;
     this.memo.updatedDate = firestore.FieldValue.serverTimestamp();
@@ -173,7 +175,7 @@ export class UpsertFormComponent implements OnInit, OnChanges {
     // メモを新規作成する
     this.memo = {
       id: '',
-      title: this.titleControl.value,
+      title: this.titleControl.value || '無題',
       description: this.descriptionControl.value,
       folderId: this.folderControl.value,
       createdUser: user.uid,
