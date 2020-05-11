@@ -166,12 +166,6 @@ export class UpsertFormComponent implements OnInit, OnChanges {
     }
   }
 
-  public getErrorMessageToTitle() {
-    return this.titleControl.hasError('notTitleOrDescriptionRequired')
-      ? 'タイトルか本文のどちらかを入力してください'
-      : '';
-  }
-
   /**
    * メモの新規作成
    *
