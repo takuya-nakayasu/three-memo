@@ -1,4 +1,4 @@
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, ValidationErrors, FormGroup } from '@angular/forms';
 
 export class CustomValidator {
   // パスワードと確認用パスワードが一致するかチェック
@@ -18,12 +18,13 @@ export class CustomValidator {
    * @param {*} AbstractControl
    * @memberof CustomValidator
    */
-  public static titleOrDescriptionRequired(ac: AbstractControl) {
-    const title = ac.get('title').value;
-    const description = ac.get('description').value;
-    if (!title && !description) {
-      // titleとdescriptionの両方に何も入力されていない場合
-      ac.get('title').setErrors({ notTitleOrDescriptionRequired: true });
-    }
+  public static titleOrDescriptionRequired(
+    control: FormGroup
+  ): ValidationErrors | null {
+    const title = control.get('title').value;
+    const description = control.get('description').value;
+    return !title && !description
+      ? { notTitleOrDescriptionRequired: true }
+      : null;
   }
 }
