@@ -1,9 +1,4 @@
-<form
-  class="example-form"
-  (ngSubmit)="onSubmit(upsertNgForm)"
-  [formGroup]="createFormGroup"
-  #upsertNgForm="ngForm"
->
+<form class="example-form" (ngSubmit)="onSubmit(upsertNgForm)" [formGroup]="createFormGroup" #upsertNgForm="ngForm">
   <mat-form-field>
     <mat-label>フォルダ</mat-label>
     <mat-select formControlName="folder">
@@ -14,32 +9,15 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input
-      matInput
-      class="title"
-      placeholder="タイトル"
-      formControlName="title"
-    />
+    <input matInput class="title" placeholder="タイトル" formControlName="title" />
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
-    <textarea
-      matInput
-      cdkTextareaAutosize
-      cdkAutosizeMinRows="10"
-      cdkAutosizeMaxRows="30"
-      placeholder="本文"
-      formControlName="description"
-    ></textarea>
+    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="10" cdkAutosizeMaxRows="30" placeholder="本文"
+      formControlName="description"></textarea>
   </mat-form-field>
-  <button
-    type="submit"
-    class="login-button"
-    mat-raised-button
-    [disabled]="!createFormGroup.valid"
-    color="primary"
-  >
-    <ng-container *ngIf="selectedMemoId; else createLabel">Update</ng-container>
-    <ng-template #createLabel>Create</ng-template>
+  <button type="submit" class="login-button" mat-raised-button [disabled]="!createFormGroup.valid" color="primary">
+    <ng-container *ngIf="selectedMemoId; else createLabel">更新</ng-container>
+    <ng-template #createLabel>保存</ng-template>
   </button>
 </form>
