@@ -1,4 +1,11 @@
 <mat-nav-list class="side-menu">
+  <div>
+    <button mat-button [matMenuTriggerFor]="menu">中安</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
+  </div>
   <a mat-list-item (click)="gotoUpsert(true)">
     <div class="menu-item">
       <mat-icon class="menu-icon">add_circle</mat-icon>
