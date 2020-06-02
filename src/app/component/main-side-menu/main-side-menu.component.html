@@ -2,7 +2,7 @@
   <!-- ログインしているアカウントの情報を表示したい #15 -->
   <div>
     <button mat-button class="account-link" [matMenuTriggerFor]="menu">
-      中安
+      {{currentUser.displayName}}
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Item 1</button>
@@ -21,12 +21,7 @@
       <div>すべてのメモ</div>
     </div>
   </a>
-  <a
-    mat-list-item
-    (click)="drawerClose()"
-    [routerLink]="'./folder-list'"
-    routerLinkActive="active"
-  >
+  <a mat-list-item (click)="drawerClose()" [routerLink]="'./folder-list'" routerLinkActive="active">
     <div class="menu-item">
       <mat-icon class="menu-icon">folder</mat-icon>
       <div>フォルダ</div>

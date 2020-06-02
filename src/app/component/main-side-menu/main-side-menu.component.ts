@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { UpsertRoutingParam } from '../../entity/upsert-routing-param.entity';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 /**
  * 左端に表示されているサイドメニュー
@@ -19,9 +20,16 @@ export class MainSideMenuComponent implements OnInit {
   @Input() isHandset: boolean;
   @Output() drawerClosed = new EventEmitter<void>();
 
-  constructor(private router: Router) {}
+  public currentUser: firebase.User;
 
-  ngOnInit() {}
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {}
+
+  ngOnInit() {
+    this.retrieveUserProfile();
+  }
 
   /**
    * メモのUpsert画面に遷移する
@@ -42,5 +50,9 @@ export class MainSideMenuComponent implements OnInit {
     if (this.isHandset) {
       this.drawerClosed.emit();
     }
+  }
+
+  private retrieveUserProfile() {
+    this.currentUser = this.authenticationService.getCurrentUser();
   }
 }
