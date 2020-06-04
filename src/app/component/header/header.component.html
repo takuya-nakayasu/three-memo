@@ -11,9 +11,17 @@
       </mat-icon>
       <span class="title">3Memo</span>
     </span>
-    <!-- ログアウトボタン(ログインしている時のみ表示される) -->
-    <mat-icon matTooltip="ログアウトする" (click)="signOut()" *ngIf="authenticationService.getUser() | async"
-      class="right-icon">exit_to_app
-    </mat-icon>
+    <!-- ログインアカウント情報(ログインしている時のみ表示される) -->
+    <!-- ログインしているアカウントの情報を表示したい #15 -->
+    <div class="right-icon" *ngIf="authenticationService.getUser() | async">
+      <button mat-button class="account-link" [matMenuTriggerFor]="menu">
+        {{currentUser.displayName}}<mat-icon>expand_more</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="signOut()">
+          <mat-icon>exit_to_app</mat-icon>ログアウト
+        </button>
+      </mat-menu>
+    </div>
   </div>
 </mat-toolbar>

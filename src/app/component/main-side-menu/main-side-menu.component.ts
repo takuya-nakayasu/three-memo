@@ -20,16 +20,12 @@ export class MainSideMenuComponent implements OnInit {
   @Input() isHandset: boolean;
   @Output() drawerClosed = new EventEmitter<void>();
 
-  public currentUser: firebase.User;
-
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) {}
 
-  ngOnInit() {
-    this.retrieveUserProfile();
-  }
+  ngOnInit() {}
 
   /**
    * メモのUpsert画面に遷移する
@@ -50,9 +46,5 @@ export class MainSideMenuComponent implements OnInit {
     if (this.isHandset) {
       this.drawerClosed.emit();
     }
-  }
-
-  private retrieveUserProfile() {
-    this.currentUser = this.authenticationService.getCurrentUser();
   }
 }

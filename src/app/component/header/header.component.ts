@@ -21,6 +21,8 @@ export class HeaderComponent implements OnInit {
   @Input() isHandset$: Observable<boolean>;
   @Output() drawerToggled = new EventEmitter<void>();
 
+  public currentUser: firebase.User;
+
   constructor(
     private router: Router,
     private _toastService: ToastService,
@@ -28,7 +30,9 @@ export class HeaderComponent implements OnInit {
     private spinnerService: SpinnerService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.retrieveUserProfile();
+  }
 
   /**
    * ログアウト処理
@@ -55,5 +59,9 @@ export class HeaderComponent implements OnInit {
   public toggle() {
     console.log('toggle');
     this.drawerToggled.emit();
+  }
+
+  private retrieveUserProfile() {
+    this.currentUser = this.authenticationService.getCurrentUser();
   }
 }
