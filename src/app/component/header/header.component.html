@@ -15,7 +15,9 @@
     <!-- ログインしているアカウントの情報を表示したい #15 -->
     <div class="right-icon" *ngIf="authenticationService.getUser() | async">
       <button mat-button class="account-link" [matMenuTriggerFor]="menu">
-        {{currentUser.displayName}}<mat-icon>expand_more</mat-icon>
+        <img class="thumbnail" *ngIf="currentUser.photoURL" src="{{currentUser.photoURL}}" />
+        {{currentUser.displayName}}<mat-icon>expand_more
+        </mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="signOut()">

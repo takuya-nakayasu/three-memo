@@ -29,6 +29,12 @@ export class AuthenticationService {
     );
   }
 
+  /**
+   * ログインしているアカウントの情報を返す
+   *
+   * @returns {User}
+   * @memberof AuthenticationService
+   */
   public getCurrentUser(): User {
     return this.afAuth.auth.currentUser;
   }
@@ -40,6 +46,12 @@ export class AuthenticationService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
+  /**
+   * ログアウトする
+   *
+   * @returns {Promise<void>}
+   * @memberof AuthenticationService
+   */
   public signOut(): Promise<void> {
     return this.afAuth.auth.signOut();
   }

@@ -61,6 +61,12 @@ export class HeaderComponent implements OnInit {
     this.drawerToggled.emit();
   }
 
+  /**
+   * ログインしているユーザーの情報を取得する
+   *
+   * @private
+   * @memberof HeaderComponent
+   */
   private retrieveUserProfile() {
     this.currentUser = this.authenticationService.getCurrentUser();
   }

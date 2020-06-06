@@ -21,10 +21,17 @@ mat-toolbar {
       font-size: 24px;
     }
 
-    // ログアウトボタンを右寄せにする
     .right-icon {
+      align-items: baseline;
       cursor: pointer;
+      display: flex;
       margin: 0 0 0 auto;
+
+      .thumbnail {
+        border-radius: 12px;
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 }
