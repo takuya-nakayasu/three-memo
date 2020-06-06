@@ -4,6 +4,12 @@ import { Observable } from 'rxjs';
 import { User, auth } from 'firebase';
 import * as firebase from 'firebase/app';
 
+/**
+ * 認証関連のサービスクラス
+ *
+ * @export
+ * @class AuthenticationService
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -56,6 +62,12 @@ export class AuthenticationService {
     return this.afAuth.auth.signOut();
   }
 
+  /**
+   * ログインしているアカウントの情報を返す
+   *
+   * @returns {Observable<User>}
+   * @memberof AuthenticationService
+   */
   public getUser(): Observable<User> {
     return this.afAuth.user;
   }
