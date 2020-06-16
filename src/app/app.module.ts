@@ -46,6 +46,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FolderChangeNameModalComponent } from './component/folder-change-name-modal/folder-change-name-modal.component';
 import { MemoUpsertComponent } from './memo-upsert/memo-upsert.component';
 import { UpsertFormComponent } from './component/upsert-form/upsert-form.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +63,8 @@ import { UpsertFormComponent } from './component/upsert-form/upsert-form.compone
     FolderCreateModalComponent,
     FolderChangeNameModalComponent,
     MemoUpsertComponent,
-    UpsertFormComponent
+    UpsertFormComponent,
+    LandingPageComponent
   ],
   entryComponents: [FolderCreateModalComponent, FolderChangeNameModalComponent],
   imports: [
