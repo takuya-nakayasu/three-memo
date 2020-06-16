@@ -7,9 +7,15 @@ import { AuthenticationGuard } from './authentication.guard';
 import { AuthenticatedGuard } from './authenticated.guard';
 import { FolderListComponent } from './folder-list/folder-list.component';
 import { MemoUpsertComponent } from './memo-upsert/memo-upsert.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/lp', pathMatch: 'full' },
+  {
+    path: 'lp',
+    component: LandingPageComponent,
+    canActivate: [AuthenticatedGuard]
+  },
   {
     path: 'login',
     component: LoginComponent,
