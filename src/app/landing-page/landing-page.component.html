@@ -1,1 +1,25 @@
-<p>landing-page works!</p>
+<mat-toolbar color="primary">
+  <div class="main">
+
+    <span class="logo">
+      <mat-icon class="header-icon">
+        note
+      </mat-icon>
+      <span class="title">3Memo</span>
+    </span>
+    <!-- ログインアカウント情報(ログインしている時のみ表示される) -->
+    <!-- ログインしているアカウントの情報を表示したい #15 -->
+    <div class="right-icon">
+      <button mat-button class="account-link" [matMenuTriggerFor]="menu">
+      </button>
+      <!-- メニュー -->
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>ログアウト
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>
+
+<div class="wrapper">landing-page works!</div>
