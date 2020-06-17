@@ -1,6 +1,5 @@
 <mat-toolbar color="primary">
   <div class="main">
-
     <span class="logo">
       <mat-icon class="header-icon">
         note
@@ -10,8 +9,7 @@
     <!-- ログインアカウント情報(ログインしている時のみ表示される) -->
     <!-- ログインしているアカウントの情報を表示したい #15 -->
     <div class="right-icon">
-      <button mat-button class="account-link" [matMenuTriggerFor]="menu">
-      </button>
+      <button mat-button class="account-link" [matMenuTriggerFor]="menu"></button>
       <!-- メニュー -->
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
@@ -22,4 +20,10 @@
   </div>
 </mat-toolbar>
 
-<div class="wrapper">landing-page works!</div>
+<div class="wrapper">
+  <div class="header-wrapper">
+    <div class="main-title">3 Memo</div>
+    <div class="sub-title">three memo</div>
+    <button class="start-button" mat-raised-button>無料でスリーメモを始める</button>
+  </div>
+</div>
