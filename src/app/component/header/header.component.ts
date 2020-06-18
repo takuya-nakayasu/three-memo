@@ -56,6 +56,23 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  public async backToTop() {
+    // スピナー表示
+    this.spinnerService.show();
+    // ログアウトAPIを呼び出す
+    try {
+      await this.authenticationService.signOut();
+      // ログアウトが成功したら、LP画面に遷移
+      this.router.navigate(['/lp']);
+      this._toastService.open('ログアウトしました。');
+    } catch (error) {
+      this._toastService.open('ログアウトに失敗しました。');
+      console.log(error);
+    } finally {
+      this.spinnerService.hide();
+    }
+  }
+
   public toggle() {
     console.log('toggle');
     this.drawerToggled.emit();
