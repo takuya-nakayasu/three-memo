@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit {
   public passwordControl: FormControl;
 
   public apiErrorMessage: string;
+  // パスワードを隠す
+  public hide = true;
 
   constructor(
     private fb: FormBuilder,

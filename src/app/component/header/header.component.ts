@@ -24,9 +24,9 @@ export class HeaderComponent implements OnInit {
   public currentUser: firebase.User;
 
   constructor(
+    public authenticationService: AuthenticationService,
     private router: Router,
     private _toastService: ToastService,
-    private authenticationService: AuthenticationService,
     private spinnerService: SpinnerService
   ) {}
 

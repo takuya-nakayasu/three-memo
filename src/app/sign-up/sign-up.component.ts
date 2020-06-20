@@ -31,6 +31,9 @@ export class SignUpComponent implements OnInit {
   public confirmPasswordControl: FormControl;
 
   public apiErrorMessage: string;
+  // パスワードを隠す
+  public hide = true;
+  public hideConfirm = true;
 
   constructor(
     private fb: FormBuilder,
