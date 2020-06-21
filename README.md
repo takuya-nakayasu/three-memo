@@ -1,27 +1,36 @@
-# Kintai
+# 3memo | スリーメモ
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
+![LP画面](resouces/three-memo.png)
 
-## Development server
+## スリーメモとは
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+無料で使えるメモアプリ、リンクは[こちら](https://taikin.web.app)
 
-## Code scaffolding
+ブログの紹介記事は[こちら](https://www.l08084.com/entry/2020/06/20/205542)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## スリーメモの機能
 
-## Build
+スリーメモの機能について紹介します。
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### SNS 認証
 
-## Running unit tests
+![LP画面](resouces/three-memo2.png)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Facebook と Twitter のアカウントを持っている場合は、SNS のアカウントを使ってスリーメモのアカウント登録・認証を実施することができます。
 
-## Running end-to-end tests
+### フォルダ
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+![LP画面](resouces/three-memo3.png)
 
-## Further help
+フォルダを作成することでメモを分類ごとに整理することができます。
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Run Things Locally
+
+```bash
+git clone https://github.com/l08084/three-memo
+cd three-memo
+npm install -g @angular/cli
+npm install
+ng serve
+# open your browser on http://localhost:4200/
+```
